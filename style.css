@@ -1,0 +1,685 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Karla', sans-serif;
+}
+.container{
+ 
+  margin: 60px;
+  
+}
+header {
+  background-color: #fff;
+  color: #000;
+  padding: 40px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+
+}
+
+nav {
+  display: flex;
+  gap: 20px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #dfca12;
+  font-weight: bold;
+  padding: 10px;
+  transition: color 0.3s ease;
+}
+
+.active{
+  color: #BF7506;
+}
+
+nav a:hover {
+  color: #ffcc00; /* Change the color on hover */
+}
+
+h1{
+  padding: 20px 20px;
+  text-transform: uppercase;
+}
+h2{
+  padding-bottom: 20px;
+  font-weight: bold;
+  font-size: 48px;
+}
+
+
+/* navigations */
+nav{
+  position: fixed;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+}
+nav ul li{
+    display: inline-block;
+    list-style: none;
+  
+    font-weight: bold;
+   text-transform: uppercase;
+  }
+  nav ul li a{
+    text-decoration: none;
+    
+    transition: 0.5s;
+  }
+  nav ul li a:hover{
+    color: #c99300;
+  }
+ 
+  a{
+    color: #dfca12;
+  }
+  .checkbtn{
+    font-size: 30px;
+    color: #c99300;
+    float: right;
+
+    cursor: pointer;
+    display: none;
+}
+#check{
+  display: none;
+}
+
+
+
+
+/* profile */
+
+  .profile {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 80px 20px;
+    justify-content: space-between;
+  
+  
+  }
+  
+  .profile img {
+    width: 300px;
+    height: 400px;
+
+    object-fit: cover; 
+    object-position: center top;
+   
+  }
+  
+  .profile .bio {
+    width: 60%;
+    padding-left: 20px;
+  }
+  
+  .profile span{
+    color:#BF7506 ;
+    font-weight: bold;
+  }
+  
+  
+
+  
+ 
+  
+   /* .social-media */
+    
+   .social-media   ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center; 
+  }
+  
+  .social-media li {
+    margin-right: 10px;
+  }
+  
+  .social-media  a {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .linkedin-icon {
+    color: #007EBB; 
+    width: 20px;
+    height: 20px;
+  }
+  
+  .github-icon {
+    width: 20px;
+    height: 20px;
+    color: #3E75C3; 
+  }
+  
+  .twitter-icon {
+    color: #1DA1F2; 
+    width: 20px;
+    height: 20px;
+  }
+  
+  .instagram-icon {
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+  }
+  
+  .instagram-icon img {
+    width: 20px;
+    height: 20px;
+  }
+  
+  #cv-link {
+    margin-left: 100px;
+    color: #000;
+    text-decoration: underline #BF7506; 
+    margin-right: 10px;
+  }
+
+  
+
+
+
+  
+
+/* portfolio */
+
+  
+.portfolio {
+  
+  
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 80px;
+  }
+  
+  .portfolio .item {
+    border: 1px solid #ddd;
+    padding: 20px 20px;
+    border-radius: 5px;
+  }
+  
+  .portfolio .item img {
+  padding: 10px;
+    border-radius: 5px; 
+  }
+  .portfolio h3{
+   font-size: 24px;
+   font-weight: bold;
+   color: #BF7506;
+  }
+  
+  
+  .portfolio .item a:hover::after{
+    width: 100%;
+  
+  }
+  .portfolio h3 p{
+    padding: 10px;
+  }
+
+  .portfolio p{
+    font-size: 16px;
+  }
+
+  .experience {
+    margin: 20px;
+
+  }
+  
+  .footer {
+   
+    background-color: #FFF3E8;
+    margin-left: 0;
+    margin-right: 0;
+    color: black;
+    padding: 10px;
+    text-align: center;
+
+  }
+  
+  
+  .blog-container {
+    display: grid;
+    margin: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  
+  
+  .blog-post {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  .blog-post span{
+    float: left;
+    color: #777676;
+  }
+  
+  .blog-post img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  
+  
+  /* .blog-actions {
+    margin-top: 60px;
+    float: left;
+    display: flex;
+    justify-content: space-between;
+    
+  
+  } */
+  
+  /* .blog-actions i {
+    margin-right: 20px;
+    margin-left: 0px;
+   font-size: 30px;
+  }
+   */
+   .blog-actions {
+    display: flex;
+    gap: 20px;
+    position: relative;
+  }
+
+  .blog-actions a {
+    position: relative;
+    text-decoration: none;
+  }
+
+  .blog-actions a i {
+    
+    font-size: 24px;
+  }
+
+  .blog-actions a h4{
+    display: none;
+    background-color: #FFF3E8;
+    border-radius: 10px;
+    color: #444141;
+    transition: 0.5ms;
+  }
+
+  .blog-actions a i:hover{
+
+     h4{
+      display: block;
+    }
+  }
+
+  .badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #FFD43B;
+    color: #fff;
+    border-radius: 50%;
+    padding: 5px 8px;
+    font-size: 12px;
+    font-weight: bold;
+  }
+  
+  /* about */
+ #about{
+    margin: 20px;
+ }
+ 
+  
+  .row{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .about-col-1{
+    flex-basis: 35%;
+  
+  }
+  .about-col-1 img{
+    width: 100%;
+    border-radius: 15px;
+  }
+  .about-col-2 {
+    flex-basis: 60%;
+  }
+  
+  .sub-title{ 
+  
+    font-size: 20px;
+    font-weight: bold;
+    color:black;
+  }
+  .name{ 
+  
+  font-size: 20px;
+  font-weight: bold;
+  color:#BF7506;
+  }
+  
+  
+  .tab-titles{
+    display: flex;
+    margin: 20px 0 40px;
+  
+  }
+  .tab-links{
+    margin-right: 50px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #BF7506;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  
+
+  
+  .listss   ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+
+  }
+  
+  .listss li {
+  border: 2px solid #fcd000; 
+  border-radius: 8px;
+  padding: 10px;
+  margin: 5px;
+  }
+  
+  
+  
+  
+          /* Pagination dots */
+       
+          .pagination {
+            display: flex;
+            margin-top: 80px;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .dot {
+          margin-top: 100px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: #ddd;
+            margin: 0 10px;
+        }
+        
+        .dot.active-slide {
+            background-color: yellow;
+        }
+  
+        .blog-container{
+          display: none;
+      }
+      .blog-container.active-container{
+          display:grid;
+      }
+  
+     
+  
+    
+   /* .contact */
+  
+   .contact {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px 40px;
+    justify-content: space-between;
+    
+  }
+  
+  .contact-form {
+    flex: 1;
+    padding: 20px 20px;
+    box-sizing: border-box;
+  }
+  
+  form {
+    max-width: 400px; 
+   
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    color: #E0DEDC;
+  }
+  .name-N{
+    display: flex;
+    position: absolute;
+    margin-top: -10px;
+    margin-left: 10px;
+    background: #fff;
+  }
+  .name-E{
+    display: flex;
+    position: absolute;
+    margin-top: -10px;
+    margin-left: 10px;
+    background: #fff;
+  }
+  .name-M{
+    display: flex;
+    position: absolute;
+    margin-top: -10px;
+    margin-left: 10px;
+    background: #fff;
+  }
+  input,
+  textarea {
+    width: 400px;
+    padding:  10px 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    color: black;
+    border-radius: 5px;
+  }
+  
+  button {
+    background-color: white;
+    color: white;
+    padding: 10px 10px;
+    border: none;
+    border-radius: 5px;
+    float: right;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  button::after{
+    content: '';
+    width:0;
+    height: 2px;
+    position: absolute;
+    background: #BF7506;
+    left: 0;
+    bottom: -6px;
+    transition: 0.5s;
+  } 
+  
+  button:hover::after{
+    width: 100%;
+  
+  }
+  
+  .footer-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .footer-image img {
+    height: 300px;
+    width: 300px;
+  }
+  
+  form.form-label{
+  position: absolute;
+  top: 3px;
+  margin: 20px  20px 20px 20px;
+  background-color: #fff;
+  border: solid black;
+  }
+  
+    
+  .checkbtn{
+    font-size: 30px;
+    cursor: pointer;
+    display: none; 
+  }
+  
+  
+  
+    
+  
+  
+  
+  
+  @media screen and (max-width: 600px) {
+    
+
+  }
+  
+  @media screen and (max-width: 600px) {
+   
+    }
+    .topnav.responsive a {
+      float: none;
+      display: block;
+      text-align: left;
+    }
+  
+  /* responsiveness */
+  @media only screen and (max-width: 768px) {
+   
+  }
+  
+  @media only screen and (max-width: 600px) {
+ 
+  
+    
+  
+    .footer-image {
+        margin-top: 20px;
+    }
+  }
+  
+  @media only screen and (max-width: 400px) {
+    
+  }
+ 
+  @media (max-width:  952px){
+
+    nav ul li a{
+      font-size: 16px;
+  }
+
+  }
+  @media (max-width:858px){
+  
+    .checkbtn {
+      display: block;
+      position: relative;
+      
+    }
+
+   header ul {
+      display: none; 
+      flex-direction: column;
+      justify-content: space-between;
+      position: absolute;
+      
+      height: 40vh;
+      color: #c99300;
+      top: 60px; 
+      left: -100px;
+      right: 0;
+      background: transparent;
+     
+    
+    }
+
+    ul.active {
+      display: flex; 
+    }
+  
+
+  .profile img{
+    display: none;
+  } 
+  
+  .portfolio {
+    margin: 20px;
+  
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 80px;
+  }
+  .blog-container {
+    display: grid;
+    margin: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .footer-image{
+    display: none;
+  }
+ 
+  
+  }
+
+  .up-arrow {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #FFF3E8;
+    color: #BF7506;
+    padding: 10px;
+    
+    cursor: pointer;
+    font-size: 16px;
+    border: none;
+    outline: none;
+  }
+
+  /* Style the arrow */
+  .up-arrow::before {
+    content: '\2191'; /* Unicode character for the up arrow */
+  }
+
+  /* Show the arrow when the user scrolls down */
+  .show {
+    display: block;
+  }
+
