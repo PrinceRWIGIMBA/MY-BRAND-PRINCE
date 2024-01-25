@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+
+  <script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-core.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-pie.min.js"></script>
+    <link rel="stylesheet" href="styles/css/admin-sidebar.css" />
+    <link rel="stylesheet" href="styles/css/admin-title.css" />
+    <link rel="stylesheet" href="styles/css/admin-main.css" />
+    <style>
+        
+        .blogs-table {
+          
+            width: 100%;
+        }
+        .blogs-table table {
+            width: 100%;
+            border-collapse: collapse;
+         
+            
+        }
+
+        .blogs-table th,
+        td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        .blogs-table th {
+            background-color: #f2f2f2;
+        }
+
+        .blogs-table .actions-column {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .blogs-table .add-btn {
+            position: absolute;
+
+            background-color: yellow;
+            color: #000;
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        /* Optional: Style the buttons for demonstration purposes */
+        .blogs-table .edit-btn,
+        .delete-btn {
+            padding: 6px 12px;
+            margin: 2px;
+            cursor: pointer;
+        }
+
+        .blogs-table .edit-btn {
+            background-color: #28a745;
+            /* Green color for edit button */
+            color: #fff;
+        }
+
+        .blogs-table .delete-btn {
+            background-color: #dc3545;
+            /* Red color for delete button */
+            color: #fff;
+        }
+        .add{
+            width: 100%;
+            display: flex;
+             justify-content: end;
+             margin-bottom: 20px;
+            
+        }
+        .add button{
+           width: 60px;
+           height: 40px;
+           border-radius: 20px;
+            background-color:#e6881d;
+            font-weight: bold;
+
+        }
+        .add button a{
+            color: #000;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <body>
+        <div class="header">
+            <div class="left-section">
+                <span class="logo">Logo</span>
+                <img class="lines-icon" src="images/icons/Lines.png" alt="" />
+            </div>
+            <div class="middle-section">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search..." name="search" />
+                </div>
+            </div>
+            <div class="right-section">
+                <div class="notification-icons">
+                    <img src="images/icons/Envelope.png" alt="" />
+                    <img src="images/icons/nitifications.png" alt="" />
+                </div>
+                <div class="username">Prince Rwigimba</div>
+                <div class="user-pic">
+                    <img src="images/icons/PersonCircle.png" alt="" />
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-container">
+            <div class="sidebar">
+                <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="blogs.html"><i class="fas fa-blog"></i> Blogs</a>
+                <a href="#messages"><i class="fas fa-envelope"></i> Messages</a>
+            </div>
+            <div class="logout-icon">
+                <a href=""><i class="fas fa-sign-out-alt"></i>Logout</a>
+                <p>&copy; Prince RWIGIMBA</p>
+            </div>
+        </div>
+
+        <main>
+            <div class="thumb-header">
+                <h1>Blogs</h1>
+            </div>
+            <div class="add">
+
+                <button class="add-button"><a href="form.html">Add</a></button>
+            </div>
+            <div class="blogs-table">
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Index</th>
+                            <th>Date</th>
+                            <th>Title</th>
+                            <th colspan="2">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>2024-01-31</td>
+                            <td>Sample Title</td>
+                            <td class="actions-column">
+                                <button class="edit-btn">Edit</button>
+                                <button class="delete-btn">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>2024-01-31</td>
+                            <td>Sample Title</td>
+                            <td class="actions-column">
+                                <button class="edit-btn">Edit</button>
+                                <button class="delete-btn">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>2024-01-31</td>
+                            <td>Sample Title</td>
+                            <td class="actions-column">
+                                <button class="edit-btn">Edit</button>
+                                <button class="delete-btn">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>2024-01-31</td>
+                            <td>Sample Title</td>
+                            <td class="actions-column">
+                                <button class="edit-btn">Edit</button>
+                                <button class="delete-btn">Delete</button>
+                            </td>
+                        </tr>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                </table>
+
+        </main>
+
+
+
+    </body>
+
+</html>

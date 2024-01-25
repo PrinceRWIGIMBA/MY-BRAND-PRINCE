@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Table Design with Flexbox</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      table {
+        width: 80%;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+
+      .actions-column {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      /* Optional: Style the buttons for demonstration purposes */
+      .edit-btn,
+      .delete-btn {
+        padding: 6px 12px;
+        margin: 2px;
+        cursor: pointer;
+      }
+
+      .edit-btn {
+        background-color: #28a745; /* Green color for edit button */
+        color: #fff;
+      }
+
+      .delete-btn {
+        background-color: #dc3545; /* Red color for delete button */
+        color: #fff;
+      }
+    </style>
+  </head>
+
+  <body>
+    <table>
+      <thead>
+        <tr>
+          <th>Index</th>
+          <th>Date</th>
+          <th>Title</th>
+          <th colspan="2">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>2024-01-31</td>
+          <td>Sample Title</td>
+          <td class="actions-column">
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">Delete</button>
+          </td>
+        </tr>
+        <!-- Add more rows as needed -->
+      </tbody>
+    </table>
+  </body>
+</html>

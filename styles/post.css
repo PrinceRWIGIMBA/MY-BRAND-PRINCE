@@ -1,0 +1,124 @@
+/* post */
+
+.body{
+    margin: 0;
+    padding: 0;
+}
+.post{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  
+    margin-left: 100px;
+}
+.blog{
+    border-radius: 20px;
+    width: 800px;
+    height: 800px;
+    display: flex;
+    justify-content: center;
+    
+    flex-direction: column;
+  }
+
+  .blog .image-container {
+    width: 1000px; 
+    height: 600px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+  }
+  .blog .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    border-radius: 20px;
+  }
+  .blog h5{
+    padding: 10px;
+  }
+  .blog p{
+    padding: 20px 0;
+  }
+  .blog-post-actions {
+   
+    display: flex;
+  }
+  
+  .blog-post-actions a  {
+    display: flex;
+    text-decoration: none;
+    align-items: center;
+  }
+  
+  .blog-post-actions a i {
+    margin-right: 20px; 
+    margin-left: 20px; 
+    font-size: 26px;
+  }
+
+
+  .blog-post-actions a h4 {
+    display: block;
+    margin: 0;
+    padding: 10px;
+    background-color: #FFF3E8;
+    border-radius: 10px;
+    color: #444141;
+    transition: 0.5s;
+  }
+  
+  .comments{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    width: 900px;
+  }
+  .comment{
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+  }
+  .commment-contents{
+
+    background-color: #FFF3E8;
+    border-radius: 10px;
+  }
+  .commment-contents p{
+    padding:10px;
+  }
+  .profile-p{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .profile-p img {
+    width: 100%; 
+    height: auto;
+    padding-right: 10px;
+  }
+  .commment-contents h1{
+    font-size: 20px;
+  } 
+  .commment-contents span{
+    color: #777676;
+    font-size: 14px;
+  }
+  .footer{
+    margin-left: 0;
+    margin-right: 0;
+  }
+  @media (max-width:500px){
+    .blog .image-container {
+        width: 1000px; 
+        height: 600px;
+        position: relative;
+        overflow: hidden;
+        border-radius: 20px;
+      }
+
+    
+}
+  

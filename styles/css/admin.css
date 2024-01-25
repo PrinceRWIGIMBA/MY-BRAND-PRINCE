@@ -1,0 +1,138 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+
+
+
+
+    
+
+    
+
+
+      /* body  */
+
+
+      .dashboard {
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+      }
+
+      .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+
+      .card {
+        flex: 1;
+        width: calc(33.333% - 10px);
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        margin-right: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out;
+        margin-bottom: 10px;
+      }
+
+      .card:last-child {
+        margin-right: 0;
+      }
+
+      .card:hover {
+        transform: scale(1.05);
+      }
+
+      .graph-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+
+      .graph {
+        flex: 1;
+        width: 20px;
+        height: 28vw;
+        margin-bottom: 20px;
+        margin-right: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .todolist {
+        flex: 1;
+        width: calc(50% - 10px);
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .todolist table {
+        width: 100%;
+        margin-bottom: 10px;
+        border-collapse: collapse;
+      }
+
+      .todolist table,
+      .todolist th,
+      .todolist td {
+        border: 1px solid #ddd;
+      }
+
+      .todolist th,
+      .todolist td {
+        padding: 10px;
+        text-align: left;
+      }
+
+      .todolist th {
+        background-color: #f2f2f2;
+      }
+
+      .todolist form {
+        display: flex;
+        margin-bottom: 10px;
+      }
+
+      .todolist input {
+        flex: 1;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+
+      .todolist button {
+        padding: 8px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .todolist button:hover {
+        background-color: #45a049;
+      }
+
+      @media (max-width: 600px) {
+        .card {
+          width: 100%;
+        }
+
+        .graph,
+        .todolist {
+          width: 100%;
+        }
+      }

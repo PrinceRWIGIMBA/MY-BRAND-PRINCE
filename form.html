@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+
+  <script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-core.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-pie.min.js"></script>
+    <title>Document</title>
+    <link
+    href="https://cdn.quilljs.com/1.3.6/quill.snow.css"
+    rel="stylesheet"
+  />
+    <link rel="stylesheet" href="styles/css/admin-sidebar.css" />
+    <link rel="stylesheet" href="styles/css/admin-title.css" />
+    <link rel="stylesheet" href="styles/css/admin-main.css" />
+    <style>
+     
+        .card-container{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+
+        }
+        .card {
+          background-color: #f0f0f0;
+          padding: 20px 5px;
+          border-radius: 10px;
+          display: flex;
+         justify-content: center;
+         align-self:center ;
+          width: 50%;
+          height: 50%;
+          
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+  
+        form {
+          display: flex;
+          flex-direction: column;
+          width: 400px;
+        }
+  
+        label {
+          margin-bottom: 8px;
+        }
+  
+        input,
+        button {
+          margin-bottom: 16px;
+          padding: 8px;
+        }
+        button{
+            border-radius: 10px;
+            margin-top: 10px;
+            background-color: antiquewhite;
+        }
+  
+        /* Set a fixed height for the Quill Editor */
+        .quill-editor {
+          height: 100px;
+          background:#fff;
+        }
+      </style>
+</head>
+
+<body>
+
+    <body>
+        <div class="header">
+            <div class="left-section">
+                <span class="logo">Logo</span>
+                <img class="lines-icon" src="images/icons/Lines.png" alt="" />
+            </div>
+            <div class="middle-section">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search..." name="search" />
+                </div>
+            </div>
+            <div class="right-section">
+                <div class="notification-icons">
+                    <img src="images/icons/Envelope.png" alt="" />
+                    <img src="images/icons/nitifications.png" alt="" />
+                </div>
+                <div class="username">Prince Rwigimba</div>
+                <div class="user-pic">
+                    <img src="images/icons/PersonCircle.png" alt="" />
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-container">
+            <div class="sidebar">
+                <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="blogs.html"><i class="fas fa-blog"></i> Blogs</a>
+                <a href="#messages"><i class="fas fa-envelope"></i> Messages</a>
+            </div>
+            <div class="logout-icon">
+                <a href=""><i class="fas fa-sign-out-alt"></i>Logout</a>
+                <p>&copy; Prince RWIGIMBA</p>
+            </div>
+        </div>
+
+        <main>
+            <div class="text-center">
+                <h1>Create Blog/Edit Blog </h1>
+            </div>
+            <div class="card-container">
+                <div class="card">
+                    <form
+                      id="blogForm"
+                      action="blogback.php"
+                      method="post"
+                      enctype="multipart/form-data"
+                    >
+                      <label for="title">Title:</label>
+                      <input type="text" id="title" name="title" required />
+              
+                      <label for="image">Image:</label>
+                      <input type="file" id="image" name="image" accept="image/*" required />
+              
+                      <label for="content">Content:</label>
+                      <div id="quill-editor" class="quill-editor"></div>
+              
+                      <button type="submit">Submit</button>
+                    </form>
+                  </div>
+            </div>
+          
+           
+        </main>
+
+
+   <!-- Include Quill library -->
+   <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+          
+   <script>
+     // Initialize Quill editor
+     var quill = new Quill("#quill-editor", {
+       theme: "snow",
+     });
+   </script>
+    </body>
+
+</html>

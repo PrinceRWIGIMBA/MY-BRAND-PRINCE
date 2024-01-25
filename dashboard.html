@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+
+    <script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-core.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-pie.min.js"></script>
+    <link rel="stylesheet" href="styles/css/admin.css" />
+    <link rel="stylesheet" href="styles/css/admin-sidebar.css" />
+    <link rel="stylesheet" href="styles/css/admin-title.css" />
+    <link rel="stylesheet" href="styles/css/admin-main.css" />
+    <title>Document</title>
+    <style>
+      .remainder table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      .remainder th,
+      td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+
+      .remainder th {
+        background-color: #fff3e8;
+        color: #bf7506;
+      }
+
+      /* Optional: Style the FontAwesome icon for demonstration purposes */
+      .remainder .icon-column i {
+        font-size: 16px;
+        color: #007bff; /* Adjust the color as needed */
+      }
+      .remainder .table-title {
+        text-align: center;
+      }
+
+      .remainder td i {
+        background-color: #bf7506;
+      }
+      .icon-column i {
+        font-size: 16px;
+        color: yellow; /* Set the color to yellow */
+      }
+      .title-bar {
+        font-size: 32px;
+        color: #bebcbc;
+        padding: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="header">
+      <div class="left-section">
+        <span class="logo">Logo</span>
+        <img class="lines-icon" src="images/icons/Lines.png" alt="" />
+      </div>
+      <div class="middle-section">
+        <div class="search-bar">
+          <input type="text" placeholder="Search..." name="search" />
+        </div>
+      </div>
+      <div class="right-section">
+        <div class="notification-icons">
+          <img src="images/icons/Envelope.png" alt="" />
+          <img src="images/icons/nitifications.png" alt="" />
+        </div>
+        <div class="username">Prince Rwigimba</div>
+        <div class="user-pic">
+          <img src="images/icons/PersonCircle.png" alt="" />
+        </div>
+      </div>
+    </div>
+
+    <main>
+      <div class="sidebar-container">
+        <div class="sidebar">
+          <a href="dashboard.html"
+            ><i class="fas fa-tachometer-alt"></i> Dashboard</a
+          >
+          <a href="blogs.html"><i class="fas fa-blog"></i> Blogs</a>
+          <a href="#messages"><i class="fas fa-envelope"></i> Messages</a>
+        </div>
+        <div class="logout-icon">
+          <a href=""><i class="fas fa-sign-out-alt"></i>Logout</a>
+          <p>&copy; Prince RWIGIMBA</p>
+        </div>
+      </div>
+
+      <section>
+        <div class="dashboard">
+          <div class="title-bar">
+            <span>Dashboard </span>
+          </div>
+          <div class="card-container">
+            <div class="card">
+              <h3>Total Blogs</h3>
+              <p>157 Blogs.</p>
+            </div>
+            <div class="card">
+              <h3>Messages</h3>
+              <p>47 messages</p>
+            </div>
+            <div class="card">
+              <h3>Card 3</h3>
+              <p>Some information or statistics here.</p>
+            </div>
+          </div>
+
+          <div class="graph-container">
+            <div class="graph" id="container"></div>
+            <div class="todolist">
+              <h3>To-Do List</h3>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Task</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Sample To-Do List Items -->
+                  <tr>
+                    <td>Task 1</td>
+                    <td><button onclick="removeTask(this)">Remove</button></td>
+                  </tr>
+                  <tr>
+                    <td>Task 2</td>
+                    <td><button onclick="removeTask(this)">Remove</button></td>
+                  </tr>
+                  <tr>
+                    <td>Task 2</td>
+                    <td><button onclick="removeTask(this)">Remove</button></td>
+                  </tr>
+                  <tr>
+                    <td>Task 2</td>
+                    <td><button onclick="removeTask(this)">Remove</button></td>
+                  </tr>
+                  <!-- Add more tasks dynamically using JavaScript -->
+                </tbody>
+              </table>
+              <form id="addTaskForm">
+                <input
+                  type="text"
+                  id="newTask"
+                  placeholder="Add a new task"
+                  required
+                />
+                <button type="button" onclick="addTask()">Add Task</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="remainder">
+          <table>
+            <tr>
+              <th colspan="3" class="table-title">Remainder</th>
+            </tr>
+            <tr>
+              <th>Icon</th>
+              <th>Date</th>
+              <th>Message</th>
+            </tr>
+            <tr>
+              <td><i class="fas fa-bell"></i></td>
+              <td>2024-01-31</td>
+              <td>Sample message content goes here.</td>
+            </tr>
+            <tr>
+              <td><i class="fas fa-bell"></i></td>
+              <td>2024-01-31</td>
+              <td>Sample message content goes here.</td>
+            </tr>
+            <tr>
+              <td><i class="fas fa-bell"></i></td>
+              <td>2024-01-31</td>
+              <td>Sample message content goes here.</td>
+            </tr>
+            <tr>
+              <td><i class="fas fa-bell"></i></td>
+              <td>2024-01-31</td>
+              <td>Sample message content goes here.</td>
+            </tr>
+            <tr>
+              <td class="icon-column"><i class="fas fa-bell"></i></td>
+              <td>2024-01-31</td>
+              <td>Sample message content goes here.</td>
+            </tr>
+            <tr>
+              <td><i class="fas fa-bell"></i></td>
+              <td>2024-01-31</td>
+              <td>Sample message content goes here.</td>
+            </tr>
+            <!-- Add more rows as needed -->
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <!-- <div class="footer">&copy; Prince RWIGIMBA</div> -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <script>
+      // Your AnyChart script here
+      var data = anychart.data.set([
+        ["Likes", 34],
+        ["DislikeS", 21],
+        ["Comments", 15],
+
+        ["Others", 13],
+      ]);
+      var chart = anychart.pie(data);
+      chart.innerRadius("55%");
+
+      chart.title("Blogs Statiistics");
+      chart.container("container");
+      chart.draw();
+
+      // Functions for To-Do List
+      function addTask() {
+        var newTaskInput = document.getElementById("newTask");
+        var task = newTaskInput.value.trim();
+
+        if (task !== "") {
+          var tableBody = document.querySelector(".todolist table tbody");
+          var newRow = tableBody.insertRow();
+
+          var taskCell = newRow.insertCell(0);
+          taskCell.textContent = task;
+
+          var actionCell = newRow.insertCell(1);
+          var removeButton = document.createElement("button");
+          removeButton.textContent = "Remove";
+          removeButton.addEventListener("click", function () {
+            removeTask(this);
+          });
+          actionCell.appendChild(removeButton);
+
+          // Clear input field
+          newTaskInput.value = "";
+        }
+      }
+
+      function removeTask(button) {
+        var row = button.parentNode.parentNode;
+        row.parentNode.removeChild(row);
+      }
+    </script>
+  </body>
+</html>
