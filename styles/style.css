@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600;700&display=swap');
 html,body{
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 *{
   margin: 0;
@@ -10,7 +11,7 @@ html,body{
   font-family: 'Karla', sans-serif;
 }
 .container{
-  margin: 60px; 
+
  
   width: 100%;
 }
@@ -68,7 +69,7 @@ nav ul li{
     display: flex;
     flex-wrap: wrap;
     padding: 80px 20px;
-    margin: auto;
+    margin-top: 120px;
     justify-content: space-between;
   
   
@@ -76,8 +77,8 @@ nav ul li{
   
   .profile img {
     flex: 4;
-    height: 400px;
-    object-fit: cover; 
+    height: 300px;
+    object-fit: contain; 
     object-position: center top;
    
   }
@@ -160,31 +161,43 @@ nav ul li{
 
 /* portfolio */
 .portfolio {
-  align-items: flex-start;
-  display: grid;
- margin: 0 20px;
-  grid-template-columns: repeat(2, 1fr);
+  
+  display: flex;
+  width: 100%;
   gap: 20px;
+  padding: 20px;
 }
 
 
 .portfolio .item  {
   border: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
   padding: 10px;
+  width: 80%;
+  height: 80%;
   border-radius: 8px;
-  text-align: center;
-min-height: 500px;
+  gap: 40px;
+
+
 }
+.portfolio .item .links{
+  display: flex;
+  gap: 40px;
+
+}
+
 .blog-post span{
   float: left;
   color: #777676;
 }
 
-.portfolio .item img {
-  max-width: 100%;
-  height: auto;
+.portfolio .item .portfolio-cover {
+  width: 100%;
+  height: 50%;
   border-radius: 8px;
   margin-bottom: 10px;
+  object-fit: cover;
 }
 .portfolio h3{
   font-size: 24px;
@@ -639,7 +652,7 @@ min-height: 500px;
    
   }
   .portfolio .item .imgs{
-   width: auto;
+   width: 100%;
   }
 
 

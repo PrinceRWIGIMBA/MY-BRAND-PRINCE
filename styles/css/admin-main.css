@@ -4,6 +4,7 @@ main {
     width: calc(100vw - 250px);
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 .text-center{
     text-align: center;
