@@ -526,6 +526,7 @@ nav ul li{
   /* login */
 
   .login{
+    width: 100%;
     display: flex;
     justify-content: space-between;
    justify-items: center;
@@ -536,8 +537,7 @@ nav ul li{
 
   .message{
     margin-top:80px;
-    justify-content: space-between;
-    justify-items: center;
+    align-items: center;
     font-size: 32px;
   }
   .message h1 span{

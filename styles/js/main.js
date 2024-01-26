@@ -70,4 +70,16 @@
           });
         });
       });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const lineBtn = document.getElementById("line-check");
+        const sideBar = document.querySelector(".sidebar-container");
+
+        lineBtn.addEventListener("change", function () {
+          sideBar.classList.toggle("active", this.checked);
+        });
+      });
+
+
+      
     

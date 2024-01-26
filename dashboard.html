@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="styles/css/admin-sidebar.css" />
     <link rel="stylesheet" href="styles/css/admin-title.css" />
     <link rel="stylesheet" href="styles/css/admin-main.css" />
+    <link rel="stylesheet" href="styles/js/main.js" />
     <title>Document</title>
     <style>
       .remainder table {
@@ -62,7 +63,10 @@
     <div class="header">
       <div class="left-section">
         <span class="logo">Logo</span>
-        <img class="lines-icon" src="images/icons/Lines.png" alt="" />
+        <input type="checkbox" id="line-check" />
+        <label for="check" class="line-btn">
+          <i class="fas fa-bars"></i>
+        </label>
       </div>
       <div class="middle-section">
         <div class="search-bar">
@@ -255,6 +259,24 @@
         var row = button.parentNode.parentNode;
         row.parentNode.removeChild(row);
       }
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var header = document.querySelector(".header");
+        var logo = document.querySelector(".logo");
+        var lineIcon = document.querySelector(".line-icon");
+
+        lineIcon.addEventListener("click", function () {
+          if (header.classList.contains("hide-logo")) {
+            header.classList.remove("hide-logo");
+            header.classList.add("show-logo");
+          } else {
+            header.classList.remove("show-logo");
+            header.classList.add("hide-logo");
+          }
+        });
+      });
     </script>
   </body>
 </html>
