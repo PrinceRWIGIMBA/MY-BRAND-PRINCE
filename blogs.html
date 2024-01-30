@@ -15,14 +15,15 @@
     <link rel="stylesheet" href="styles/css/admin-sidebar.css" />
     <link rel="stylesheet" href="styles/css/admin-title.css" />
     <link rel="stylesheet" href="styles/css/admin-main.css" />
+    <script defer="defer" src="styles/js/main.js"></script>
     <style>
-        
-        .blogs-table {
-          
+        .blogs-table{
             width: 100%;
+            overflow-x: hidden;
         }
+       
         .blogs-table table {
-            width: 100%;
+        width:100%;
             border-collapse: collapse;
          
             
@@ -105,11 +106,10 @@
     <body>
         <div class="header">
             <div class="left-section">
-                <span class="logo">Logo</span>
-                <input type="checkbox" id="line-check" />
-                <label for="check" class="line-btn">
-                  <i class="fas fa-bars"></i>
-                </label>
+                <span class="logo">RP</span>
+                <div class="btn" onclick="toggleSidebar()">
+                    <i class="fas fa-bars menu-btn"></i>
+                  </div>
             </div>
             <div class="middle-section">
                 <div class="search-bar">
@@ -131,7 +131,7 @@
         <div class="sidebar-container">
             <div class="sidebar">
                 <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-                <a href="blogs.html"><i class="fas fa-blog"></i> Blogs</a>
+                <a href="blogs.html" class="active"><i class="fas fa-blog"></i> Blogs</a>
                 <a href="messages.html"><i class="fas fa-envelope"></i> Messages</a>
                
                 <a href="profile.html"><i class="fa fa-address-card"></i> Profile</a>
@@ -142,7 +142,8 @@
             </div>
         </div>
 
-        <main>
+        <main >
+           <section id="content">
             <div class="thumb-header">
                 <h1>Blogs</h1>
             </div>
@@ -177,8 +178,8 @@
                             <td>2024-01-31</td>
                             <td>Sample Title</td>
                             <td class="actions-column">
-                                <button class="view-btn">View</button>
-                                <button class="edit-btn">Edit</button>
+                                <button class="view-btn"><a href="blog.html">View</a></button>
+                                <button class="edit-btn"><a href=""></a>Edit</button>
                                 <button class="delete-btn">Delete</button>
                             </td>
                         </tr>
@@ -205,6 +206,7 @@
                         <!-- Add more rows as needed -->
                     </tbody>
                 </table>
+           </section>
 
         </main>
 

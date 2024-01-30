@@ -16,6 +16,15 @@
     margin-bottom: 30px;
 
 }
+.sidebar-container.hidden {
+    display: none;
+  }
+  .sidebar-container.hidden #content {
+    width: 100%;
+    margin-left: 0;
+  }
+
+
 
 
 
@@ -46,8 +55,16 @@
 }
 
 .sidebar a:hover {
-    background-color: #c99300; /* Darker yellow on hover */
+    background-color: #c99300; 
 }
+.sidebar .active{
+    background-color: #c99300; 
+}
+
+.sidebar a.clicked {
+    color: #BF7506 !important;
+    
+  }
 
 .logout-icon {
 

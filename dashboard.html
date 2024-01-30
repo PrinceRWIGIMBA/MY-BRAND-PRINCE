@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="styles/css/admin-sidebar.css" />
     <link rel="stylesheet" href="styles/css/admin-title.css" />
     <link rel="stylesheet" href="styles/css/admin-main.css" />
-    <link rel="stylesheet" href="styles/js/main.js" />
+    <script defer="defer" src="styles/js/main.js"></script>
     <title>Document</title>
     <style>
       .remainder table {
@@ -62,11 +62,11 @@
   <body>
     <div class="header">
       <div class="left-section">
-        <span class="logo">Logo</span>
-        <input type="checkbox" id="line-check" />
-        <label for="check" class="line-btn">
-          <i class="fas fa-bars"></i>
-        </label>
+        <span class="logo">RP</span>
+
+        <div class="btn" onclick="toggleSidebar()">
+          <i class="fas fa-bars menu-btn"></i>
+        </div>
       </div>
       <div class="middle-section">
         <div class="search-bar">
@@ -84,24 +84,22 @@
         </div>
       </div>
     </div>
-
-    <main>
-      <div class="sidebar-container">
-        <div class="sidebar">
-          <a href="dashboard.html"
-            ><i class="fas fa-tachometer-alt"></i> Dashboard</a
-          >
-          <a href="blogs.html"><i class="fas fa-blog"></i> Blogs</a>
-          <a href="messages.html"><i class="fas fa-envelope"></i> Messages</a>
-          <a href="profile.html"><i class="fa fa-address-card"></i> Profile</a>
-        </div>
-        <div class="logout-icon">
-          <a href=""><i class="fas fa-sign-out-alt"></i>Logout</a>
-          <p>&copy; Prince RWIGIMBA</p>
-        </div>
+    <div class="sidebar-container">
+      <div class="sidebar">
+        <a href="dashboard.html" class="active"
+          ><i class="fas fa-tachometer-alt"></i> Dashboard</a
+        >
+        <a href="blogs.html"><i class="fas fa-blog"></i> Blogs</a>
+        <a href="messages.html"><i class="fas fa-envelope"></i> Messages</a>
+        <a href="profile.html"><i class="fa fa-address-card"></i> Profile</a>
       </div>
-
-      <section>
+      <div class="logout-icon">
+        <a href=""><i class="fas fa-sign-out-alt"></i>Logout</a>
+        <p>&copy; Prince RWIGIMBA</p>
+      </div>
+    </div>
+    <main>
+      <section id="content">
         <div class="dashboard">
           <div class="title-bar">
             <span>Dashboard </span>
@@ -116,8 +114,8 @@
               <p>47 messages</p>
             </div>
             <div class="card">
-              <h3>Card 3</h3>
-              <p>Some information or statistics here.</p>
+              <h3>Comments</h3>
+              <p>250 Comments.</p>
             </div>
           </div>
 
@@ -259,24 +257,6 @@
         var row = button.parentNode.parentNode;
         row.parentNode.removeChild(row);
       }
-    </script>
-
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        var header = document.querySelector(".header");
-        var logo = document.querySelector(".logo");
-        var lineIcon = document.querySelector(".line-icon");
-
-        lineIcon.addEventListener("click", function () {
-          if (header.classList.contains("hide-logo")) {
-            header.classList.remove("hide-logo");
-            header.classList.add("show-logo");
-          } else {
-            header.classList.remove("show-logo");
-            header.classList.add("hide-logo");
-          }
-        });
-      });
     </script>
   </body>
 </html>

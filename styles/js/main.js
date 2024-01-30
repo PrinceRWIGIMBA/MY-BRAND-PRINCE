@@ -81,5 +81,93 @@
       });
 
 
+
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // Get all navigation links
+        const navLinks = document.querySelectorAll("nav a");
+
+        // Add click event listener to each link
+        navLinks.forEach(function (link) {
+          link.addEventListener("click", function () {
+            // Remove 'clicked' class from all links
+            navLinks.forEach(function (navLink) {
+              navLink.classList.remove("clicked");
+            });
+
+            // Add 'clicked' class to the clicked link
+            link.classList.add("clicked");
+          });
+        });
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const commentForm = document.getElementById("commentForm");
+
+        commentForm.addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const usernameInput = document.getElementById("username");
+          const commentTextarea = document.getElementById("comment");
+
+          const username = usernameInput.value;
+          const comment = commentTextarea.value;
+
+          // You can handle the comment data here (e.g., send it to a server)
+
+          // For demonstration purposes, let's log the data to the console
+          console.log("Username:", username);
+          console.log("Comment:", comment);
+
+          // Clear the form fields
+          usernameInput.value = "";
+          commentTextarea.value = "";
+        });
+      });
+    
+  // blog view on the side of admin script 
+    
+   //header burger
+   var sidebarContainer = document.querySelector(".sidebar-container");
+   var content = document.getElementById("content");
+
+   function toggleSidebar() {
+     sidebarContainer.classList.toggle("hidden"); 
+     if (sidebarContainer.classList.contains("hidden")) {
+       content.style.width = "100%";
+       content.style.marginLeft = "0px";
+     } else {
+       content.style.width = "calc(100vw - 250px)";
+       content.style.marginLeft = "200px";
+     }
+   }
+ 
+
+
+
+
+   document.addEventListener("DOMContentLoaded", function () {
+    
+    const navLinks = document.querySelectorAll("sidebar a");
+    navLinks.forEach(function (link) {
+      link.addEventListener("click", function () {
+       
+        navLinks.forEach(function (navLink) {
+          navLink.classList.remove("clicked");
+        });
+        if (!link.classList.contains("active")) {
+        
+          navLinks.forEach(function (navLink) {
+              navLink.classList.remove("active");
+          });
+        }
+
+      
+        link.classList.add("clicked");
+      });
+    });
+  });
+
+
       
     
