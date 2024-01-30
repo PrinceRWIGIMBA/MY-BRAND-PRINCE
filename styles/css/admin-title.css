@@ -19,8 +19,9 @@
 
 
 .header  .btn{
-    
-    font-size: 40px;
+    margin-left: 75px;
+    font-size: 30px;
+    color: #888383;
     cursor: pointer;
     display: block;
 }
@@ -38,6 +39,7 @@
 
 .logo {
     margin-right: 20px;
+    color: #BF7506;
     margin-left: 20px;
     font-size: 32px;
     font-weight: bold;

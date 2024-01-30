@@ -35,10 +35,9 @@
         color: #bf7506;
       }
 
-      /* Optional: Style the FontAwesome icon for demonstration purposes */
       .remainder .icon-column i {
         font-size: 16px;
-        color: #007bff; /* Adjust the color as needed */
+        color: #007bff;
       }
       .remainder .table-title {
         text-align: center;
@@ -49,7 +48,7 @@
       }
       .icon-column i {
         font-size: 16px;
-        color: yellow; /* Set the color to yellow */
+        color: yellow;
       }
       .title-bar {
         font-size: 32px;
@@ -131,7 +130,6 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <!-- Sample To-Do List Items -->
                   <tr>
                     <td>Task 1</td>
                     <td><button onclick="removeTask(this)">Remove</button></td>
@@ -148,7 +146,6 @@
                     <td>Task 2</td>
                     <td><button onclick="removeTask(this)">Remove</button></td>
                   </tr>
-                  <!-- Add more tasks dynamically using JavaScript -->
                 </tbody>
               </table>
               <form id="addTaskForm">
@@ -203,17 +200,13 @@
               <td>2024-01-31</td>
               <td>Sample message content goes here.</td>
             </tr>
-            <!-- Add more rows as needed -->
           </table>
         </div>
       </section>
     </main>
 
-    <!-- <div class="footer">&copy; Prince RWIGIMBA</div> -->
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
     <script>
-      // Your AnyChart script here
       var data = anychart.data.set([
         ["Likes", 34],
         ["DislikeS", 21],
@@ -228,7 +221,6 @@
       chart.container("container");
       chart.draw();
 
-      // Functions for To-Do List
       function addTask() {
         var newTaskInput = document.getElementById("newTask");
         var task = newTaskInput.value.trim();
@@ -248,7 +240,6 @@
           });
           actionCell.appendChild(removeButton);
 
-          // Clear input field
           newTaskInput.value = "";
         }
       }

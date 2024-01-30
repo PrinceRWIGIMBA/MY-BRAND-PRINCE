@@ -116,7 +116,9 @@
           }
     
           button:hover {
-            background-color: #0056b3;
+            background-color: #BF7506;
+            color: #000;
+            font-weight: bold;
           }
           h2{
             padding: 0;
@@ -275,8 +277,8 @@
           <small></small>
         </div>
                     <button type="submit" onclick="saveEdit()">Save Changes</button>
-                    <!-- Add a summary section for errors -->
-                    <div id="error-summary" class="error-summary"></div>
+                 
+                   
                 </form>
                 </div>
           
@@ -326,8 +328,8 @@
             }
       
             function saveEdit() {
-              // Implement saving of edited data (you can add AJAX request or other logic here)
-              showUserInfo(); // After saving, switch back to user info view
+            
+              showUserInfo(); 
             }
           </script>
 
@@ -467,7 +469,7 @@
               let isFormValid = isImageValid && isUsernameValid && isEmailValid && isAddressValid;
           
               if (isFormValid) {
-                // Perform form submission or additional actions
+              
                 form.submit();
               }
             });
@@ -525,11 +527,11 @@
             };
           
             function saveEdit() {
-              // Add logic for saving the edited profile
+           
             }
 
 
-            //validation for reminder
+        
 
 
         </script>

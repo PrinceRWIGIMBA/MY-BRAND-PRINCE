@@ -135,7 +135,7 @@ nav a.clicked {
   .profile h1{
     font-size: 32px;
     padding: 30px;
-    color: #BF7506;
+    color: #000;
   }
   
   .profile span{
@@ -616,11 +616,13 @@ nav a.clicked {
   
   .contact-button {
     background-color: white;
-    color: white;
+    color: #000;
     padding: 10px 10px;
     border: none;
     border-radius: 5px;
     float: right;
+    width: 20%;
+    align-self: flex-end;
     cursor: pointer;
     position: relative;
     right: 10px;

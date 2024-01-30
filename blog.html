@@ -191,7 +191,7 @@
       
           <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
           <script>
-            // Initialize Quill
+          
             var quill = new Quill("#editor", {
               theme: "snow",
               modules: {
@@ -204,11 +204,10 @@
             });
       
             function validateForm(event) {
-              // Reset error messages
+           
               document.getElementById("usernameError").innerHTML = "";
               document.getElementById("contentError").innerHTML = "";
       
-              // Validate username
               var username = document.getElementById("username").value.trim();
               if (username === "") {
                 document.getElementById("usernameError").innerHTML =
@@ -216,7 +215,6 @@
                 event.preventDefault();
               }
       
-              // Validate Quill editor content
               var content = quill.root.innerHTML.trim();
               if (content === "") {
                 document.getElementById("contentError").innerHTML =
@@ -224,13 +222,11 @@
                 event.preventDefault();
               }
       
-              // You can do something with the values here, like sending them to the server
               console.log("Username:", username);
               console.log("Content:", content);
       
-              // Reset the form
               document.getElementById("postForm").reset();
-              quill.setText(""); // Clear the Quill editor
+              quill.setText(""); 
             }
           </script>
     </body>
