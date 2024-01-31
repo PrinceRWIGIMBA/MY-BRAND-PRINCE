@@ -1019,9 +1019,7 @@ nav a.clicked {
       padding: 8px;
       width: 40%;
     }
-
 }
-
 @media (max-width:599px) {
   
   .blog-container {
