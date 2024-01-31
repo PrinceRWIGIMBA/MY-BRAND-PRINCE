@@ -84,7 +84,7 @@
     <body>
         <div class="header">
             <div class="left-section">
-                <span class="logo">Logo</span>
+                <span class="logo">RP</span>
                 <div class="btn" onclick="toggleSidebar()">
                   <i class="fas fa-bars menu-btn"></i>
                 </div>
@@ -140,12 +140,12 @@
                   <div class="error-container" id="image-error"></div>
             
                   <label for="content">Content:</label>
-                  <div id="quill-editor" class="quill-editor"> add content here...</div>
+                  <div id="quill-editor" class="quill-editor"></div>
                   <div class="error-container" id="content-error"></div>
             
-                  <button type="submit">Submit</button>
+                  <button type="submit" onclick="submitForm()">Submit</button>
              
-                  <div id="error-summary" class="error-summary"></div>
+                
                 </form>
                   </div>
             </div>
@@ -161,11 +161,16 @@
 
   var quill = new Quill("#quill-editor", {
     theme: "snow",
+    showCharCount: true,
+    maxLength: 100,
+    placeholder: 'Type content here...',
   });
+
+  
 
   const titleEl = document.querySelector("#title");
   const imageEl = document.querySelector("#image");
-  const contentEl = document.querySelector("#quill-editor");
+  const contentEl =quill.root.innerText;
   const form = document.querySelector("#blogForm");
 
   const isRequired = (value) => (value.trim() === "" ? false : true);
@@ -186,29 +191,63 @@
   };
 
   const checkImage = () => {
-    
+    let valid = false;
+
+    const image = imageEl.value.trim();
+
+    if (!isRequired(image)) {
+      showError(imageEl, "Image cannot be blank.");
+    } else {
+      showSuccess(imageEl);
+      valid = true;
+    }
+
+    return valid;
   };
 
   const checkContent = () => {
-
-  };
-
-  const showError = (input, message) => {
-    const formField = input.parentElement;
-    formField.classList.remove("success");
-    formField.classList.add("error");
-
-    const errorContainerId = input.id + "-error";
-    const errorContainer = document.getElementById(errorContainerId);
-
-    errorContainer.textContent = message;
-
+    let valid = false;
   
-    const errorSummary = document.getElementById("error-summary");
-    const errorSummaryItem = document.createElement("div");
-    errorSummaryItem.textContent = message;
-    errorSummary.appendChild(errorSummaryItem);
+    const content = contentEl.trim();
+  
+    if (!isRequired(content)) {
+      showError(contentEl, "Content cannot be blank.");
+    } else {
+      showSuccess(contentEl);
+      valid = true;
+    }
+  
+    return valid;
   };
+
+  const showError = (element, message) => {
+    const formField = element.parentElement;
+  
+    
+    const actualFormField = formField || element;
+  
+    actualFormField.classList.remove("success");
+    actualFormField.classList.add("error");
+  
+    const errorContainerId = element.id + "-error";
+    let errorContainer = document.getElementById(errorContainerId);
+  
+    
+    if (!errorContainer) {
+      errorContainer = document.createElement('div');
+      errorContainer.id = errorContainerId;
+  
+      if (formField) {
+        formField.appendChild(errorContainer);
+      } else {
+     
+        element.parentNode.insertBefore(errorContainer, element.nextSibling);
+      }
+    }
+  
+    errorContainer.textContent = message;
+  };
+
 
   const showSuccess = (input) => {
     const formField = input.parentElement;
@@ -243,6 +282,43 @@
       
     }
   });
+ // get the data from form 
+
+ function submitForm() {
+  
+  var titleInputValue = document.getElementById('title').value;
+
+  var imageInput = document.getElementById('image');
+  var imageFile = imageInput.files[0];
+
+  
+  var quillContent = quill.root.innerHTML;
+
+
+  if (titleInputValue.trim() === '') {
+    document.getElementById('title-error').innerText = 'Title cannot be empty.';
+    return;
+  } else {
+    document.getElementById('title-error').innerText = '';
+  }
+
+ 
+  document.getElementById('image-error').innerText = '';
+  document.getElementById('content-error').innerText = '';
+
+ 
+  var formData = new FormData();
+  formData.append('title', titleInputValue);
+  formData.append('image', imageFile);
+  formData.append('content', quillContent);
+
+  for (var pair of formData.entries()) {
+    console.log(pair[0] + ', ' + pair[1]);
+  }
+
+ 
+}
+
 </script>
 </body>
 </html>

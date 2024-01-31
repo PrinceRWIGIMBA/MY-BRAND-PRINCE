@@ -175,6 +175,12 @@
         let isFormValid = isUsernameValid && isPasswordValid;
 
         if (isFormValid) {
+          var formData = {
+            Username: usernameEl.value,
+            Password: passwordEl.value,
+          };
+
+          console.log(formData);
         }
       });
 

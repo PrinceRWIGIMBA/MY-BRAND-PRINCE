@@ -237,46 +237,33 @@
               </div>
               <div class="edit-form" id="edit-form">
                   <h2>Edit User Info</h2>
-                  <form  method="post"  id="editProfileForm">
+                  <form method="post" id="editProfileForm">
                     <div class="form-field">
                       <label for="image">Image:</label>
-                      <input
-                        type="file"
-                        accept="image/*"
-                        name="image"
-                        id="image"
-                        placeholder="...add your image here.."
-                        autocomplete="off"
-                      />
-        
-                      <small></small>
+                      <input type="file" accept="image/*" name="image" id="image" />
+                      <small id="image-error"></small>
                     </div>
-
+                
                     <div class="form-field">
                       <label for="username">Username:</label>
-                      <input
-                        type="text"
-                        
-                        name="text"
-                        id="username"
-                        placeholder="...add your username here.."
-                        autocomplete="off"
-                      />
-        
-                      <small></small>
+                      <input type="text" name="username" id="username" placeholder="...add your username here.." autocomplete="off" />
+                      <small id="username-error"></small>
                     </div>
+                
                     <div class="form-field">
                       <label for="email">Email:</label>
                       <input type="text" name="email" id="email" placeholder="email..." autocomplete="off" />
-                      <small></small>
+                      <small id="email-error"></small>
                     </div>
-
+                
                     <div class="form-field">
-          <label for="address">Address:</label>
-          <input type="text" name="address" id="address"placeholder="add your address here..." autocomplete="off" />
-          <small></small>
-        </div>
-                    <button type="submit" onclick="saveEdit()">Save Changes</button>
+                      <label for="address">Address:</label>
+                      <input type="text" name="address" id="address" placeholder="add your address here..." autocomplete="off" />
+                      <small id="address-error"></small>
+                    </div>
+                
+                    <button type="button" onclick="saveEdit()">Save Changes</button>
+                  </form>
                  
                    
                 </form>
@@ -284,7 +271,7 @@
           
                 <div class="empty-state" id="empty-state">
                   <h2>Add Reminder</h2>
-                  <form id="postForm" onsubmit="validateForm(event)">
+                  <form id="reminderForm" onsubmit="validateForm(event)">
                     <label for="date" style="font-size: 24px">Date:</label>
                     <input
                       type="date"
@@ -296,10 +283,10 @@
                     <span id="DateError" class="error"></span>
         
                     <label for="reminder" style="font-size: 24px">Reminder:</label>
-                    <div id="editor">add your Reminder here...</div>
+                    <div id="editor"></div>
                     <span id="ReminderError" class="error"></span>
         
-                    <button type="submit">Save</button>
+                    <button type="submit" onclick="saveReminder()">Save</button>
                   </form>
                 
                 </div>
@@ -338,6 +325,9 @@
             // Initialize Quill
             var quill = new Quill("#editor", {
               theme: "snow",
+              showCharCount: true,
+              maxLength: 100,
+              placeholder: 'Type Reminder here...',
               modules: {
                 toolbar: [
                   ["bold", "italic", "underline", "strike"],
@@ -527,14 +517,113 @@
             };
           
             function saveEdit() {
-           
+              // Get form input values
+              var imageInput = document.getElementById('image');
+              var usernameInput = document.getElementById('username');
+              var emailInput = document.getElementById('email');
+              var addressInput = document.getElementById('address');
+        
+              // Validate form fields
+              var valid = true;
+        
+              if (!imageInput.files[0]) {
+                document.getElementById('image-error').innerText = 'Please select an image.';
+                valid = false;
+              } else {
+                document.getElementById('image-error').innerText = '';
+              }
+        
+              if (usernameInput.value.trim() === '') {
+                document.getElementById('username-error').innerText = 'Username cannot be empty.';
+                valid = false;
+              } else {
+                document.getElementById('username-error').innerText = '';
+              }
+              if (emailInput.value.trim() === '') {
+                document.getElementById('email-error').innerText = 'Email cannot be empty.';
+                valid = false;
+              } else {
+                document.getElementById('email-error').innerText = '';
+              }
+              if (addressInput.value.trim() === '') {
+                document.getElementById('address-error').innerText = 'Address cannot be empty.';
+                valid = false;
+              } else {
+                document.getElementById('address-error').innerText = '';
+              }
+        
+              // Add additional validation for email and address if needed
+              // ...
+        
+              if (valid) {
+                // Form data is valid, proceed with capturing the data
+                var imageFile = imageInput.files[0];
+                var username = usernameInput.value;
+                var email = emailInput.value;
+                var address = addressInput.value;
+        
+                // Example: Log captured data
+                console.log('Image:', imageFile);
+                console.log('Username:', username);
+                console.log('Email:', email);
+                console.log('Address:', address);
+        
+                // ... (continue with your logic, e.g., send data to the backend)
+              }
             }
+        
+            function openPopup(message) {
+              // Display the popup with the specified message
+              document.getElementById('popupMessage').innerText = message;
+              document.getElementById('popupContainer').style.display = 'block';
+            }
+        
+            function closePopup() {
+              // Close the popup
+              document.getElementById('popupContainer').style.display = 'none';
+            }
+//data capture in the reminder form
 
+
+
+function saveReminder() {
+  // Get form input values
+  var dateInput = document.getElementById('date').value;
+  var reminderContent = quill.root.innerText;
+
+  // Validate form fields
+  var valid = true;
+
+  if (dateInput.trim() === '') {
+    document.getElementById('DateError').innerText = 'Please select a date.';
+    valid = false;
+  } else {
+    document.getElementById('DateError').innerText = '';
+  }
+
+  if (reminderContent.trim() === '<p><br></p>' || reminderContent.trim() === '') {
+    document.getElementById('ReminderError').innerText = 'Reminder content cannot be empty.';
+    valid = false;
+  } else {
+    document.getElementById('ReminderError').innerText = '';
+  }
+
+  if (valid) {
+    // Form data is valid, proceed with capturing the data
+    var formData = {
+      date: dateInput,
+      reminder: reminderContent
+    };
+
+    console.log(formData);
+
+    event.preventDefault();
+}
+}
+</script>
 
         
 
-
-        </script>
     </body>
     
     </html>

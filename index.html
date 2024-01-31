@@ -523,7 +523,7 @@
       <div class="contact" id="contact">
         <div class="contact-form">
           <h1>I’m ready to talk...</h1>
-          <form action="#" method="post">
+          <form id="contactForm" method="post">
             <div class="form-group">
               <label for="name" class="name-N">Name</label>
               <input type="text" id="name" name="name" />
@@ -539,7 +539,11 @@
               <textarea id="message" name="message" rows="4"></textarea>
               <small></small>
             </div>
-            <button type="submit" class="contact-button">
+            <button
+              type="submit"
+              onclick="contactSend()"
+              class="contact-button"
+            >
               <img src="images/Content.png" alt="" />
             </button>
           </form>
@@ -631,10 +635,17 @@
         let isFormValid = isNameValid && isEmailValid && isMessageValid;
 
         if (isFormValid) {
-          console.log("Form is valid. Submitting...");
-          // You can add code here to submit the form to the server
+          var formData = {
+            name: nameEl.value,
+            email: emailEl.value,
+            message: messageEl.value,
+          };
+
+          console.log(formData);
         }
       });
+
+      //capture the data from the contact form
     </script>
   </body>
 </html>
