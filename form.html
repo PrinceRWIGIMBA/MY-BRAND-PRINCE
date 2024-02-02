@@ -145,7 +145,7 @@
             
                   <button type="submit" onclick="submitForm()">Submit</button>
              
-                
+                  <div id="error-summary" class="error-summary"></div>
                 </form>
                   </div>
             </div>
@@ -170,7 +170,7 @@
 
   const titleEl = document.querySelector("#title");
   const imageEl = document.querySelector("#image");
-  const contentEl =quill.root.innerText;
+  const contentEl =document.querySelector("#content");
   const form = document.querySelector("#blogForm");
 
   const isRequired = (value) => (value.trim() === "" ? false : true);
@@ -196,7 +196,7 @@
     const image = imageEl.value.trim();
 
     if (!isRequired(image)) {
-      showError(imageEl, "Image cannot be blank.");
+      showError(imageEl, "Image cannot be empty.");
     } else {
       showSuccess(imageEl);
       valid = true;
@@ -208,7 +208,7 @@
   const checkContent = () => {
     let valid = false;
   
-    const content = contentEl.trim();
+    const content = quill.root.trim();
   
     if (!isRequired(content)) {
       showError(contentEl, "Content cannot be blank.");
@@ -220,33 +220,21 @@
     return valid;
   };
 
-  const showError = (element, message) => {
-    const formField = element.parentElement;
-  
-    
-    const actualFormField = formField || element;
-  
-    actualFormField.classList.remove("success");
-    actualFormField.classList.add("error");
-  
-    const errorContainerId = element.id + "-error";
-    let errorContainer = document.getElementById(errorContainerId);
-  
-    
-    if (!errorContainer) {
-      errorContainer = document.createElement('div');
-      errorContainer.id = errorContainerId;
-  
-      if (formField) {
-        formField.appendChild(errorContainer);
-      } else {
-     
-        element.parentNode.insertBefore(errorContainer, element.nextSibling);
-      }
-    }
-  
+  const showError = (input, message) => {
+    const formField = input.parentElement;
+    formField.classList.remove("success");
+    formField.classList.add("error");
+
+    const errorContainerId = input.id + "-error";
+    const errorContainer = document.getElementById(errorContainerId);
+
     errorContainer.textContent = message;
+
+  
+ 
   };
+
+
 
 
   const showSuccess = (input) => {
@@ -265,22 +253,13 @@
     e.preventDefault();
 
    
-    const errorSummary = document.getElementById("error-summary");
-    errorSummary.innerHTML = "";
-
-   
     let isTitleValid = checkTitle();
     let isImageValid = checkImage();
     let isContentValid = checkContent();
 
     let isFormValid = isTitleValid && isImageValid && isContentValid;
 
-    if (!isFormValid) {
-    
-      errorSummary.scrollIntoView({ behavior: "smooth" });
-    } else {
-      
-    }
+  
   });
  // get the data from form 
 
