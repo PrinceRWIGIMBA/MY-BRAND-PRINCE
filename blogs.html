@@ -25,6 +25,7 @@
         .blogs-table table {
         width:100%;
             border-collapse: collapse;
+            border-radius: 20px;
          
             
         }
@@ -98,6 +99,16 @@
             color: #000;
             text-decoration: none;
         }
+        .blogs-table .image-cell img {
+            max-width: 100px;
+            max-height: 100px;
+            width: auto;
+            height: auto;
+            
+        }
+       
+
+
     </style>
 </head>
 
@@ -156,60 +167,20 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Index</th>
                             <th>Date</th>
+                            <th>Image</th>
                             <th>Title</th>
-                            <th colspan="2">Actions</th>
+                            <th>Description</th>
+                
+                            <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>2024-01-31</td>
-                            <td>Sample Title</td>
-                            <td class="actions-column">
-                                <button class="view-btn">View</button>
-                                <button class="edit-btn">Edit</button>
-                                <button class="delete-btn">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>2024-01-31</td>
-                            <td>Sample Title</td>
-                            <td class="actions-column">
-                                <button class="view-btn"><a href="blog.html">View</a></button>
-                                <button class="edit-btn"><a href=""></a>Edit</button>
-                                <button class="delete-btn">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>2024-01-31</td>
-                            <td>Sample Title</td>
-                            <td class="actions-column">
-                                <button class="view-btn">View</button>
-                                <button class="edit-btn">Edit</button>
-                                <button class="delete-btn">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>2024-01-31</td>
-                            <td>Sample Title</td>
-                            <td class="actions-column">
-                                <button class="view-btn">View</button>
-                                <button class="edit-btn">Edit</button>
-                                <button class="delete-btn">Delete</button>
-                            </td>
-                        </tr>
-                       
-                    </tbody>
+                    <tbody id="blogTableBody"></tbody>
                 </table>
            </section>
 
         </main>
-
+<script src="styles/js/script2.js"></script>
 
 
     </body>

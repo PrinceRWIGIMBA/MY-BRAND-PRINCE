@@ -57,15 +57,39 @@
           <h1><span>WELCOME</span><br />Back</h1>
         </div>
         <div class="login-form">
-          <h1>Login</h1>
+          <h1>Register</h1>
           <form id="signin" action="">
             <div class="form-field">
-              <label for="username">Username:</label>
+              <label for="firstname">FirstName:</label>
               <input
                 type="text"
-                name="username"
-                id="username"
-                placeholder="...username.."
+                name="firstname"
+                id="firstname"
+                placeholder="...firstname.."
+                autocomplete="off"
+              />
+
+              <small></small>
+            </div>
+            <div class="form-field">
+              <label for="username">LastName:</label>
+              <input
+                type="text"
+                name="lastname"
+                id="lastname"
+                placeholder="...lastname.."
+                autocomplete="off"
+              />
+
+              <small></small>
+            </div>
+            <div class="form-field">
+              <label for="email">Email:</label>
+              <input
+                type="text"
+                name="email"
+                id="email"
+                placeholder="...email.."
                 autocomplete="off"
               />
 
@@ -84,10 +108,7 @@
               <small></small>
             </div>
 
-            <button type="submit">Login</button>
-
-            Don't have an account click <a href="register.html">here</a>to
-            signUp!
+            <button type="submit">Register</button>
           </form>
         </div>
       </div>

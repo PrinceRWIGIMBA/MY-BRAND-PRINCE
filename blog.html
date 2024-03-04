@@ -78,26 +78,14 @@
         <main>
           <section id="content">
             <div class="post" >
-              <h1 class="comment-title">title</h1>
+              <h1 class="comment-title" id="blogTitle"></h1>
               <div class="blog">
                 <div class="image-container">
-                  <img src="images/blog.jpg" alt="" />
+                  <img id="blogImage" alt="blog Image" />
                 </div>
-                <h5 style="font-size: 16px; color: gray">Des 15 2022</h5>
-                <p>
-                  perspiciatis unde omnis iste natus error sit voluptatem accusantium
-                  doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo
-                  inventore veritatis et quasi architecto beatae vitae dicta sunt
-                  explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur
-                  aut odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt. In adipiscing ac tellus in hac
-                  habitasse platea dictumst. Quisque euismod metus vel arcu tincidunt,
-                  eget scelerisque est tristique. Vivamus consectetur, odio id
-                  interdum hendrerit, neque elit tristique nisl, nec aliquet metus
-                  elit vel enim. Sed eget convallis sapien. Nullam nec sapien in
-                  libero accumsan dignissim. Integer lacinia, sem ac vehicula
-                  vulputate, turpis nunc venenatis justo, nec faucibus tortor dui vel
-                  elit. Curabitur varius nisi sit amet tortor tincidunt ultricies.
+                <h5 style="font-size: 16px; color: gray" id="blogDate"></h5>
+                <p id="blogContent">
+                  
                 </p>
       
                 <div class="blog-post-actions">
@@ -227,7 +215,26 @@
               document.getElementById("postForm").reset();
               quill.setText(""); 
             }
-          </script>
+          </script>y
+          <script src="styles/js/script2.js"></script>
+    <script>
+      // Retrieve and display blog details from localStorage
+      const viewedBlog = JSON.parse(localStorage.getItem("viewed-blog"));
+
+      document.getElementById("blogTitle").textContent = viewedBlog.title;
+
+      const blogImage = document.getElementById("blogImage");
+      blogImage.src = viewedBlog.image;
+      blogImage.style.maxWidth = "100%"; // You can adjust the size
+
+      document.getElementById(
+        "blogDate"
+      ).textContent = `Date: ${viewedBlog.date}`;
+      document.getElementById("blogContent").innerHTML = viewedBlog.content;
+
+      // Clear the viewed-blog data from localStorage
+      localStorage.removeItem("viewed-blog");
+    </script>
     </body>
 
 </html>

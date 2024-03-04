@@ -93,7 +93,7 @@
         <a href="profile.html"><i class="fa fa-address-card"></i> Profile</a>
       </div>
       <div class="logout-icon">
-        <a href=""><i class="fas fa-sign-out-alt"></i>Logout</a>
+        <a href="login.html"><i class="fas fa-sign-out-alt"></i>Logout</a>
         <p>&copy; Prince RWIGIMBA</p>
       </div>
     </div>
@@ -129,29 +129,12 @@
                     <th>Action</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td>Task 1</td>
-                    <td><button onclick="removeTask(this)">Remove</button></td>
-                  </tr>
-                  <tr>
-                    <td>Task 2</td>
-                    <td><button onclick="removeTask(this)">Remove</button></td>
-                  </tr>
-                  <tr>
-                    <td>Task 2</td>
-                    <td><button onclick="removeTask(this)">Remove</button></td>
-                  </tr>
-                  <tr>
-                    <td>Task 2</td>
-                    <td><button onclick="removeTask(this)">Remove</button></td>
-                  </tr>
-                </tbody>
+                <tbody id="taskListBody"></tbody>
               </table>
               <form id="addTaskForm">
                 <input
                   type="text"
-                  id="newTask"
+                  id="taskInput"
                   placeholder="Add a new task"
                   required
                 />
@@ -249,5 +232,6 @@
         row.parentNode.removeChild(row);
       }
     </script>
+    <script src="styles/js/todo-list.js"></script>
   </body>
 </html>

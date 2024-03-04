@@ -36,6 +36,7 @@ main {
 
 
 @media (max-width: 874px) {
+    
 
 
     main{
@@ -44,9 +45,10 @@ main {
         padding: 20px;
     }
     #content {
-        margin-left: 0px;
+        margin-left: 200px;
         padding: 20px;
         transition: 0.3s;
+        width: calc(-250px +100vw);
       }
 
       
@@ -56,7 +58,7 @@ main {
         width: auto;
     }
     .sidebar-container{
-        display: none;
+        display: block;
     }
 
 

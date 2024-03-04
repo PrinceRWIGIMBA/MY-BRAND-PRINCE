@@ -76,6 +76,24 @@
           color: red;
           margin-top: 10px;
         }
+        #response {
+          width: 300px;
+          padding: 20px;
+          margin: 50px auto;
+          text-align: center;
+          border-radius: 10px;
+          color: white;
+          font-weight: bold;
+          display: none;
+        }
+  
+        .success {
+          background-color: green;
+        }
+  
+        .failure {
+          background-color: red;
+        }
       </style>
 </head>
 
@@ -120,6 +138,7 @@
         </div>
 
         <main>
+          <div id="response"></div>
             <div class="text-center">
                 <h1>Create Blog/Edit Blog </h1>
             </div>
@@ -127,9 +146,7 @@
                 <div class="card">
                   <form
                   id="blogForm"
-                  action="blogback.php"
-                  method="post"
-                  enctype="multipart/form-data"
+                  onsubmit="submitForm(); return false"
                 >
                   <label for="title">Title:</label>
                   <input type="text" id="title" name="title" placeholder="add the title here..."/>
@@ -138,14 +155,18 @@
                   <label for="image">Image:</label>
                   <input type="file" id="image" name="image" accept="image/*" />
                   <div class="error-container" id="image-error"></div>
+                  <label for="description">Description:</label>
+                  <textarea name="description" id="description" cols="30" rows="5" placeholder="Add short description of your blog post..."></textarea>
+                  <div class="error-container" id="description-error"></div>
             
                   <label for="content">Content:</label>
                   <div id="quill-editor" class="quill-editor"></div>
                   <div class="error-container" id="content-error"></div>
+
+                  <input type="hidden" id="blogIndex" name="blogIndex" value="" />
+
             
-                  <button type="submit" onclick="submitForm()">Submit</button>
-             
-                  <div id="error-summary" class="error-summary"></div>
+                  <button type="submit" id="submitButton">Submit</button>
                 </form>
                   </div>
             </div>
@@ -170,20 +191,20 @@
 
   const titleEl = document.querySelector("#title");
   const imageEl = document.querySelector("#image");
-  const contentEl =document.querySelector("#content");
+  const descriptionEl = document.querySelector("#description");
+  const contentEl =document.querySelector("#quill-editor");
   const form = document.querySelector("#blogForm");
-
-  const isRequired = (value) => (value.trim() === "" ? false : true);
+  const isNotEmpty = (value) => (value.trim() === "" ? false : true);
 
   const checkTitle = () => {
     
     let valid = false;
     const title = titleEl.value.trim();
 
-    if (!isRequired(title)) {
-      showError(titleEl, "Title cannot be blank.");
-    } else {
-      showSuccess(titleEl);
+    if (!isNotEmpty(title)) {
+      document.querySelector("#title-error").textContent =  "Title cannot be blank.";
+    } else {     
+      document.querySelector("#title-error").textContent =  "";
       valid = true;
     }
 
@@ -195,108 +216,56 @@
 
     const image = imageEl.value.trim();
 
-    if (!isRequired(image)) {
-      showError(imageEl, "Image cannot be empty.");
+    if (!isNotEmpty(image)) {
+      document.querySelector("#image-error").textContent = "Image cannot be empty.";
     } else {
-      showSuccess(imageEl);
+      document.querySelector("#image-error").textContent = "";
       valid = true;
     }
 
     return valid;
   };
+
+  const checkDescription = () => {
+    let valid = false;
+    const description = document.querySelector("#description").value.trim();
+  
+    if (!isNotEmpty(description)) {
+      document.querySelector("#description-error").textContent = "Description cannot be blank.";
+    } else if (description.length < 10) {
+      document.querySelector("#description-error").textContent = "Description should be at least 10 characters long.";
+    } else if (description.length > 200) {
+      document.querySelector("#description-error").textContent = "Description should not exceed 200 characters.";
+    } else {
+      document.querySelector("#description-error").textContent = "";
+      valid = true;
+    }
+  
+    return valid;
+  };
+  
 
   const checkContent = () => {
     let valid = false;
   
-    const content = quill.root.trim();
+    const content = quill.root.innerText;
   
-    if (!isRequired(content)) {
-      showError(contentEl, "Content cannot be blank.");
+    if (!isNotEmpty(content)) {
+      document.querySelector("#content-error").textContent = "Content cannot be blank.";
     } else {
-      showSuccess(contentEl);
+      document.querySelector("#content-error").textContent = "";
       valid = true;
     }
   
     return valid;
   };
 
-  const showError = (input, message) => {
-    const formField = input.parentElement;
-    formField.classList.remove("success");
-    formField.classList.add("error");
+  // get the data from form 
+</script>
+<script src="styles/js/script2.js"></script>
 
-    const errorContainerId = input.id + "-error";
-    const errorContainer = document.getElementById(errorContainerId);
-
-    errorContainer.textContent = message;
-
-  
+<script>
  
-  };
-
-
-
-
-  const showSuccess = (input) => {
-    const formField = input.parentElement;
-
-    formField.classList.remove("error");
-    formField.classList.add("success");
-
-    const errorContainerId = input.id + "-error";
-    const errorContainer = document.getElementById(errorContainerId);
-
-    errorContainer.textContent = "";
-  };
-
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-
-   
-    let isTitleValid = checkTitle();
-    let isImageValid = checkImage();
-    let isContentValid = checkContent();
-
-    let isFormValid = isTitleValid && isImageValid && isContentValid;
-
-  
-  });
- // get the data from form 
-
- function submitForm() {
-  
-  var titleInputValue = document.getElementById('title').value;
-
-  var imageInput = document.getElementById('image');
-  var imageFile = imageInput.files[0];
-
-  
-  var quillContent = quill.root.innerHTML;
-
-
-  if (titleInputValue.trim() === '') {
-    document.getElementById('title-error').innerText = 'Title cannot be empty.';
-    return;
-  } else {
-    document.getElementById('title-error').innerText = '';
-  }
-
- 
-  document.getElementById('image-error').innerText = '';
-  document.getElementById('content-error').innerText = '';
-
- 
-  var formData = new FormData();
-  formData.append('title', titleInputValue);
-  formData.append('image', imageFile);
-  formData.append('content', quillContent);
-
-  for (var pair of formData.entries()) {
-    console.log(pair[0] + ', ' + pair[1]);
-  }
-
- 
-}
 
 </script>
 </body>

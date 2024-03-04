@@ -86,3 +86,12 @@ height: auto;
 
 
 
+  .register-form {
+    display: none;
+    margin-top: 20px;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  

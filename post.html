@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="styles/css/style.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
@@ -36,27 +36,13 @@
     </header>
     <section>
       <div class="post">
-        <h1 class="comment-title">title</h1>
+        <h1 class="comment-title" id="blogTitle"></h1>
         <div class="blog">
           <div class="image-container">
-            <img src="images/blog.jpg" alt="" />
+            <img id="blogImage" alt="" />
           </div>
-          <h5 style="font-size: 16px; color: gray">Des 15 2022</h5>
-          <p>
-            perspiciatis unde omnis iste natus error sit voluptatem accusantium
-            doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo
-            inventore veritatis et quasi architecto beatae vitae dicta sunt
-            explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur
-            aut odit aut fugit, sed quia consequuntur magni dolores eos qui
-            ratione voluptatem sequi nesciunt. In adipiscing ac tellus in hac
-            habitasse platea dictumst. Quisque euismod metus vel arcu tincidunt,
-            eget scelerisque est tristique. Vivamus consectetur, odio id
-            interdum hendrerit, neque elit tristique nisl, nec aliquet metus
-            elit vel enim. Sed eget convallis sapien. Nullam nec sapien in
-            libero accumsan dignissim. Integer lacinia, sem ac vehicula
-            vulputate, turpis nunc venenatis justo, nec faucibus tortor dui vel
-            elit. Curabitur varius nisi sit amet tortor tincidunt ultricies.
-          </p>
+          <h5 style="font-size: 16px; color: gray" id="blogDate"></h5>
+          <p id="blogContent"></p>
 
           <div class="blog-post-actions">
             <a href="#"
@@ -144,7 +130,7 @@
       </div>
     </section>
     <div class="footer">&copy; Prince RWIGIMBA</div>
-    <script defer="defer" src="script.js"></script>
+    <script defer="defer" src="styles/js/script.js"></script>
 
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <script>
@@ -184,6 +170,22 @@
         document.getElementById("postForm").reset();
         quill.setText("");
       }
+    </script>
+    <script>
+      // Get the index from the URL parameters
+      const urlParams = new URLSearchParams(window.location.search);
+      const index = urlParams.get("index");
+
+      // Fetch the blog post content from localStorage based on the index
+      const blogs = JSON.parse(localStorage.getItem("blogs"));
+      const blog = blogs[index];
+
+      // Set the content of your page elements using the retrieved data
+      document.getElementById("blogTitle").textContent = blog.title;
+      document.getElementById("blogImage").src = blog.image;
+      document.getElementById("blogImage").style.maxWidth = "100%"; // Adjust size if needed
+      document.getElementById("blogDate").textContent = `Date: ${blog.date}`;
+      document.getElementById("blogContent").innerHTML = blog.content;
     </script>
   </body>
 </html>

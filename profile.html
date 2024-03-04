@@ -230,9 +230,9 @@
                       <h3>About</h3>
                   <p class="small fst-italic">User details go here...</p>
           
-                    <p><strong>Username:</strong> John Doe</p>
-                    <p><strong>Email:</strong> john.doe@example.com</p>
-                    <p><strong>Address:</strong> 123 Main Street, City, Country</p>
+                    <p><strong>Username:</strong> <i id="name"></i></p>
+                    <p><strong>Email:</strong><i  id="email1"></i> </p>
+                    <p><strong >Address:</strong > <i id="address1"></i></p>
                   </div>
               </div>
               <div class="edit-form" id="edit-form">
@@ -271,7 +271,7 @@
           
                 <div class="empty-state" id="empty-state">
                   <h2>Add Reminder</h2>
-                  <form id="reminderForm" onsubmit="validateForm(event)">
+                  <form id="reminderForm">
                     <label for="date" style="font-size: 24px">Date:</label>
                     <input
                       type="date"
@@ -337,34 +337,40 @@
               },
             });
       
-            function validateForm(event) {
-              // Reset error messages
-              document.getElementById("DateError").innerHTML = "";
-              document.getElementById("ReminderError").innerHTML = "";
-      
-              // Validate username
-              var username = document.getElementById("date").value.trim();
-              if (username === "") {
-                document.getElementById("DateError").innerHTML =
-                  "Date is required.";
-                event.preventDefault();
+          
+            function saveReminder() {
+              // Get form input values
+              var dateInput = document.getElementById('date').value;
+              var reminderContent = quill.root.innerText;
+            
+              // Validate form fields
+              var valid = true;
+            
+              if (dateInput.trim() === '') {
+                document.getElementById('DateError').innerText = 'Please select a date.';
+                valid = false;
+              } else {
+                document.getElementById('DateError').innerText = '';
               }
-      
-              // Validate Quill editor content
-              var content = quill.root.innerHTML.trim();
-              if (content === "") {
-                document.getElementById("editor").innerHTML =
-                  "Reminder is required.";
-                event.preventDefault();
+            
+              if (reminderContent.trim() === '<p><br></p>' || reminderContent.trim() === '') {
+                document.getElementById('ReminderError').innerText = 'Reminder content cannot be empty.';
+                valid = false;
+              } else {
+                document.getElementById('ReminderError').innerText = '';
               }
-      
-              // You can do something with the values here, like sending them to the server
-              console.log("Date:", Date);
-              console.log("Reminder:", Reminder);
-      
-              // Reset the form
-              document.getElementById("postForm").reset();
-              quill.setText(""); // Clear the Quill editor
+            
+              if (valid) {
+                // Form data is valid, proceed with capturing the data
+                var formData = {
+                  date: dateInput,
+                  reminder: reminderContent
+                };
+            
+                console.log(formData);
+            
+                event.preventDefault();
+            }
             }
           </script>
 
@@ -563,63 +569,42 @@
                 var address = addressInput.value;
         
                 // Example: Log captured data
-                console.log('Image:', imageFile);
-                console.log('Username:', username);
-                console.log('Email:', email);
-                console.log('Address:', address);
+                let userData = {
+                  username,
+                  imageFile,
+                  email,
+                  address,
+                } 
+                localStorage.setItem('userData', JSON.stringify(userData));
+               
         
                 // ... (continue with your logic, e.g., send data to the backend)
+
+                //get the data
+                
               }
             }
+
+            // Retrieve data from local storage
+      var storedUserData = localStorage.getItem("userData");
+
+
+      // Parse JSON string to object
+      var userData = JSON.parse(storedUserData);
+
+      // Check if userData exists
+      if (userData) {
+        // Create a table row for the user data
+        document.getElementById('name').innerText=userData.username;
+        document.getElementById('email1').innerText=userData.email;
+        document.getElementById('address1').innerText=userData.address;
         
-            function openPopup(message) {
-              // Display the popup with the specified message
-              document.getElementById('popupMessage').innerText = message;
-              document.getElementById('popupContainer').style.display = 'block';
-            }
-        
-            function closePopup() {
-              // Close the popup
-              document.getElementById('popupContainer').style.display = 'none';
-            }
+      }
 //data capture in the reminder form
 
 
 
-function saveReminder() {
-  // Get form input values
-  var dateInput = document.getElementById('date').value;
-  var reminderContent = quill.root.innerText;
 
-  // Validate form fields
-  var valid = true;
-
-  if (dateInput.trim() === '') {
-    document.getElementById('DateError').innerText = 'Please select a date.';
-    valid = false;
-  } else {
-    document.getElementById('DateError').innerText = '';
-  }
-
-  if (reminderContent.trim() === '<p><br></p>' || reminderContent.trim() === '') {
-    document.getElementById('ReminderError').innerText = 'Reminder content cannot be empty.';
-    valid = false;
-  } else {
-    document.getElementById('ReminderError').innerText = '';
-  }
-
-  if (valid) {
-    // Form data is valid, proceed with capturing the data
-    var formData = {
-      date: dateInput,
-      reminder: reminderContent
-    };
-
-    console.log(formData);
-
-    event.preventDefault();
-}
-}
 </script>
 
         
