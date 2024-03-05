@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/css/style.css" />
+    <link rel="stylesheet" href="styles/css/LoginCss.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    />
+
+    <style>
+      @import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
+
+      :root {
+        --error-color: #dc3545;
+        --success-color: #28a745;
+        --warning-color: #ffc107;
+      }
+
+      .form-field.error input {
+        border-color: var(--error-color);
+      }
+
+      .form-field.success input {
+        border-color: var(--success-color);
+      }
+
+      .form-field small {
+        color: var(--error-color);
+        font-size: 12px;
+        margin-top: 0px;
+        display: block;
+      }
+    </style>
+    <title>header sample</title>
+  </head>
+  <body>
+    <header>
+      <a href="#" class="logo"></a>
+      <nav class="navbar">
+        <div class="btn">
+          <i class="fas fa-times close-btn"></i>
+        </div>
+        <a href="index.html" class="active">Home</a>
+
+        <a href="login.html">Login</a>
+      </nav>
+      <div class="btn">
+        <i class="fas fa-bars menu-btn"></i>
+      </div>
+    </header>
+    <section>
+      <div class="login">
+        <div class="message">
+          <h1><span>WELCOME</span><br />Back</h1>
+        </div>
+        <div class="login-form">
+          <h1>Login</h1>
+          <form id="signin" action="">
+            <div class="form-field">
+              <label for="username">Username:</label>
+              <input
+                type="text"
+                name="username"
+                id="username"
+                placeholder="...username.."
+                autocomplete="off"
+              />
+
+              <small></small>
+            </div>
+
+            <div class="form-field">
+              <label for="password">Password:</label>
+              <input
+                type="text"
+                name="password"
+                id="password"
+                placeholder="...password..."
+                autocomplete="off"
+              />
+              <small></small>
+            </div>
+
+            <button type="submit">Login</button>
+
+            Don't have an account click <a href="register.html">here</a>to
+            signUp!
+          </form>
+        </div>
+      </div>
+    </section>
+    <div class="footer">&copy; Prince RWIGIMBA</div>
+    <script defer="defer" src="script.js"></script>
+    <script>
+      const usernameEl = document.querySelector("#username");
+      const passwordEl = document.querySelector("#password");
+
+      const form = document.querySelector("#signin");
+
+      const checkUsername = () => {
+        let valid = false;
+
+        const min = 3,
+          max = 25;
+
+        const username = usernameEl.value.trim();
+
+        if (!isRequired(username)) {
+          showError(usernameEl, "Username cannot be blank.");
+        } else if (!isBetween(username.length, min, max)) {
+          showError(
+            usernameEl,
+            `Username must be between ${min} and ${max} characters.`
+          );
+        } else {
+          showSuccess(usernameEl);
+          valid = true;
+        }
+        return valid;
+      };
+
+      const checkPassword = () => {
+        let valid = false;
+
+        const password = passwordEl.value.trim();
+
+        if (!isRequired(password)) {
+          showError(passwordEl, "Password cannot be blank.");
+        } else if (!isPasswordSecure(password)) {
+          showError(
+            passwordEl,
+            "Password must have at least strong 8 characters"
+          );
+        } else {
+          showSuccess(passwordEl);
+          valid = true;
+        }
+
+        return valid;
+      };
+
+      const isPasswordSecure = (password) => {
+        const re = new RegExp(
+          "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})"
+        );
+        return re.test(password);
+      };
+
+      const isRequired = (value) => (value === "" ? false : true);
+      const isBetween = (length, min, max) =>
+        length < min || length > max ? false : true;
+
+      const showError = (input, message) => {
+        const formField = input.parentElement;
+        formField.classList.remove("success");
+        formField.classList.add("error");
+        const error = formField.querySelector("small");
+        error.textContent = message;
+      };
+
+      const showSuccess = (input) => {
+        const formField = input.parentElement;
+        formField.classList.remove("error");
+        formField.classList.add("success");
+        const error = formField.querySelector("small");
+        error.textContent = "";
+      };
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        let isUsernameValid = checkUsername(),
+          isPasswordValid = checkPassword();
+
+        let isFormValid = isUsernameValid && isPasswordValid;
+
+        if (isFormValid) {
+          var formData = {
+            Username: usernameEl.value,
+            Password: passwordEl.value,
+          };
+
+          console.log(formData);
+        }
+      });
+
+      const debounce = (fn, delay = 500) => {
+        let timeoutId;
+        return (...args) => {
+          if (timeoutId) {
+            clearTimeout(timeoutId);
+          }
+          timeoutId = setTimeout(() => {
+            fn.apply(null, args);
+          }, delay);
+        };
+      };
+
+      form.addEventListener(
+        "input",
+        debounce(function (e) {
+          switch (e.target.id) {
+            case "username":
+              checkUsername();
+              break;
+            case "password":
+              checkPassword();
+              break;
+          }
+        })
+      );
+    </script>
+  </body>
+</html>

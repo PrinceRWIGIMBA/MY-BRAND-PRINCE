@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+
+  <script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-core.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-pie.min.js"></script>
+    <link rel="stylesheet" href="styles/css/admin-sidebar.css" />
+    <link rel="stylesheet" href="styles/css/admin-title.css" />
+    <link rel="stylesheet" href="styles/css/admin-main.css" />
+    <script defer="defer" src="styles/js/main.js"></script>
+
+    <style>
+        /* Basic styling for the message card */
+        
+        .card-container{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+
+        }
+      
+        .message-card {
+          border: 1px solid #ccc;
+          padding: 20px 5px;
+          border-radius: 10px;
+          display: flex;
+         justify-content: center;
+         align-self:center ;
+          width: 75%;
+          height: 75%;
+        
+          flex-direction: column;
+          margin-bottom: 20px;
+        }
+        .address{
+            display: flex;
+            flex-direction: row;
+            padding-left: 10px;
+            justify-content: start;
+            gap: 10px;
+        }
+  
+        /* Style for the profile picture */
+        .profile-pic {
+          width: 25px;
+          height: 25px;
+          border-radius: 50%;
+          object-fit: cover;
+          margin-bottom: 10px;
+        }
+  
+        /* Style for the sender's email */
+        .sender-email {
+          font-weight: bold;
+          margin-bottom: 10px;
+        }
+  
+        /* Style for the email content */
+        .email-content {
+          margin-bottom: 10px;
+        }
+  
+        /* Style for the reply button */
+        .reply-button {
+          background-color: #BF7506;
+          color: white;
+          padding: 8px 16px;
+          width: 20%;
+          border: none;
+          border-radius: 10px;
+          cursor: pointer;
+        }
+      </style>
+   
+</head>
+
+<body>
+
+    <body>
+        <div class="header">
+            <div class="left-section">
+                <span class="logo">RP</span>
+                <div class="btn" onclick="toggleSidebar()">
+                  <i class="fas fa-bars menu-btn"></i>
+                </div>
+            </div>
+            <div class="middle-section">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search..." name="search" />
+                </div>
+            </div>
+            <div class="right-section">
+                <div class="notification-icons">
+                    <img src="images/icons/Envelope.png" alt="" />
+                    <img src="images/icons/nitifications.png" alt="" />
+                </div>
+                <div class="username">Prince Rwigimba</div>
+                <div class="user-pic">
+                    <img src="images/icons/PersonCircle.png" alt="" />
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-container">
+            <div class="sidebar">
+                <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="blogs.html"><i class="fas fa-blog"></i> Blogs</a>
+                <a href="messages.html" class="active"><i class="fas fa-envelope"></i> Messages</a>
+                <a href="profile.html"><i class="fa fa-address-card"></i> Profile</a>
+            </div>
+            <div class="logout-icon">
+                <a href=""><i class="fas fa-sign-out-alt"></i>Logout</a>
+                <p>&copy; Prince RWIGIMBA</p>
+            </div>
+        </div>
+
+        <main >
+         <section id="content">
+          <div class="text-center">
+            <h1 style="color: #BF7506;">Portfolio Messages</h1>
+        </div>
+        <div class="card-container">  
+            <div class="message-card">
+              <div class="address">
+                  <!-- Profile picture -->
+                  <img
+                  src="images/icons/PersonCircle.png"
+                  alt="Profile Picture"
+                  class="profile-pic"
+                />
+          
+                <!-- Sender's email -->
+                <div class="sender-email">Prince RWIGIMBA(sender@example.com)</div><span style="color:#D9D9D9 ;">.Des 7</span>
+              </div>
+          
+                <!-- Email content -->
+                <div class="email-content">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi.
+                </div>
+          
+                <!-- Reply button -->
+                <button class="reply-button">Reply</button>
+              </div>
+              <div class="message-card">
+                <div class="address">
+                    <!-- Profile picture -->
+                    <img
+                    src="images/icons/PersonCircle.png"
+                    alt="Profile Picture"
+                    class="profile-pic"
+                  />
+            
+                  <!-- Sender's email -->
+                  <div class="sender-email">Prince RWIGIMBA(sender@example.com)</div><span style="color:#D9D9D9 ;">.Des 7</span>
+                </div>
+            
+                  <!-- Email content -->
+                  <div class="email-content">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi.
+                  </div>
+            
+                  <!-- Reply button -->
+                  <button class="reply-button">Reply</button>
+                </div>
+                <div class="message-card">
+                    <div class="address">
+                        <!-- Profile picture -->
+                        <img
+                        src="images/icons/PersonCircle.png"
+                        alt="Profile Picture"
+                        class="profile-pic"
+                      />
+                
+                      <!-- Sender's email -->
+                      <div class="sender-email">Prince RWIGIMBA(sender@example.com)</div><span style="color:#D9D9D9 ;">.Des 7</span>
+                    </div>
+                
+                      <!-- Email content -->
+                      <div class="email-content">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi.
+                      </div>
+                
+                      <!-- Reply button -->
+                      <button class="reply-button">Reply</button>
+                    </div>
+              
+
+        </div>
+         </section>
+           
+        </main>
+
+
+
+    </body>
+
+</html>

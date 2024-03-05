@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+
+  <script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-core.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-pie.min.js"></script>
+    <title>Document</title>
+    <link
+    href="https://cdn.quilljs.com/1.3.6/quill.snow.css"
+    rel="stylesheet"
+  />
+    <link rel="stylesheet" href="styles/css/admin-sidebar.css" />
+    <link rel="stylesheet" href="styles/css/admin-title.css" />
+    <link rel="stylesheet" href="styles/css/admin-main.css" />
+    <script defer="defer" src="styles/js/main.js"></script>
+    <style>
+     
+        .card-container{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+
+        }
+        .card {
+          background-color: #f0f0f0;
+          padding: 20px 5px;
+          border-radius: 10px;
+          display: flex;
+         justify-content: center;
+         align-self:center ;
+          width: 50%;
+          height: 50%;
+          
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+  
+        form {
+          display: flex;
+          flex-direction: column;
+          width: 400px;
+        }
+  
+        label {
+          margin-bottom: 8px;
+        }
+  
+        input,
+        button {
+          margin-bottom: 16px;
+          padding: 8px;
+        }
+        button{
+            border-radius: 10px;
+            margin-top: 10px;
+            background-color: antiquewhite;
+        }
+  
+        
+        .quill-editor {
+          height: 100px;
+          background:#fff;
+        }
+        
+        .error-container {
+          color: red;
+        }
+        
+        .error-summary {
+          color: red;
+          margin-top: 10px;
+        }
+        #response {
+          width: 300px;
+          padding: 20px;
+          margin: 50px auto;
+          text-align: center;
+          border-radius: 10px;
+          color: white;
+          font-weight: bold;
+          display: none;
+        }
+  
+        .success {
+          background-color: green;
+        }
+  
+        .failure {
+          background-color: red;
+        }
+      </style>
+</head>
+
+<body>
+
+    <body>
+        <div class="header">
+            <div class="left-section">
+                <span class="logo">RP</span>
+                <div class="btn" onclick="toggleSidebar()">
+                  <i class="fas fa-bars menu-btn"></i>
+                </div>
+            </div>
+            <div class="middle-section">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search..." name="search" />
+                </div>
+            </div>
+            <div class="right-section">
+                <div class="notification-icons">
+                    <img src="images/icons/Envelope.png" alt="" />
+                    <img src="images/icons/nitifications.png" alt="" />
+                </div>
+                <div class="username">Prince Rwigimba</div>
+                <div class="user-pic">
+                    <img src="images/icons/PersonCircle.png" alt="" />
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-container">
+            <div class="sidebar">
+                <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="blogs.html"><i class="fas fa-blog"></i> Blogs</a>
+                <a href="messages.html"><i class="fas fa-envelope"></i> Messages</a>
+                <a href="profile.html"><i class="fa fa-address-card"></i> Profile</a>
+            </div>
+            <div class="logout-icon">
+                <a href=""><i class="fas fa-sign-out-alt"></i>Logout</a>
+                <p>&copy; Prince RWIGIMBA</p>
+            </div>
+        </div>
+
+        <main>
+          <div id="response"></div>
+            <div class="text-center">
+                <h1>Create Blog/Edit Blog </h1>
+            </div>
+            <div class="card-container">
+                <div class="card">
+                  <form
+                  id="blogForm"
+                  onsubmit="submitForm(); return false"
+                >
+                  <label for="title">Title:</label>
+                  <input type="text" id="title" name="title" placeholder="add the title here..."/>
+                  <div class="error-container" id="title-error"></div>
+            
+                  <label for="image">Image:</label>
+                  <input type="file" id="image" name="image" accept="image/*" />
+                  <div class="error-container" id="image-error"></div>
+                  <label for="description">Description:</label>
+                  <textarea name="description" id="description" cols="30" rows="5" placeholder="Add short description of your blog post..."></textarea>
+                  <div class="error-container" id="description-error"></div>
+            
+                  <label for="content">Content:</label>
+                  <div id="quill-editor" class="quill-editor"></div>
+                  <div class="error-container" id="content-error"></div>
+
+                  <input type="hidden" id="blogIndex" name="blogIndex" value="" />
+
+            
+                  <button type="submit" id="submitButton">Submit</button>
+                </form>
+                  </div>
+            </div>
+          
+           
+        </main>
+
+
+
+   <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+<script>
+
+  var quill = new Quill("#quill-editor", {
+    theme: "snow",
+    showCharCount: true,
+    maxLength: 100,
+    placeholder: 'Type content here...',
+  });
+
+  
+
+  const titleEl = document.querySelector("#title");
+  const imageEl = document.querySelector("#image");
+  const descriptionEl = document.querySelector("#description");
+  const contentEl =document.querySelector("#quill-editor");
+  const form = document.querySelector("#blogForm");
+  const isNotEmpty = (value) => (value.trim() === "" ? false : true);
+
+  const checkTitle = () => {
+    
+    let valid = false;
+    const title = titleEl.value.trim();
+
+    if (!isNotEmpty(title)) {
+      document.querySelector("#title-error").textContent =  "Title cannot be blank.";
+    } else {     
+      document.querySelector("#title-error").textContent =  "";
+      valid = true;
+    }
+
+    return valid;
+  };
+
+  const checkImage = () => {
+    let valid = false;
+
+    const image = imageEl.value.trim();
+
+    if (!isNotEmpty(image)) {
+      document.querySelector("#image-error").textContent = "Image cannot be empty.";
+    } else {
+      document.querySelector("#image-error").textContent = "";
+      valid = true;
+    }
+
+    return valid;
+  };
+
+  const checkDescription = () => {
+    let valid = false;
+    const description = document.querySelector("#description").value.trim();
+  
+    if (!isNotEmpty(description)) {
+      document.querySelector("#description-error").textContent = "Description cannot be blank.";
+    } else if (description.length < 10) {
+      document.querySelector("#description-error").textContent = "Description should be at least 10 characters long.";
+    } else if (description.length > 200) {
+      document.querySelector("#description-error").textContent = "Description should not exceed 200 characters.";
+    } else {
+      document.querySelector("#description-error").textContent = "";
+      valid = true;
+    }
+  
+    return valid;
+  };
+  
+
+  const checkContent = () => {
+    let valid = false;
+  
+    const content = quill.root.innerText;
+  
+    if (!isNotEmpty(content)) {
+      document.querySelector("#content-error").textContent = "Content cannot be blank.";
+    } else {
+      document.querySelector("#content-error").textContent = "";
+      valid = true;
+    }
+  
+    return valid;
+  };
+
+  // get the data from form 
+</script>
+<script src="styles/js/script2.js"></script>
+
+<script>
+ 
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

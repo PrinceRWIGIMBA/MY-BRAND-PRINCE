@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-5P7e3rZpzz7r8To8HcuEKrVfvVxDwGLfWP8Cz8cO0qSSDfzB0Ji1H7DxdJ+u4dbCglb9A7QGLtwwZ4pNRdCj6w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <style>
+      :root {
+        --error-color: #dc3545;
+        --success-color: #28a745;
+        --warning-color: #ffc107;
+      }
+
+      .form-group.error input {
+        border-color: var(--error-color);
+      }
+
+      .form-group.success input {
+        border-color: var(--success-color);
+      }
+
+      .form-group small {
+        color: var(--error-color);
+        font-size: 12px;
+        margin-top: 0px;
+        display: block;
+      }
+    </style>
+    <title>header sample</title>
+  </head>
+  <body>
+    <header>
+      <a href="#" class="logo"></a>
+      <nav class="navbar">
+        <div class="btn">
+          <i class="fas fa-times close-btn"></i>
+        </div>
+        <a href="#profile" class="active">Home</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#blogs">Blogs</a>
+        <a href="#about">Ablout</a>
+        <a href="#contact">Contact</a>
+        <a href="login.html">Login</a>
+      </nav>
+      <div class="btn">
+        <i class="fas fa-bars menu-btn"></i>
+      </div>
+    </header>
+    <section>
+      <div class="profile" id="profile">
+        <img src="images/arm-pic.png" alt="Your Name" />
+        <div class="bio">
+          <h1>I'm Prince RWIGIMBA</h1>
+          <p>
+            <span>Backend Developer</span> fluent in PHP with expertise in the
+            Laravel framework. Equipped with a blend of HTML, CSS, and
+            JavaScript skills, I excel at architecting robust and visually
+            appealing web applications. Let's collaborate to turn your digital
+            ideas into seamless, user-friendly realities.
+          </p>
+          <br />
+          <div class="social-media">
+            <ul>
+              <li>
+                <a href="https://www.linkedin.com/" target="_blank"
+                  ><i class="fab fa-linkedin linkedin-icon"></i
+                ></a>
+              </li>
+              <li>
+                <a href="https://twitter.com/" target="_blank"
+                  ><i class="fab fa-twitter twitter-icon"></i
+                ></a>
+              </li>
+
+              <li>
+                <a href="https://github.com/" target="_blank"
+                  ><i class="fab fa-github github-icon"></i
+                ></a>
+              </li>
+
+              <li>
+                <a
+                  href="https://www.instagram.com/"
+                  target="_blank"
+                  class="instagram-icon"
+                  ><img src="images/instagram.svg" alt="Instagram"
+                /></a>
+              </li>
+
+              <li>
+                <a id="cv-link" href="path/to/your/cv.pdf"
+                  ><i class="fas fa-paperclip"></i> Download CV</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <h1 id="portfolio" class="titles">my portfolios</h1>
+      <div class="portfolio">
+        <div class="item imgs">
+          <img
+            class="portfolio-cover"
+            src="images/image2.png"
+            alt="Portfolio Item 1"
+          />
+          <h3 class="p-titles">eCommerce Mobile App</h3>
+          <div class="listss">
+            <ul>
+              <li>HTML</li>
+              <li>CSS</li>
+              <li>JavaScript</li>
+              <li>Git</li>
+              <li>PHP</li>
+              <li>LARAVEL</li>
+            </ul>
+          </div>
+          <p>
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+            officia deserunt mollit anim id est laborum.
+          </p>
+
+          <div class="links">
+            <a href="#" class="p-titles"
+              ><img src="images/Link.png" alt=""
+            /></a>
+            <a href="#" class="p-titles"
+              ><img src="images/demo.png" alt=""
+            /></a>
+          </div>
+        </div>
+        <div class="item imgs">
+          <img
+            class="portfolio-cover"
+            src="images/image1.png"
+            alt="Portfolio Item 2"
+          />
+          <h3 class="p-titles">Dataset Landing Page</h3>
+          <div class="listss">
+            <ul>
+              <li>HTML</li>
+              <li>CSS</li>
+            </ul>
+          </div>
+          <p>
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+            officia deserunt mollit anim id est laborum.
+          </p>
+
+          <div class="links">
+            <a href="#" class="p-titles"
+              ><img src="images/Link.png" alt=""
+            /></a>
+            <a href="#" class="p-titles"
+              ><img src="images/demo.png" alt=""
+            /></a>
+          </div>
+        </div>
+      </div>
+      <div class="blogs" id="blogs">
+        <div class="slideshow-container">
+          <div class="mySlides fade">
+            <h1 class="titles">Blogs</h1>
+            <div class="blog-container" id="slide1"></div>
+          </div>
+
+          <div class="mySlides fade">
+            <h1 class="titles">Blogs</h1>
+            <div class="blog-container" id="slide2"></div>
+          </div>
+
+          <div class="mySlides fade">
+            <h1 class="titles">Blogs</h1>
+            <div class="blog-container" id="slide3"></div>
+          </div>
+
+          <a class="prev" onclick="plusSlides(-1)">❮</a>
+          <a class="next" onclick="plusSlides(1)">❯</a>
+        </div>
+        <br />
+
+        <div class="pagination" style="text-align: center">
+          <span class="dot" onclick="currentSlide(1)"></span>
+          <span class="dot" onclick="currentSlide(2)"></span>
+          <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+      </div>
+      <div class="about" id="about">
+        <div class="row">
+          <div class="about-col-1">
+            <img src="images/about.png" alt="" />
+          </div>
+          <div class="about-col-2">
+            <h2 class="sub-title">Nice to meeet you</h2>
+            <h1 class="name">I'm Prince RWIGIMBA</h1>
+            <p>
+              Engaged full-time in Laravel, I'm spearheading the overhaul of
+              DotCMS's backend administration system. My leadership involves
+              shaping server-side functionalities, optimizing database
+              management, and ensuring a smooth collaboration with the frontend
+              team for a sleek and efficient user experience. Stay tuned for the
+              enhanced and streamlined DotCMS administration powered by Laravel
+              excellence!.
+            </p>
+
+            <div class="tab-titles">
+              <p class="tab-links">Code</p>
+              <p class="tab-links">Design</p>
+              <p class="tab-links">Learnin And Teach</p>
+            </div>
+            <div>
+              <p>
+                Backend development is my true passion, and I find immense joy
+                in the entire journey of crafting server-side solutions. From
+                the initial problem-solving, architecture planning, and coding,
+                to the optimization and deployment, I relish every aspect of
+                bringing a robust backend to life that seamlessly complements
+                and powers the frontend user experience. 's collaborate to
+                transform your digital concepts into functional and efficient
+                backend realities!
+              </p>
+            </div>
+          </div>
+          <div class="skills">
+            <h1>My experience includes but not limited</h1>
+            <br />
+            <div class="listss">
+              <ul>
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>Nodejs</li>
+                <li>PHP</li>
+                <li>LARAVEL</li>
+                <li>UI Design</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact" id="contact">
+        <div class="contact-form">
+          <h1>I’m ready to talk...</h1>
+          <form id="contactForm" method="post">
+            <div class="form-group">
+              <label for="name" class="name-N">Name</label>
+              <input type="text" id="name" name="name" />
+              <small></small>
+            </div>
+            <div class="form-group">
+              <label for="email" class="name-E">Email</label>
+              <input type="email" id="email" name="email" />
+              <small></small>
+            </div>
+            <div class="form-group">
+              <label for="message" class="name-M">Message</label>
+              <textarea id="message" name="message" rows="4"></textarea>
+              <small></small>
+            </div>
+            <button
+              type="submit"
+              onclick="contactSend()"
+              class="contact-button"
+            >
+              <img src="images/Content.png" alt="" />
+            </button>
+          </form>
+        </div>
+        <div class="footer-image">
+          <img src="images/gooter-arm2.png" alt="" />
+        </div>
+      </div>
+    </section>
+    <div class="footer">&copy; Prince RWIGIMBA</div>
+    <script defer="defer" src="styles/js/script.js"></script>
+    <script>
+      const nameEl = document.getElementById("name");
+      const emailEl = document.getElementById("email");
+      const messageEl = document.getElementById("message");
+
+      const form = document.querySelector("form");
+
+      const checkName = () => {
+        let valid = false;
+        const name = nameEl.value.trim();
+
+        if (!isRequired(name)) {
+          showError(nameEl, "Name cannot be blank.");
+        } else {
+          showSuccess(nameEl);
+          valid = true;
+        }
+
+        return valid;
+      };
+
+      const checkEmail = () => {
+        let valid = false;
+        const email = emailEl.value.trim();
+
+        if (!isRequired(email)) {
+          showError(emailEl, "Email cannot be blank.");
+        } else if (!isEmailValid(email)) {
+          showError(emailEl, "Email is not valid.");
+        } else {
+          showSuccess(emailEl);
+          valid = true;
+        }
+
+        return valid;
+      };
+
+      const checkMessage = () => {
+        let valid = false;
+        const message = messageEl.value.trim();
+
+        if (!isRequired(message)) {
+          showError(messageEl, "Message cannot be blank.");
+        } else {
+          showSuccess(messageEl);
+          valid = true;
+        }
+
+        return valid;
+      };
+
+      const isEmailValid = (email) => {
+        const re =
+          /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+      };
+
+      const isRequired = (value) => (value === "" ? false : true);
+
+      const showError = (input, message) => {
+        const small = input.parentElement.querySelector("small");
+        input.classList.add("error");
+        small.textContent = message;
+      };
+
+      const showSuccess = (input) => {
+        const small = input.parentElement.querySelector("small");
+        input.classList.remove("error");
+        small.textContent = "";
+      };
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        let isNameValid = checkName();
+        let isEmailValid = checkEmail();
+        let isMessageValid = checkMessage();
+        let isFormValid = isNameValid && isEmailValid && isMessageValid;
+
+        if (isFormValid) {
+          var formData = {
+            name: nameEl.value,
+            email: emailEl.value,
+            message: messageEl.value,
+          };
+
+          console.log(formData);
+        }
+      });
+
+      //capture the data from the contact form
+    </script>
+    <script src="styles/js/script2.js"></script>
+    <script>
+      // Paste your modified showSlides function here
+
+      // Example usage: Display the first slide when the page loads
+      let slideIndex = 1;
+      showSlides(slideIndex);
+
+      // Next/previous controls
+      function plusSlides(n) {
+        showSlides((slideIndex += n));
+      }
+
+      // Thumbnail image controls
+      function currentSlide(n) {
+        showSlides((slideIndex = n));
+      }
+    </script>
+  </body>
+</html>

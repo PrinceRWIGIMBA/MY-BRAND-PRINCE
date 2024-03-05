@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+
+  <script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-core.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-pie.min.js"></script>
+    <link rel="stylesheet" href="styles/css/admin-sidebar.css" />
+    <link rel="stylesheet" href="styles/css/admin-title.css" />
+    <link rel="stylesheet" href="styles/css/admin-main.css" />
+    <script defer="defer" src="styles/js/main.js"></script>
+    <style>
+        .blogs-table{
+            width: 100%;
+            overflow-x: hidden;
+        }
+       
+        .blogs-table table {
+        width:100%;
+            border-collapse: collapse;
+            border-radius: 20px;
+         
+            
+        }
+
+        .blogs-table th,
+        td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        .blogs-table th {
+            background-color: #f2f2f2;
+        }
+
+        .blogs-table .actions-column {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .blogs-table .add-btn {
+            position: absolute;
+
+            background-color: yellow;
+            color: #000;
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        
+        .blogs-table .edit-btn,
+        .delete-btn, .view-btn{
+            padding: 6px 12px;
+            margin: 2px;
+            cursor: pointer;
+        }
+
+        .blogs-table .edit-btn {
+            background-color: #209fda;
+           
+            color: #fff;
+        }
+
+        .blogs-table .delete-btn {
+            background-color: #dc3545;
+          
+            color: #fff;
+        }
+        .blogs-table .view-btn {
+            background-color: #28a745;
+           
+            color: #fff;
+        }
+        .add{
+            width: 100%;
+            display: flex;
+             justify-content: end;
+             margin-bottom: 20px;
+            
+        }
+        .add button{
+           width: 60px;
+           height: 40px;
+           border-radius: 20px;
+            background-color:#b86a12;
+            font-weight: bold;
+
+        }
+        .add button a{
+            color: #000;
+            text-decoration: none;
+        }
+        .blogs-table .image-cell img {
+            max-width: 100px;
+            max-height: 100px;
+            width: auto;
+            height: auto;
+            
+        }
+       
+
+
+    </style>
+</head>
+
+<body>
+
+    <body>
+        <div class="header">
+            <div class="left-section">
+                <span class="logo">RP</span>
+                <div class="btn" onclick="toggleSidebar()">
+                    <i class="fas fa-bars menu-btn"></i>
+                  </div>
+            </div>
+            <div class="middle-section">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search..." name="search" />
+                </div>
+            </div>
+            <div class="right-section">
+                <div class="notification-icons">
+                    <img src="images/icons/Envelope.png" alt="" />
+                    <img src="images/icons/nitifications.png" alt="" />
+                </div>
+                <div class="username">Prince Rwigimba</div>
+                <div class="user-pic">
+                    <img src="images/icons/PersonCircle.png" alt="" />
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-container">
+            <div class="sidebar">
+                <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="blogs.html" class="active"><i class="fas fa-blog"></i> Blogs</a>
+                <a href="messages.html"><i class="fas fa-envelope"></i> Messages</a>
+               
+                <a href="profile.html"><i class="fa fa-address-card"></i> Profile</a>
+            </div>
+            <div class="logout-icon">
+                <a href=""><i class="fas fa-sign-out-alt"></i>Logout</a>
+                <p>&copy; Prince RWIGIMBA</p>
+            </div>
+        </div>
+
+        <main >
+           <section id="content">
+            <div class="thumb-header">
+                <h1>Blogs</h1>
+            </div>
+            <div class="add">
+
+                <button class="add-button"><a href="form.html">Add</a></button>
+            </div>
+            <div class="blogs-table">
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Image</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="blogTableBody"></tbody>
+                </table>
+           </section>
+
+        </main>
+<script src="styles/js/script2.js"></script>
+
+
+    </body>
+
+</html>

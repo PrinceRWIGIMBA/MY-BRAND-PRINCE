@@ -1,0 +1,115 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    width: 98%;
+    z-index: 1000;
+    margin: 0;
+    background-color: #FFF3E8;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: #070707;
+    padding: 15px;
+    text-align: center;
+    overflow: hidden;
+}
+
+
+.header  .btn{
+    margin-left: 75px;
+    font-size: 30px;
+    color: #888383;
+    cursor: pointer;
+    display: block;
+}
+ #content {
+    margin-left: 200px;
+    padding: 20px;
+    transition: 0.3s;
+  }
+.left-section {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.logo {
+    margin-right: 20px;
+    color: #BF7506;
+    margin-left: 20px;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.line-icon {
+    height: 20px;
+    width: 20px;
+}
+
+.middle-section {
+    display: flex;
+    align-items: center;
+    width: 40%;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.search-icon {
+    font-size: 20px;
+    margin-right: 5px;
+    margin-left: 5px;
+    color: #471212;
+}
+
+.search-bar input {
+    padding: 7px 30px 5px 30px;
+    background: url('images/icons/Vector.png') no-repeat 5px center, linear-gradient(transparent, transparent) 20px,
+        linear-gradient(transparent, transparent) calc(20px + 10px + 5px);
+    background-color: #fff;
+    border-radius: 10px;
+    border: solid black;
+}
+
+.right-section {
+    width: 40%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    align-items: center;
+    flex-direction: row;
+}
+
+.notification-icons img {
+    width: 30px;
+    height: 30px;
+}
+
+.user-pic img {
+    width: 40px;
+    height: 40px;
+}
+
+.thumb-header h1{
+        margin-top: 0;
+        padding: 0 0 20px;
+    
+}
+.header.hide-logo .logo {
+    display: none;
+}
+
+/* Add the following styles for the logo when it should be visible */
+.header.show-logo .logo {
+    display: block;
+}
+
+
+   

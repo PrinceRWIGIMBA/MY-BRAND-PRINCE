@@ -1,0 +1,97 @@
+*{
+  margin: 0;
+  padding: 0;
+
+}
+
+
+
+
+.login{
+  width: 100%;
+  display: grid;
+grid-template-columns: 1fr 1fr;
+
+
+ padding: 100px ;
+ overflow: hidden;
+
+gap: 10px;
+height: auto;
+}
+.message{
+  display: flex;
+  justify-content: center;
+}
+.message h1{
+  font-size: 64px;
+  margin-top:20%;
+}
+.message h1 span{
+  color:#BF7506 ;
+}
+  .login-form{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+    background-color: #FFF3E8;
+    padding: 40px;
+    border-radius: 41px
+  }
+
+  .login-form form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .login-form form button{
+    width: 20%;
+    align-self: center;
+  }
+
+  .login-form form label{
+    font-size: 16px;
+    font-weight: bold;
+  }
+  .login-form h1{
+
+    font-size: 30px;
+  }
+
+  @media (max-width:800px){
+  
+    
+    .message{
+      margin-top:20px;
+      justify-content: space-between;
+      justify-items: center;
+      font-size: 16px;
+    }
+    .login{
+      display: flex;
+      justify-content: center;
+     justify-items: center;
+     flex-wrap: wrap;
+     overflow: scroll;
+     padding: 100px ;
+    }
+    .login-form form button{
+      width: 40%;
+      margin-left: 10px;
+      color: #000;
+      align-self: center;
+    }
+  }
+
+
+
+  .register-form {
+    display: none;
+    margin-top: 20px;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  

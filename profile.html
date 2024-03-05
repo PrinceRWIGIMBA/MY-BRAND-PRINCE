@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+  <link
+  href="https://cdn.quilljs.com/1.3.6/quill.snow.css"
+  rel="stylesheet"
+/>
+  <script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-core.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-pie.min.js"></script>
+    <link rel="stylesheet" href="styles/css/admin-sidebar.css" />
+    <link rel="stylesheet" href="styles/css/admin-title.css" />
+    <link rel="stylesheet" href="styles/css/admin-main.css" />
+    <script defer="defer" src="styles/js/main.js"></script>
+    <style>
+         .profile-container{
+            width: 100%;
+            display: flex;
+            justify-content: start;
+            flex-direction: row;
+            gap: 20px;
+            padding: 20px;
+        }
+        .profile-card{
+         width: 30%;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         flex-direction: column;
+         padding: 10px;
+         height: 200px;
+         gap: 20px;
+         background-color: #FFF3E8;
+         border-radius: 20px;
+        }
+        .profile-card img{
+            width: 50%;
+            height: 50%;
+            object-fit: contain;
+        }
+        .profile-content-card{
+            flex: 1;
+            background-color: #fff;
+            padding: 20px;
+        }
+        .nav-links {
+            background-color: #FFF3E8;
+            color: #000;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+          }
+    
+          .nav-link {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+            font-weight: bold;
+          }
+    
+          .nav-link:hover {
+            color: #BF7506;
+          }
+    
+          
+    
+          .edit-form {
+            display: none;
+            padding: 0 0 0 20px ;
+          }
+    
+          .empty-state {
+            display: none;
+            padding: 20px;
+          }
+          form {
+           
+           
+            width: 100%;
+          }
+          form h2{
+            padding: 20px;
+          }
+    
+          label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #495057;
+          }
+    
+          input {
+            width: 80%;
+            padding: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            box-sizing: border-box;
+          }
+    
+          button {
+            background-color: #BF7506;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            cursor: pointer;
+          }
+    
+          button:hover {
+            background-color: #BF7506;
+            color: #000;
+            font-weight: bold;
+          }
+          h2{
+            padding: 0;
+            color:#BF7506 ;
+          }
+          .user-info{
+            padding: 20px;
+          }
+          .ql-editor {
+            min-height: 80px;
+          }
+          .empty-state button{
+            
+                background-color: #BF7506;
+               
+                padding: 10px 20px;
+                border: none;
+                border-radius: 6px;
+                margin-top: 20px;
+                cursor: pointer;
+              
+          }
+
+          :root {
+            --error-color: #dc3545;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+          }
+    
+          .form-field.error input {
+            border-color: var(--error-color);
+          }
+    
+          .form-field.success input {
+            border-color: var(--success-color);
+          }
+    
+          .form-field small {
+            color: var(--error-color);
+            margin-top: 0px;
+            display: block;
+          }
+          .error {
+            color: red;
+          }
+    </style>
+</head>
+
+<body>
+
+    <body>
+        <div class="header">
+            <div class="left-section">
+                <span class="logo">RP</span>
+                <div class="btn" onclick="toggleSidebar()">
+                  <i class="fas fa-bars menu-btn"></i>
+                </div>
+            </div>
+            <div class="middle-section">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search..." name="search" />
+                </div>
+            </div>
+            <div class="right-section">
+                <div class="notification-icons">
+                    <img src="images/icons/Envelope.png" alt="" />
+                    <img src="images/icons/nitifications.png" alt="" />
+                </div>
+                <div class="username">Prince Rwigimba</div>
+                <div class="user-pic">
+                    <img src="images/icons/PersonCircle.png" alt="" />
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-container">
+            <div class="sidebar">
+                <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="blogs.html"><i class="fas fa-blog"></i> Blogs</a>
+                <a href="messages.html"><i class="fas fa-envelope"></i> Messages</a>
+                <a href="profile.html" class="active"><i class="fa fa-address-card"></i> Profile</a>
+            </div>
+            <div class="logout-icon">
+                <a href=""><i class="fas fa-sign-out-alt"></i>Logout</a>
+                <p>&copy; Prince RWIGIMBA</p>
+            </div>
+        </div>
+
+        <main >
+           <section id="content">
+            <div class="thumb-header" >
+              <h1>Profile</h1>
+          </div>
+        <div class="profile-container">
+          <div class="profile-card">
+              <img src="images/icons/PersonCircle.png" alt="">
+              <span class="name">Prince RWIGIMBA</span>
+          </div>
+          <div class="profile-content-card">
+              <div class="nav-links">
+                  <a href="#" class="nav-link" onclick="showUserInfo()">User Info</a>
+                  <a href="#" class="nav-link" onclick="showEditForm()">Edit Info</a>
+                  <a href="#" class="nav-link" onclick="showEmptyState()">Remainder</a>
+              </div>
+              <div class="user-details">
+                  
+                  <!-- Display user details like username, email, and address -->
+                  <div id="user-info">
+                      <h3>About</h3>
+                  <p class="small fst-italic">User details go here...</p>
+          
+                    <p><strong>Username:</strong> <i id="name"></i></p>
+                    <p><strong>Email:</strong><i  id="email1"></i> </p>
+                    <p><strong >Address:</strong > <i id="address1"></i></p>
+                  </div>
+              </div>
+              <div class="edit-form" id="edit-form">
+                  <h2>Edit User Info</h2>
+                  <form method="post" id="editProfileForm">
+                    <div class="form-field">
+                      <label for="image">Image:</label>
+                      <input type="file" accept="image/*" name="image" id="image" />
+                      <small id="image-error"></small>
+                    </div>
+                
+                    <div class="form-field">
+                      <label for="username">Username:</label>
+                      <input type="text" name="username" id="username" placeholder="...add your username here.." autocomplete="off" />
+                      <small id="username-error"></small>
+                    </div>
+                
+                    <div class="form-field">
+                      <label for="email">Email:</label>
+                      <input type="text" name="email" id="email" placeholder="email..." autocomplete="off" />
+                      <small id="email-error"></small>
+                    </div>
+                
+                    <div class="form-field">
+                      <label for="address">Address:</label>
+                      <input type="text" name="address" id="address" placeholder="add your address here..." autocomplete="off" />
+                      <small id="address-error"></small>
+                    </div>
+                
+                    <button type="button" onclick="saveEdit()">Save Changes</button>
+                  </form>
+                 
+                   
+                </form>
+                </div>
+          
+                <div class="empty-state" id="empty-state">
+                  <h2>Add Reminder</h2>
+                  <form id="reminderForm">
+                    <label for="date" style="font-size: 24px">Date:</label>
+                    <input
+                      type="date"
+                      id="date"
+                      name="date"
+                     
+                    />
+                    <br>
+                    <span id="DateError" class="error"></span>
+        
+                    <label for="reminder" style="font-size: 24px">Reminder:</label>
+                    <div id="editor"></div>
+                    <span id="ReminderError" class="error"></span>
+        
+                    <button type="submit" onclick="saveReminder()">Save</button>
+                  </form>
+                
+                </div>
+          </div>
+        </div>
+           </section>
+        </main>
+
+        <script>
+            function showUserInfo() {
+              document.getElementById("user-info").style.display = "block";
+              document.getElementById("edit-form").style.display = "none";
+              document.getElementById("empty-state").style.display = "none";
+            }
+      
+            function showEditForm() {
+              document.getElementById("user-info").style.display = "none";
+              document.getElementById("edit-form").style.display = "block";
+              document.getElementById("empty-state").style.display = "none";
+            }
+      
+            function showEmptyState() {
+              document.getElementById("user-info").style.display = "none";
+              document.getElementById("edit-form").style.display = "none";
+              document.getElementById("empty-state").style.display = "block";
+            }
+      
+            function saveEdit() {
+            
+              showUserInfo(); 
+            }
+          </script>
+
+          <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+          <script>
+            // Initialize Quill
+            var quill = new Quill("#editor", {
+              theme: "snow",
+              showCharCount: true,
+              maxLength: 100,
+              placeholder: 'Type Reminder here...',
+              modules: {
+                toolbar: [
+                  ["bold", "italic", "underline", "strike"],
+                  ["link", "image", "video"],
+                  ["clean"],
+                ],
+              },
+            });
+      
+          
+            function saveReminder() {
+              // Get form input values
+              var dateInput = document.getElementById('date').value;
+              var reminderContent = quill.root.innerText;
+            
+              // Validate form fields
+              var valid = true;
+            
+              if (dateInput.trim() === '') {
+                document.getElementById('DateError').innerText = 'Please select a date.';
+                valid = false;
+              } else {
+                document.getElementById('DateError').innerText = '';
+              }
+            
+              if (reminderContent.trim() === '<p><br></p>' || reminderContent.trim() === '') {
+                document.getElementById('ReminderError').innerText = 'Reminder content cannot be empty.';
+                valid = false;
+              } else {
+                document.getElementById('ReminderError').innerText = '';
+              }
+            
+              if (valid) {
+                // Form data is valid, proceed with capturing the data
+                var formData = {
+                  date: dateInput,
+                  reminder: reminderContent
+                };
+            
+                console.log(formData);
+            
+                event.preventDefault();
+            }
+            }
+          </script>
+
+            <script>
+
+            ////// validation for  user edit 
+
+            const form = document.querySelector("#editProfileForm");
+            const imageEl = document.querySelector("#image");
+            const usernameEl = document.querySelector("#username");
+            const emailEl = document.querySelector("#email");
+            const addressEl = document.querySelector("#address");
+          
+            const checkImage = () => {
+              let valid = false;
+          
+              const image = imageEl.value.trim();
+          
+              if (!isRequired(image)) {
+                showError(imageEl, "Image cannot be blank.");
+              } else {
+                showSuccess(imageEl);
+                valid = true;
+              }
+          
+              return valid;
+            };
+          
+            const checkUsername = () => {
+              let valid = false;
+          
+              const min = 3,
+                max = 25;
+          
+              const username = usernameEl.value.trim();
+          
+              if (!isRequired(username)) {
+                showError(usernameEl, "Username cannot be blank.");
+              } else if (!isBetween(username.length, min, max)) {
+                showError(
+                  usernameEl,
+                  `Username must be between ${min} and ${max} characters.`
+                );
+              } else {
+                showSuccess(usernameEl);
+                valid = true;
+              }
+              return valid;
+            };
+          
+            const checkEmail = () => {
+              let valid = false;
+              const email = emailEl.value.trim();
+              if (!isRequired(email)) {
+                  showError(emailEl, 'Email cannot be blank.');
+              } else if (!isEmailValid(email)) {
+                  showError(emailEl, 'Email is not valid.')
+              } else {
+                  showSuccess(emailEl);
+                  valid = true;
+              }
+              return valid;
+          }
+          const isEmailValid = (email) => {
+            const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email);
+        };
+          
+            const checkAddress = () => {
+              let valid = false;
+          
+              const address = addressEl.value.trim();
+          
+              if (!isRequired(address)) {
+                showError(addressEl, "Address cannot be blank.");
+              } else {
+                showSuccess(addressEl);
+                valid = true;
+              }
+          
+              return valid;
+            };
+          
+            form.addEventListener("submit", function (e) {
+              e.preventDefault();
+          
+              let isImageValid = checkImage();
+              let isUsernameValid = checkUsername();
+              let isEmailValid = checkEmail();
+              let isAddressValid = checkAddress();
+          
+              let isFormValid = isImageValid && isUsernameValid && isEmailValid && isAddressValid;
+          
+              if (isFormValid) {
+              
+                form.submit();
+              }
+            });
+          
+            const debounce = (fn, delay = 500) => {
+              let timeoutId;
+              return (...args) => {
+                if (timeoutId) {
+                  clearTimeout(timeoutId);
+                }
+                timeoutId = setTimeout(() => {
+                  fn.apply(null, args);
+                }, delay);
+              };
+            };
+          
+            form.addEventListener(
+              "input",
+              debounce(function (e) {
+                switch (e.target.id) {
+                  case "image":
+                    checkImage();
+                    break;
+                  case "username":
+                    checkUsername();
+                    break;
+                  case "email":
+                    checkEmail();
+                    break;
+                  case "address":
+                    checkAddress();
+                    break;
+                }
+              })
+            );
+          
+            const isRequired = (value) => (value === "" ? false : true);
+            const isBetween = (length, min, max) =>
+              length < min || length > max ? false : true;
+          
+            const showError = (input, message) => {
+              const formField = input.parentElement;
+              formField.classList.remove("success");
+              formField.classList.add("error");
+              const error = formField.querySelector("small");
+              error.textContent = message;
+            };
+          
+            const showSuccess = (input) => {
+              const formField = input.parentElement;
+              formField.classList.remove("error");
+              formField.classList.add("success");
+              const error = formField.querySelector("small");
+              error.textContent = "";
+            };
+          
+            function saveEdit() {
+              // Get form input values
+              var imageInput = document.getElementById('image');
+              var usernameInput = document.getElementById('username');
+              var emailInput = document.getElementById('email');
+              var addressInput = document.getElementById('address');
+        
+              // Validate form fields
+              var valid = true;
+        
+              if (!imageInput.files[0]) {
+                document.getElementById('image-error').innerText = 'Please select an image.';
+                valid = false;
+              } else {
+                document.getElementById('image-error').innerText = '';
+              }
+        
+              if (usernameInput.value.trim() === '') {
+                document.getElementById('username-error').innerText = 'Username cannot be empty.';
+                valid = false;
+              } else {
+                document.getElementById('username-error').innerText = '';
+              }
+              if (emailInput.value.trim() === '') {
+                document.getElementById('email-error').innerText = 'Email cannot be empty.';
+                valid = false;
+              } else {
+                document.getElementById('email-error').innerText = '';
+              }
+              if (addressInput.value.trim() === '') {
+                document.getElementById('address-error').innerText = 'Address cannot be empty.';
+                valid = false;
+              } else {
+                document.getElementById('address-error').innerText = '';
+              }
+        
+              // Add additional validation for email and address if needed
+              // ...
+        
+              if (valid) {
+                // Form data is valid, proceed with capturing the data
+                var imageFile = imageInput.files[0];
+                var username = usernameInput.value;
+                var email = emailInput.value;
+                var address = addressInput.value;
+        
+                // Example: Log captured data
+                let userData = {
+                  username,
+                  imageFile,
+                  email,
+                  address,
+                } 
+                localStorage.setItem('userData', JSON.stringify(userData));
+               
+        
+                // ... (continue with your logic, e.g., send data to the backend)
+
+                //get the data
+                
+              }
+            }
+
+            // Retrieve data from local storage
+      var storedUserData = localStorage.getItem("userData");
+
+
+      // Parse JSON string to object
+      var userData = JSON.parse(storedUserData);
+
+      // Check if userData exists
+      if (userData) {
+        // Create a table row for the user data
+        document.getElementById('name').innerText=userData.username;
+        document.getElementById('email1').innerText=userData.email;
+        document.getElementById('address1').innerText=userData.address;
+        
+      }
+//data capture in the reminder form
+
+
+
+
+</script>
+
+        
+
+    </body>
+    
+    </html>
