@@ -60,12 +60,12 @@
           <h1>Login</h1>
           <form id="signin" action="">
             <div class="form-field">
-              <label for="username">Username:</label>
+              <label for="email">Email:</label>
               <input
                 type="text"
-                name="username"
-                id="username"
-                placeholder="...username.."
+                name="email"
+                id="email"
+                placeholder="...email.."
                 autocomplete="off"
               />
 
@@ -73,9 +73,9 @@
             </div>
 
             <div class="form-field">
-              <label for="password">Password:</label>
+              <label for="password">password:</label>
               <input
-                type="text"
+                type="password"
                 name="password"
                 id="password"
                 placeholder="...password..."
@@ -95,44 +95,44 @@
     <div class="footer">&copy; Prince RWIGIMBA</div>
     <script defer="defer" src="script.js"></script>
     <script>
-      const usernameEl = document.querySelector("#username");
+      const emailEl = document.querySelector("#email");
       const passwordEl = document.querySelector("#password");
 
       const form = document.querySelector("#signin");
 
-      const checkUsername = () => {
+      const checkemail = () => {
         let valid = false;
 
         const min = 3,
           max = 25;
 
-        const username = usernameEl.value.trim();
+        const email = emailEl.value.trim();
 
-        if (!isRequired(username)) {
-          showError(usernameEl, "Username cannot be blank.");
-        } else if (!isBetween(username.length, min, max)) {
+        if (!isRequired(email)) {
+          showError(emailEl, "email cannot be blank.");
+        } else if (!isBetween(email.length, min, max)) {
           showError(
-            usernameEl,
-            `Username must be between ${min} and ${max} characters.`
+            emailEl,
+            `email must be between ${min} and ${max} characters.`
           );
         } else {
-          showSuccess(usernameEl);
+          showSuccess(emailEl);
           valid = true;
         }
         return valid;
       };
 
-      const checkPassword = () => {
+      const checkpassword = () => {
         let valid = false;
 
         const password = passwordEl.value.trim();
 
         if (!isRequired(password)) {
-          showError(passwordEl, "Password cannot be blank.");
-        } else if (!isPasswordSecure(password)) {
+          showError(passwordEl, "password cannot be blank.");
+        } else if (!ispasswordSecure(password)) {
           showError(
             passwordEl,
-            "Password must have at least strong 8 characters"
+            "password must have at least strong 8 characters"
           );
         } else {
           showSuccess(passwordEl);
@@ -142,7 +142,7 @@
         return valid;
       };
 
-      const isPasswordSecure = (password) => {
+      const ispasswordSecure = (password) => {
         const re = new RegExp(
           "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})"
         );
@@ -172,19 +172,45 @@
       form.addEventListener("submit", function (e) {
         e.preventDefault();
 
-        let isUsernameValid = checkUsername(),
-          isPasswordValid = checkPassword();
+        let isemailValid = checkemail(),
+          ispasswordValid = checkpassword();
 
-        let isFormValid = isUsernameValid && isPasswordValid;
+        let isFormValid = isemailValid && ispasswordValid;
 
-        if (isFormValid) {
-          var formData = {
-            Username: usernameEl.value,
-            Password: passwordEl.value,
-          };
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
 
-          console.log(formData);
-        }
+          let isEmailValid = checkemail();
+          let ispasswordValid = checkpassword();
+          let isFormValid = isEmailValid && ispasswordValid;
+
+          if (isFormValid) {
+            var formData = {
+              email: emailEl.value,
+              password: passwordEl.value,
+            };
+
+            // Make a POST request to the authentication API using fetch
+            fetch("https://mybrand-prince-be.onrender.com/api/auth/login", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(formData),
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                localStorage.setItem("token", data.token);
+                console.log("Authentication successful:", data);
+
+                // Redirect to dashboard.html
+                window.location.href = "dashboard.html";
+              })
+              .catch((error) => {
+                console.error("Authentication failed:", error);
+              });
+          }
+        });
       });
 
       const debounce = (fn, delay = 500) => {
@@ -203,11 +229,11 @@
         "input",
         debounce(function (e) {
           switch (e.target.id) {
-            case "username":
-              checkUsername();
+            case "email":
+              checkemail();
               break;
             case "password":
-              checkPassword();
+              checkpassword();
               break;
           }
         })

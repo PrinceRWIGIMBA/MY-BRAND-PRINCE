@@ -79,50 +79,11 @@
         </div>
 
         <h1 class="comment-title">comments</h1>
-        <div class="comments" style.maxHeight="150px">
-          <div class="comment">
-            <div class="profile-p">
-              <img src="images/icons/PersonCircle.png" alt="" />
-            </div>
-            <div class="commment-contents">
-              <h1>Michel Jean Peter <span>Des 15</span></h1>
-              <p>
-                sapien. Nullam nec sapien in libero accumsan dignissim. Integer
-                lacinia, sem ac vehicula vulputate, turpis nunc venenatis justo,
-                nec faucibus tortor dui vel elit. Curabitur varius nisi sit amet
-                tortor tincidunt ultricies.
-              </p>
-            </div>
-          </div>
-          <div class="comment">
-            <div class="profile-p">
-              <img src="images/icons/PersonCircle.png" alt="" />
-            </div>
-            <div class="commment-contents">
-              <h1>Michel Jean Peter <span>Des 15</span></h1>
-              <p>
-                sapien. Nullam nec sapien in libero accumsan dignissim. Integer
-                lacinia, sem ac vehicula vulputate, turpis nunc venenatis justo,
-                nec faucibus tortor dui vel elit. Curabitur varius nisi sit amet
-                tortor tincidunt ultricies.
-              </p>
-            </div>
-          </div>
-          <div class="comment">
-            <div class="profile-p">
-              <img src="images/icons/PersonCircle.png" alt="" />
-            </div>
-            <div class="commment-contents">
-              <h1>Michel Jean Peter <span>Des 15</span></h1>
-              <p>
-                sapien. Nullam nec sapien in libero accumsan dignissim. Integer
-                lacinia, sem ac vehicula vulputate, turpis nunc venenatis justo,
-                nec faucibus tortor dui vel elit. Curabitur varius nisi sit amet
-                tortor tincidunt ultricies.
-              </p>
-            </div>
-          </div>
-        </div>
+        <div
+          class="comments"
+          id="commentsContainer"
+          style.maxHeight="150px"
+        ></div>
 
         <div class="see-all">
           <a href="#" onclick="toggleComments()">See all</a>
@@ -145,6 +106,21 @@
           ],
         },
       });
+      function toggleComments() {
+        var commentsContainer = document.querySelector(".comments");
+        var seeAllLink = document.querySelector(".see-all a");
+
+        if (
+          commentsContainer.style.maxHeight === "150px" ||
+          commentsContainer.style.maxHeight === ""
+        ) {
+          commentsContainer.style.maxHeight = "none";
+          seeAllLink.textContent = "Collapse";
+        } else {
+          commentsContainer.style.maxHeight = "150px";
+          seeAllLink.textContent = "See all";
+        }
+      }
 
       function validateForm(event) {
         document.getElementById("usernameError").innerHTML = "";
@@ -172,20 +148,78 @@
       }
     </script>
     <script>
-      // Get the index from the URL parameters
       const urlParams = new URLSearchParams(window.location.search);
-      const index = urlParams.get("index");
+      const blogId = urlParams.get("index");
 
-      // Fetch the blog post content from localStorage based on the index
-      const blogs = JSON.parse(localStorage.getItem("blogs"));
-      const blog = blogs[index];
+      fetch(`https://mybrand-prince-be.onrender.com/api/blogs/${blogId}`)
+        .then((response) => response.json())
+        .then((viewedBlog) => {
+          // Set the values to the HTML elements
+          document.getElementById("blogTitle").textContent = viewedBlog.title;
 
-      // Set the content of your page elements using the retrieved data
-      document.getElementById("blogTitle").textContent = blog.title;
-      document.getElementById("blogImage").src = blog.image;
-      document.getElementById("blogImage").style.maxWidth = "100%"; // Adjust size if needed
-      document.getElementById("blogDate").textContent = `Date: ${blog.date}`;
-      document.getElementById("blogContent").innerHTML = blog.content;
+          const blogImage = document.getElementById("blogImage");
+          blogImage.src = viewedBlog.image;
+          blogImage.alt = viewedBlog.title;
+
+          document.getElementById(
+            "blogDate"
+          ).textContent = `Date: ${viewedBlog.createdAt}`;
+          document.getElementById("blogContent").innerHTML =
+            viewedBlog.contents;
+
+          // Display the comments
+          const commentsContainer =
+            document.getElementById("commentsContainer");
+          if (viewedBlog.comments && viewedBlog.comments.length > 0) {
+            viewedBlog.comments.forEach((commentId) => {
+              // Fetch each comment using its ID
+              fetch(
+                `https://mybrand-prince-be.onrender.com/api/comments/${commentId}`
+              )
+                .then((response) => response.json())
+                .then((comment) => {
+                  // Check if userId is present in the comment object
+                  if (comment.data.user) {
+                    // Fetch user details for the commenter
+                    fetch(
+                      `https://mybrand-prince-be.onrender.com/api/auth/Users/${comment.data.user}`
+                    )
+                      .then((userResponse) => userResponse.json())
+                      .then((user) => {
+                        const commentHTML = `
+                          <div class="comment">
+                            <div class="profile-p">
+                              <img src="images/icons/PersonCircle.png" alt=""/>
+                            </div>
+                            <div class="comment-contents">
+                              <h1 id="username">${user.data.firstname} ${user.data.lastname}</h1>
+                              <span id="createdAt">${comment.data.createdAt}</span>
+                              <p id="description">${comment.data.description}</p>
+                            </div>
+                          </div>
+                        `;
+                        commentsContainer.insertAdjacentHTML(
+                          "beforeend",
+                          commentHTML
+                        );
+                      })
+                      .catch((error) =>
+                        console.error("Error fetching user:", error)
+                      );
+                  } else {
+                    // Handle the case where userId is undefined
+                    console.error("Comment does not have a userId:", comment);
+                  }
+                })
+                .catch((error) =>
+                  console.error("Error fetching comment:", error)
+                );
+            });
+          } else {
+            commentsContainer.innerHTML = "<p>No comments available.</p>";
+          }
+        })
+        .catch((error) => console.error("Error fetching blog:", error));
     </script>
   </body>
 </html>

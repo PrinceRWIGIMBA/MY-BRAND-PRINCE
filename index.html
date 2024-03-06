@@ -187,8 +187,8 @@
             <div class="blog-container" id="slide3"></div>
           </div>
 
-          <a class="prev" onclick="plusSlides(-1)">❮</a>
-          <a class="next" onclick="plusSlides(1)">❯</a>
+          <a class="prev" id="leftButton_id" onclick="plusSlides(-1)">❮</a>
+          <a class="next" id="rightButton_id" onclick="plusSlides(1)">❯</a>
         </div>
         <br />
 
@@ -258,7 +258,7 @@
           <form id="contactForm" method="post">
             <div class="form-group">
               <label for="name" class="name-N">Name</label>
-              <input type="text" id="name" name="name" />
+              <input type="text" id="username" name="username" />
               <small></small>
             </div>
             <div class="form-group">
@@ -267,8 +267,8 @@
               <small></small>
             </div>
             <div class="form-group">
-              <label for="message" class="name-M">Message</label>
-              <textarea id="message" name="message" rows="4"></textarea>
+              <label for="querie" class="name-M">Message</label>
+              <textarea id="querie" name="querie" rows="4"></textarea>
               <small></small>
             </div>
             <button
@@ -288,9 +288,9 @@
     <div class="footer">&copy; Prince RWIGIMBA</div>
     <script defer="defer" src="styles/js/script.js"></script>
     <script>
-      const nameEl = document.getElementById("name");
+      const nameEl = document.getElementById("username");
       const emailEl = document.getElementById("email");
-      const messageEl = document.getElementById("message");
+      const querieEl = document.getElementById("querie");
 
       const form = document.querySelector("form");
 
@@ -324,14 +324,14 @@
         return valid;
       };
 
-      const checkMessage = () => {
+      const checkQuerie = () => {
         let valid = false;
-        const message = messageEl.value.trim();
+        const querie = querieEl.value.trim();
 
-        if (!isRequired(message)) {
-          showError(messageEl, "Message cannot be blank.");
+        if (!isRequired(querie)) {
+          showError(querieEl, "Message cannot be blank.");
         } else {
-          showSuccess(messageEl);
+          showSuccess(querieEl);
           valid = true;
         }
 
@@ -346,7 +346,7 @@
 
       const isRequired = (value) => (value === "" ? false : true);
 
-      const showError = (input, message) => {
+      const showError = (input, querie) => {
         const small = input.parentElement.querySelector("small");
         input.classList.add("error");
         small.textContent = message;
@@ -363,39 +363,40 @@
 
         let isNameValid = checkName();
         let isEmailValid = checkEmail();
-        let isMessageValid = checkMessage();
-        let isFormValid = isNameValid && isEmailValid && isMessageValid;
+        let isQuerieValid = checkQuerie();
+        let isFormValid = isNameValid && isEmailValid && isQuerieValid;
 
         if (isFormValid) {
           var formData = {
-            name: nameEl.value,
+            username: nameEl.value,
             email: emailEl.value,
-            message: messageEl.value,
+            querie: querieEl.value,
           };
 
           console.log(formData);
+
+          // Make a POST request to the API using fetch
+          fetch("https://mybrand-prince-be.onrender.com/api/messages", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log("Message sent successfully:", data);
+              // Optionally, you can redirect to a thank you page or display a success message
+            })
+            .catch((error) => {
+              console.error("Error sending message:", error);
+              // Handle the error, show an error message, etc.
+            });
         }
       });
 
       //capture the data from the contact form
     </script>
-    <script src="styles/js/script2.js"></script>
-    <script>
-      // Paste your modified showSlides function here
-
-      // Example usage: Display the first slide when the page loads
-      let slideIndex = 1;
-      showSlides(slideIndex);
-
-      // Next/previous controls
-      function plusSlides(n) {
-        showSlides((slideIndex += n));
-      }
-
-      // Thumbnail image controls
-      function currentSlide(n) {
-        showSlides((slideIndex = n));
-      }
-    </script>
+    <script src="styles/js/landingpage.js"></script>
   </body>
 </html>
