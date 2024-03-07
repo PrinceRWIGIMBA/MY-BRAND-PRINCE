@@ -23,13 +23,14 @@
     <header>
       <a href="#" class="logo">RP</a>
       <nav class="navbar">
-        <div class="btn">
-          <i class="fas fa-times close-btn"></i>
-        </div>
-        <a href="index.html" class="active">Home</a>
-
-        <a href="login.html">Login</a>
-      </nav>
+        <nav class="navbar">
+          <div class="btn">
+            <i class="fas fa-times close-btn"></i>
+          </div>
+          <a href="index.html" class="active">Home</a>
+          <button id="loginButton" onclick="login()">Login</button>
+          <button id="logoutButton" style="display: none;" onclick="logout()">Logout</button>
+        </nav>
       <div class="btn">
         <i class="fas fa-bars menu-btn"></i>
       </div>
@@ -47,11 +48,11 @@
           <div class="blog-post-actions">
             <a href="#"
               ><i class="far fa-thumbs-up" style="color: #ffd43b"></i>
-              <h4>9 likes</h4>
+              <h4 id="likes"></h4>
             </a>
             <a href="#"
               ><i class="far fa-thumbs-down" style="color: #ffd43b"></i>
-              <h4>9 dislikes</h4>
+              <h4 id="dislike"></h4>
             </a>
             <span class="add" onclick="toggleForm()">
               <i class="far fa-comments" style="color: #ffd43b"></i>
@@ -61,18 +62,10 @@
 
         <div id="editor-container">
           <form id="postForm" onsubmit="validateForm(event)">
-            <label for="username" style="font-size: 24px">Username:</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              placeholder="add your name here..."
-            />
-            <span id="usernameError" class="error"></span>
-
-            <label for="content" style="font-size: 24px">Comment:</label>
-            <div id="editor">add your commment here...</div>
             <span id="contentError" class="error"></span>
+            <span id="contentSuccess" class="success"></span>
+            <label for="content" style="font-size: 24px">Comment:</label>
+            <div id="editor"></div>
 
             <button type="submit">Comment</button>
           </form>
@@ -94,132 +87,6 @@
     <script defer="defer" src="styles/js/script.js"></script>
 
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-    <script>
-      // Initialize Quill
-      var quill = new Quill("#editor", {
-        theme: "snow",
-        modules: {
-          toolbar: [
-            ["bold", "italic", "underline", "strike"],
-            ["link", "image", "video"],
-            ["clean"],
-          ],
-        },
-      });
-      function toggleComments() {
-        var commentsContainer = document.querySelector(".comments");
-        var seeAllLink = document.querySelector(".see-all a");
-
-        if (
-          commentsContainer.style.maxHeight === "150px" ||
-          commentsContainer.style.maxHeight === ""
-        ) {
-          commentsContainer.style.maxHeight = "none";
-          seeAllLink.textContent = "Collapse";
-        } else {
-          commentsContainer.style.maxHeight = "150px";
-          seeAllLink.textContent = "See all";
-        }
-      }
-
-      function validateForm(event) {
-        document.getElementById("usernameError").innerHTML = "";
-        document.getElementById("contentError").innerHTML = "";
-
-        var username = document.getElementById("username").value.trim();
-        if (username === "") {
-          document.getElementById("usernameError").innerHTML =
-            "Username is required.";
-          event.preventDefault();
-        }
-
-        var content = quill.root.innerHTML.trim();
-        if (content === "") {
-          document.getElementById("contentError").innerHTML =
-            "Content is required.";
-          event.preventDefault();
-        }
-
-        console.log("Username:", username);
-        console.log("Content:", content);
-
-        document.getElementById("postForm").reset();
-        quill.setText("");
-      }
-    </script>
-    <script>
-      const urlParams = new URLSearchParams(window.location.search);
-      const blogId = urlParams.get("index");
-
-      fetch(`https://mybrand-prince-be.onrender.com/api/blogs/${blogId}`)
-        .then((response) => response.json())
-        .then((viewedBlog) => {
-          // Set the values to the HTML elements
-          document.getElementById("blogTitle").textContent = viewedBlog.title;
-
-          const blogImage = document.getElementById("blogImage");
-          blogImage.src = viewedBlog.image;
-          blogImage.alt = viewedBlog.title;
-
-          document.getElementById(
-            "blogDate"
-          ).textContent = `Date: ${viewedBlog.createdAt}`;
-          document.getElementById("blogContent").innerHTML =
-            viewedBlog.contents;
-
-          // Display the comments
-          const commentsContainer =
-            document.getElementById("commentsContainer");
-          if (viewedBlog.comments && viewedBlog.comments.length > 0) {
-            viewedBlog.comments.forEach((commentId) => {
-              // Fetch each comment using its ID
-              fetch(
-                `https://mybrand-prince-be.onrender.com/api/comments/${commentId}`
-              )
-                .then((response) => response.json())
-                .then((comment) => {
-                  // Check if userId is present in the comment object
-                  if (comment.data.user) {
-                    // Fetch user details for the commenter
-                    fetch(
-                      `https://mybrand-prince-be.onrender.com/api/auth/Users/${comment.data.user}`
-                    )
-                      .then((userResponse) => userResponse.json())
-                      .then((user) => {
-                        const commentHTML = `
-                          <div class="comment">
-                            <div class="profile-p">
-                              <img src="images/icons/PersonCircle.png" alt=""/>
-                            </div>
-                            <div class="comment-contents">
-                              <h1 id="username">${user.data.firstname} ${user.data.lastname}</h1>
-                              <span id="createdAt">${comment.data.createdAt}</span>
-                              <p id="description">${comment.data.description}</p>
-                            </div>
-                          </div>
-                        `;
-                        commentsContainer.insertAdjacentHTML(
-                          "beforeend",
-                          commentHTML
-                        );
-                      })
-                      .catch((error) =>
-                        console.error("Error fetching user:", error)
-                      );
-                  } else {
-                    // Handle the case where userId is undefined
-                    console.error("Comment does not have a userId:", comment);
-                  }
-                })
-                .catch((error) =>
-                  console.error("Error fetching comment:", error)
-                );
-            });
-          } else {
-            commentsContainer.innerHTML = "<p>No comments available.</p>";
-          }
-        })
-        .catch((error) => console.error("Error fetching blog:", error));
-    </script>
+    <script src="styles/js/post.js"></script>
   </body>
 </html>

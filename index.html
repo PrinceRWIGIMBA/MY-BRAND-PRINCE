@@ -187,8 +187,8 @@
             <div class="blog-container" id="slide3"></div>
           </div>
 
-          <a class="prev" id="leftButton_id" onclick="plusSlides(-1)">❮</a>
-          <a class="next" id="rightButton_id" onclick="plusSlides(1)">❯</a>
+          <a class="prev" id="leftButton_id">❮</a>
+          <a class="next" id="rightButton_id">❯</a>
         </div>
         <br />
 
@@ -257,7 +257,7 @@
           <h1>I’m ready to talk...</h1>
           <form id="contactForm" method="post">
             <div class="form-group">
-              <label for="name" class="name-N">Name</label>
+              <label for="username" class="name-N">UserName</label>
               <input type="text" id="username" name="username" />
               <small></small>
             </div>
@@ -286,117 +286,8 @@
       </div>
     </section>
     <div class="footer">&copy; Prince RWIGIMBA</div>
-    <script defer="defer" src="styles/js/script.js"></script>
-    <script>
-      const nameEl = document.getElementById("username");
-      const emailEl = document.getElementById("email");
-      const querieEl = document.getElementById("querie");
-
-      const form = document.querySelector("form");
-
-      const checkName = () => {
-        let valid = false;
-        const name = nameEl.value.trim();
-
-        if (!isRequired(name)) {
-          showError(nameEl, "Name cannot be blank.");
-        } else {
-          showSuccess(nameEl);
-          valid = true;
-        }
-
-        return valid;
-      };
-
-      const checkEmail = () => {
-        let valid = false;
-        const email = emailEl.value.trim();
-
-        if (!isRequired(email)) {
-          showError(emailEl, "Email cannot be blank.");
-        } else if (!isEmailValid(email)) {
-          showError(emailEl, "Email is not valid.");
-        } else {
-          showSuccess(emailEl);
-          valid = true;
-        }
-
-        return valid;
-      };
-
-      const checkQuerie = () => {
-        let valid = false;
-        const querie = querieEl.value.trim();
-
-        if (!isRequired(querie)) {
-          showError(querieEl, "Message cannot be blank.");
-        } else {
-          showSuccess(querieEl);
-          valid = true;
-        }
-
-        return valid;
-      };
-
-      const isEmailValid = (email) => {
-        const re =
-          /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(email);
-      };
-
-      const isRequired = (value) => (value === "" ? false : true);
-
-      const showError = (input, querie) => {
-        const small = input.parentElement.querySelector("small");
-        input.classList.add("error");
-        small.textContent = message;
-      };
-
-      const showSuccess = (input) => {
-        const small = input.parentElement.querySelector("small");
-        input.classList.remove("error");
-        small.textContent = "";
-      };
-
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        let isNameValid = checkName();
-        let isEmailValid = checkEmail();
-        let isQuerieValid = checkQuerie();
-        let isFormValid = isNameValid && isEmailValid && isQuerieValid;
-
-        if (isFormValid) {
-          var formData = {
-            username: nameEl.value,
-            email: emailEl.value,
-            querie: querieEl.value,
-          };
-
-          console.log(formData);
-
-          // Make a POST request to the API using fetch
-          fetch("https://mybrand-prince-be.onrender.com/api/messages", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formData),
-          })
-            .then((response) => response.json())
-            .then((data) => {
-              console.log("Message sent successfully:", data);
-              // Optionally, you can redirect to a thank you page or display a success message
-            })
-            .catch((error) => {
-              console.error("Error sending message:", error);
-              // Handle the error, show an error message, etc.
-            });
-        }
-      });
-
-      //capture the data from the contact form
-    </script>
-    <script src="styles/js/landingpage.js"></script>
+    <script defer="defer" src="styles/js/landingpage.js"></script>
+    <script src="styles/js/message.js"></script>
   </body>
 </html>
+s

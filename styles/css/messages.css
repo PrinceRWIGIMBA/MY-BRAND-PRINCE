@@ -1,0 +1,63 @@
+
+        /* Basic styling for the message card */
+        
+        .card-container{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+
+        }
+      
+        .message-card {
+          border: 1px solid #ccc;
+          padding: 20px 5px;
+          border-radius: 10px;
+          display: flex;
+         justify-content: center;
+         align-self:center ;
+          width: 75%;
+          height: 75%;
+        
+          flex-direction: column;
+          margin-bottom: 20px;
+        }
+        .address{
+            display: flex;
+            flex-direction: row;
+            padding-left: 10px;
+            justify-content: start;
+            gap: 10px;
+        }
+  
+        /* Style for the profile picture */
+        .profile-pic {
+          width: 25px;
+          height: 25px;
+          border-radius: 50%;
+          object-fit: cover;
+          margin-bottom: 10px;
+        }
+  
+        /* Style for the sender's email */
+        .sender-email {
+          font-weight: bold;
+          margin-bottom: 10px;
+        }
+  
+        /* Style for the email content */
+        .email-content {
+          margin-bottom: 10px;
+        }
+  
+        /* Style for the reply button */
+        .reply-button {
+          background-color: #BF7506;
+          color: white;
+          padding: 8px 16px;
+          width: 20%;
+          border: none;
+          border-radius: 10px;
+          cursor: pointer;
+        }
+    

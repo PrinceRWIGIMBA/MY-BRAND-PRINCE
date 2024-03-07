@@ -1,3 +1,9 @@
+const formatDate = (dateString) => {
+  const options = { year: "numeric", month: "long", day: "numeric" };
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-US", options);
+};
+
 let blogs;
 const fetchInfo = async () => {
   const response = await fetch(
@@ -42,13 +48,15 @@ const fetchInfo = async () => {
         <img src="${blog.image}" alt="${blog.title}" />
         <h3>${blog.title}</h3>
         <p>${blog.description}</p>
-        <p><span>${blog.createdAt}</span></p>
+        <p><span>${formatDate(blog.createdAt)}</span></p>
         <br />
         <br />
         <div class="blog-actions">
           <a href="#"><i class="far fa-thumbs-up" style="color: #ffd43b"></i><span class="badge">1</span><h4>likes</h4></a>
           <a href="#"><i class="far fa-comments" style="color: #ffd43b"></i><span class="badge">3</span><h4>comments</h4></a>
-          <a href="post.html?index=${blog._id}"><i class="fab fa-readme" style="color: #ffd43b"></i><h4>Read more</h4></a>
+          <a href="post.html?index=${
+            blog._id
+          }"><i class="fab fa-readme" style="color: #ffd43b"></i><h4>Read more</h4></a>
           
         </div>`;
 
