@@ -122,7 +122,7 @@ fetch(`https://mybrand-prince-be.onrender.com/api/blogs/${blogId}`)
 
     const commentsContainer = document.getElementById("commentsContainer");
     if (viewedBlog.comments && viewedBlog.comments.length > 0) {
-      viewedBlog.comments.forEach((commentId) => {
+      viewedBlog.comm  ents.forEach((commentId) => {
         fetch(
           `https://mybrand-prince-be.onrender.com/api/comments/${commentId}`
         )
