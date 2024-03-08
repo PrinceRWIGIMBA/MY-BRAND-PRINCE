@@ -168,7 +168,6 @@ const submitUpdate = () => {
         } else {
           showResponseMessage("Blog updated successfully!", true);
 
-          // Redirect to blogs.html after 3 seconds
           setTimeout(() => {
             window.location.href = "blogs.html";
           }, 3000);
@@ -187,7 +186,6 @@ const submitUpdate = () => {
   }
 };
 
-// Function to fetch blog data and populate form
 const populateForm = async () => {
   const queryParams = new URLSearchParams(window.location.search);
   const blogId = queryParams.get("blogId");
@@ -215,14 +213,10 @@ const populateForm = async () => {
 
   const data = await response.json();
   const blog = data;
-  //console.log(blogId);
-  // Populate form fields with blog data
+
   document.getElementById("title").value = blog.title;
   document.getElementById("description").value = blog.description;
   quill.root.innerHTML = blog.contents;
-  document.getElementById("blogId").value = blogId; // Set blog ID for submission
-  //console.log(blogId);
+  document.getElementById("blogId").value = blogId;
 };
 window.onload = populateForm;
-
-// Call populateForm when the page loads

@@ -41,6 +41,9 @@ const fetchInfo = async () => {
 
     for (let j = (n - 1) * 3; j < n * 3 && j < blogs.length; j++) {
       const blog = blogs[j];
+      const likesCount = blog.likes.length;
+      const dislikesCount = blog.disLikes.length;
+      const commentCount = blog.comments.length;
       const blogPost = document.createElement("div");
       blogPost.className = "blog-post";
 
@@ -52,8 +55,9 @@ const fetchInfo = async () => {
         <br />
         <br />
         <div class="blog-actions">
-          <a href="#"><i class="far fa-thumbs-up" style="color: #ffd43b"></i><span class="badge">1</span><h4>likes</h4></a>
-          <a href="#"><i class="far fa-comments" style="color: #ffd43b"></i><span class="badge">3</span><h4>comments</h4></a>
+          <a href="#"><i class="far fa-thumbs-up" style="color: #ffd43b"></i><span class="badge">${likesCount}</span><h4>likes</h4></a>
+          <a href="#"><i class="far fa-thumbs-down" style="color: #ffd43b"></i><span class="badge">${dislikesCount}</span><h4>dislikes</h4></a>
+          <a href="#"><i class="far fa-comments" style="color: #ffd43b"></i><span class="badge">${commentCount}</span><h4>comments</h4></a>
           <a href="post.html?index=${
             blog._id
           }"><i class="fab fa-readme" style="color: #ffd43b"></i><h4>Read more</h4></a>

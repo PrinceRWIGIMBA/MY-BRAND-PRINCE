@@ -28,59 +28,13 @@
       }
 
 
-      header{
-
-        position: absolute;
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 15px 50px;
-        background: #fff;
-        color: #dfca12;
-        box-shadow: 0.05rem 1.5rem rga(0,0,0.5);
-        z-index: 1000;
-    }
-    
-    header .logo{
-        font-size: 30px;
-        font-weight: 700;
-        color: #BF7506;
-        letter-spacing: 2px;
-    }
-    header .navbar{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    header .navbar a{
-        font-size: 1.7rem;
-        font-weight: 500;
-        margin: 0 0.5rem;
-        color: #dfca12;
-        padding: 1rem 1.5rem;
-    }
-    
-    header .navbar a:hover, .active{
-    
-       color: #BF7506 !important;
-        transition: 0.6s;
-    }
-    
-    header  .btn{
-     
-        font-size: 25px;
-        cursor: pointer;
-        display: none;
-    }
-.login{
+.register{
   width: 100%;
   display: grid;
 grid-template-columns: 1fr 1fr;
 
 
  padding: 100px ;
- overflow: hidden;
 
 gap: 10px;
 height: auto;
@@ -161,10 +115,25 @@ height: auto;
     display: none;
   }
   
+
   .register-link{
-  
+
     font-size: 140%;
     font-weight:bold;
   }
-  
-  
+
+  .register-form input,
+  textarea {
+    width: 400px;
+    padding:  10px 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    color: black;
+    border-radius: 5px;
+  }
+
+  .response{
+    font-size: 20px;
+    
+  }
+ 

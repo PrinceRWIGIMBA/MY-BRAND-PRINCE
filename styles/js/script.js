@@ -80,7 +80,8 @@ form.addEventListener("submit", function (e) {
       email: emailEl.value,
       password: passwordEl.value,
     };
-
+    document.querySelector(".loader").style.display = "block";
+    document.querySelector("#login-btn").style.display = "none";
     // Make a POST request to the authentication API using fetch
     fetch("https://mybrand-prince-be.onrender.com/api/auth/login", {
       method: "POST",
@@ -96,6 +97,8 @@ form.addEventListener("submit", function (e) {
         return response.json();
       })
       .then((data) => {
+        document.querySelector(".loader").style.display = "none";
+        document.querySelector("#login-btn").style.display = "block";
         localStorage.setItem("token", data.token);
         console.log("Authentication successful:", data.data.role);
         let userType = data.data.role;

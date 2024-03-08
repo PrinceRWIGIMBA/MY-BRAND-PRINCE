@@ -1,6 +1,6 @@
 var quill = new Quill("#editor", {
   theme: "snow",
-  placeholder: "Type Reminder here...",
+  placeholder: "Type Comment here...",
   modules: {
     toolbar: [
       ["bold", "italic", "underline", "strike"],
@@ -37,7 +37,6 @@ function toggleComments() {
   }
 }
 
-// Function to get the value of a URL parameter by name
 function getParameterByName(name, url) {
   name = name.replace(/[\[\]]/g, "\\$&");
   let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
@@ -48,19 +47,19 @@ function getParameterByName(name, url) {
 }
 
 function validateForm(event) {
-  event.preventDefault(); // Always prevent the default form submission behavior
+  event.preventDefault();
 
   let contentError = document.getElementById("contentError");
-  contentError.innerHTML = ""; // Clear previous content error message
+  contentError.innerHTML = "";
 
   let contentSuccess = document.getElementById("contentSuccess");
   contentSuccess.innerHTML = "";
-  // Check for authentication token
+
   let authToken = localStorage.getItem("token");
   if (!authToken) {
     console.error("Authentication token not found.");
-    contentError.innerHTML = "Authentication token not found.";
-    // tokenError.style.backgroundColor = "red";
+    contentError.innerHTML = "Please login before to add comment.";
+
     return;
   }
 
@@ -71,10 +70,8 @@ function validateForm(event) {
     return;
   }
 
-  // Get the blogId from the URL
-
   console.log(blogId);
-  // Submit only the description to the backend API
+
   fetch(`https://mybrand-prince-be.onrender.com/api/comments/${blogId}`, {
     method: "POST",
     headers: {
@@ -92,33 +89,24 @@ function validateForm(event) {
       return response.json();
     })
     .then((result) => {
-      // Handle the result from the backend
       console.log("Comment submitted successfully:", result);
 
-      // Optionally, you can do something after successful submission
-      // For example, show a success message
       contentSuccess.innerHTML = "Comment submitted successfully!";
       contentSuccess.style.color = "var(--success-color)";
-
-      //   alert("Comment submitted successfully!");
     })
     .catch((error) => {
-      // Log the error response from the backend
       if (error.response) {
         error.response.json().then((errorData) => {
           console.error("Error from backend:", errorData);
-          contentError.innerHTML = errorData.error; // Display the backend error message
-          contentError.style.backgroundColor = "red"; // Set red background
+          contentError.innerHTML = errorData.error;
+          contentError.style.backgroundColor = "red";
         });
       } else {
         console.error("Network error or unexpected response:", error);
         contentError.innerHTML = "An error occurred. Please try again later.";
-        // contentError.style.backgroundColor = "red";
       }
     });
 }
-
-//comments and post display
 
 const urlParams = new URLSearchParams(window.location.search);
 const blogId = urlParams.get("index");
@@ -126,7 +114,6 @@ const blogId = urlParams.get("index");
 fetch(`https://mybrand-prince-be.onrender.com/api/blogs/${blogId}`)
   .then((response) => response.json())
   .then((viewedBlog) => {
-    // Set the values to the HTML elements
     document.getElementById("blogTitle").textContent = viewedBlog.title;
     console.log(viewedBlog);
     const blogImage = document.getElementById("blogImage");
@@ -139,21 +126,18 @@ fetch(`https://mybrand-prince-be.onrender.com/api/blogs/${blogId}`)
       viewedBlog.createdAt
     )}`;
     document.getElementById("blogContent").innerHTML = viewedBlog.contents;
-    document.getElementById("likes").innerHTML = `${likesCount} likes`;
-    document.getElementById("dislike").innerHTML = `${dislikesCount} dislikes`;
-    // Display the comments
+    document.getElementById("likes").innerHTML = `${likesCount} Likes`;
+    document.getElementById("dislike").innerHTML = `${dislikesCount} Dislikes`;
+
     const commentsContainer = document.getElementById("commentsContainer");
     if (viewedBlog.comments && viewedBlog.comments.length > 0) {
       viewedBlog.comments.forEach((commentId) => {
-        // Fetch each comment using its ID
         fetch(
           `https://mybrand-prince-be.onrender.com/api/comments/${commentId}`
         )
           .then((response) => response.json())
           .then((comment) => {
-            // Check if userId is present in the comment object
             if (comment.data.user) {
-              // Fetch user details for the commenter
               fetch(
                 `https://mybrand-prince-be.onrender.com/api/auth/Users/${comment.data.user}`
               )
@@ -185,7 +169,6 @@ fetch(`https://mybrand-prince-be.onrender.com/api/blogs/${blogId}`)
                 })
                 .catch((error) => console.error("Error fetching user:", error));
             } else {
-              // Handle the case where userId is undefined
               console.error("Comment does not have a userId:", comment);
             }
           })
@@ -197,36 +180,25 @@ fetch(`https://mybrand-prince-be.onrender.com/api/blogs/${blogId}`)
   })
   .catch((error) => console.error("Error fetching blog:", error));
 
-//authentications
-
-// Function to check if user is logged in and update navbar
 function checkLoginStatus() {
   let authToken = localStorage.getItem("token");
   if (authToken) {
-    // User is logged in
     document.getElementById("loginButton").style.display = "none";
     document.getElementById("logoutButton").style.display = "inline-block";
   } else {
-    // User is not logged in
     document.getElementById("loginButton").style.display = "inline-block";
     document.getElementById("logoutButton").style.display = "none";
   }
 }
 
-// Call this function when the page loads
 checkLoginStatus();
 
-// Function to handle login button click
 function login() {
-  // Your login logic here
-  // For example, redirect to the login page
   window.location.href = "login.html";
 }
 
-// Function to handle logout button click
 function logout() {
-  // Remove the token from localStorage
   localStorage.removeItem("token");
-  // Update the navbar
+
   checkLoginStatus();
 }

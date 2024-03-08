@@ -102,5 +102,3 @@ form.addEventListener("submit", function (e) {
       });
   }
 });
-
-//capture the data from the contact form

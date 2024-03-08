@@ -80,7 +80,6 @@ const checkContent = () => {
   return valid;
 };
 
-// Function to disable form fields during submission
 const disableFormFields = () => {
   titleEl.setAttribute("readonly", true);
   imageEl.setAttribute("readonly", true);
@@ -88,7 +87,6 @@ const disableFormFields = () => {
   contentEl.setAttribute("readonly", true);
 };
 
-// Function to enable form fields after submission
 const enableFormFields = () => {
   titleEl.removeAttribute("readonly");
   imageEl.removeAttribute("readonly");
@@ -96,19 +94,16 @@ const enableFormFields = () => {
   contentEl.removeAttribute("readonly");
 };
 
-// Function to show loading spinner
 const showLoadingSpinner = () => {
   const loadingSpinner = document.getElementById("loading-spinner");
   loadingSpinner.style.display = "block";
 };
 
-// Function to hide loading spinner
 const hideLoadingSpinner = () => {
   const loadingSpinner = document.getElementById("loading-spinner");
   loadingSpinner.style.display = "none";
 };
 
-// Function to show response message
 const showResponseMessage = (message, isSuccess) => {
   const responseDiv = document.getElementById("response");
   const responseText = document.getElementById("response-text");
@@ -123,14 +118,12 @@ const showResponseMessage = (message, isSuccess) => {
 
   responseDiv.style.display = "block";
 
-  // Hide response after 3 seconds
   setTimeout(() => {
     responseDiv.style.display = "none";
     responseDiv.classList.remove("success", "failure");
   }, 3000);
 };
 
-// function to create
 const submitForm = () => {
   if (
     !checkTitle() ||
@@ -179,7 +172,6 @@ const submitForm = () => {
             descriptionEl.value = "";
             quill.root.innerHTML = "";
 
-            // Redirect to blogs.html
             window.location.href = "blogs.html";
           }
         })
