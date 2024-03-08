@@ -41,19 +41,19 @@ function toggleComments() {
 }
 
 function validateForm(event) {
-  event.preventDefault(); // Always prevent the default form submission behavior
+  event.preventDefault();
   let blogForm = document.getElementById("blogForm");
   let contentError = document.getElementById("contentError");
-  contentError.innerHTML = ""; // Clear previous content error message
+  contentError.innerHTML = "";
 
   let contentSuccess = document.getElementById("contentSuccess");
   contentSuccess.innerHTML = "";
-  // Check for authentication token
+
   let authToken = localStorage.getItem("token");
   if (!authToken) {
     console.error("Authentication token not found.");
     contentError.innerHTML = "Authentication token not found.";
-    // tokenError.style.backgroundColor = "red";
+
     return;
   }
 
@@ -64,10 +64,8 @@ function validateForm(event) {
     return;
   }
 
-  // Get the blogId from the URL
-
   console.log(blogId);
-  // Submit only the description to the backend API
+
   fetch(`https://mybrand-prince-be.onrender.com/api/comments/${blogId}`, {
     method: "POST",
     headers: {
@@ -85,34 +83,25 @@ function validateForm(event) {
       return response.json();
     })
     .then((result) => {
-      // Handle the result from the backend
       console.log("Comment submitted successfully:", result);
 
-      // Optionally, you can do something after successful submission
-      // For example, show a success message
       contentSuccess.innerHTML = "Comment submitted successfully!";
       contentSuccess.style.color = "var(--success-color)";
       blogForm.reset();
-
-      //   alert("Comment submitted successfully!");
     })
     .catch((error) => {
-      // Log the error response from the backend
       if (error.response) {
         error.response.json().then((errorData) => {
           console.error("Error from backend:", errorData);
-          contentError.innerHTML = errorData.error; // Display the backend error message
-          contentError.style.backgroundColor = "red"; // Set red background
+          contentError.innerHTML = errorData.error;
+          contentError.style.backgroundColor = "red";
         });
       } else {
         console.error("Network error or unexpected response:", error);
         contentError.innerHTML = "An error occurred. Please try again later.";
-        // contentError.style.backgroundColor = "red";
       }
     });
 }
-
-//blog display
 
 const urlParams = new URLSearchParams(window.location.search);
 const blogId = urlParams.get("index");
@@ -120,7 +109,6 @@ const blogId = urlParams.get("index");
 fetch(`https://mybrand-prince-be.onrender.com/api/blogs/${blogId}`)
   .then((response) => response.json())
   .then((viewedBlog) => {
-    // Set the values to the HTML elements
     document.getElementById("blogTitle").textContent = viewedBlog.title;
 
     const blogImage = document.getElementById("blogImage");
@@ -132,19 +120,15 @@ fetch(`https://mybrand-prince-be.onrender.com/api/blogs/${blogId}`)
     ).textContent = `Date: ${viewedBlog.createdAt}`;
     document.getElementById("blogContent").innerHTML = viewedBlog.contents;
 
-    // Display the comments
     const commentsContainer = document.getElementById("commentsContainer");
     if (viewedBlog.comments && viewedBlog.comments.length > 0) {
       viewedBlog.comments.forEach((commentId) => {
-        // Fetch each comment using its ID
         fetch(
           `https://mybrand-prince-be.onrender.com/api/comments/${commentId}`
         )
           .then((response) => response.json())
           .then((comment) => {
-            // Check if userId is present in the comment object
             if (comment.data.user) {
-              // Fetch user details for the commenter
               fetch(
                 `https://mybrand-prince-be.onrender.com/api/auth/Users/${comment.data.user}`
               )
@@ -170,7 +154,6 @@ fetch(`https://mybrand-prince-be.onrender.com/api/blogs/${blogId}`)
                 })
                 .catch((error) => console.error("Error fetching user:", error));
             } else {
-              // Handle the case where userId is undefined
               console.error("Comment does not have a userId:", comment);
             }
           })

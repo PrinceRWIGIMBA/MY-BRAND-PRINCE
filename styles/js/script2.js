@@ -1,6 +1,3 @@
-// your_script.js
-
-// Load data from local storage on page load
 window.onload = function () {
   const queryParams = new URLSearchParams(window.location.search);
   const index = queryParams.get("index");
@@ -8,7 +5,7 @@ window.onload = function () {
   if (index !== null) {
     populateFormFromQueryParams(index);
   } else {
-    fetchInfo(); // Fetch and display blogs
+    fetchInfo();
   }
 };
 
@@ -56,7 +53,6 @@ const fetchInfo = async () => {
 const deleteBlog = async (blogId, deleteBtn) => {
   const confirmDelete = confirm("Are you sure you want to delete this blog?");
   if (confirmDelete) {
-    // Disable the delete button and show loading spinner
     deleteBtn.disabled = true;
     const spinner = document.createElement("div");
     spinner.className = "loading-spinner";
@@ -75,18 +71,15 @@ const deleteBlog = async (blogId, deleteBtn) => {
       );
       const data = await response.json();
       if (response.ok) {
-        // Blog successfully deleted
         alert("Blog deleted successfully");
-        fetchInfo(); // Refresh the blog list
+        fetchInfo();
       } else {
-        // Display error message
         alert(data.error || "Error deleting blog");
       }
     } catch (error) {
       console.error("Error:", error);
       alert("Error deleting blog");
     } finally {
-      // Enable the delete button and hide the loading spinner
       deleteBtn.disabled = false;
       spinner.remove();
     }
@@ -94,7 +87,6 @@ const deleteBlog = async (blogId, deleteBtn) => {
 };
 
 const editBlog = (blogId) => {
-  // Redirect to edit page with blogId as query parameter
   window.location.href = `edit-blog.html?blogId=${blogId}`;
 };
 
@@ -110,7 +102,7 @@ const updateBlog = async () => {
 
     if (response.ok) {
       const blogData = data.data;
-      // Populate form with blog data
+
       document.getElementById("title").value = blogData.title;
       document.getElementById("description").value = blogData.description;
       quill.root.innerHTML = blogData.contents;
@@ -145,7 +137,6 @@ const submitUpdate = async (blogId) => {
     formData.append("description", description);
     formData.append("contents", contents);
 
-    // Show loading spinner and disable form fields
     showLoadingSpinner();
     disableFormFields();
 
@@ -163,21 +154,18 @@ const submitUpdate = async (blogId) => {
       );
       const data = await response.json();
       if (response.ok) {
-        // Blog successfully updated
         responseText.innerText = "Blog updated successfully!";
-        // Reset form fields
+
         document.getElementById("title").value = "";
         document.getElementById("description").value = "";
         quill.root.innerHTML = "";
       } else {
-        // Display error message
         responseText.innerText = data.error || "Error updating blog";
       }
     } catch (error) {
       console.error("Error:", error);
       responseText.innerText = "Error updating blog";
     } finally {
-      // Hide loading spinner and enable form fields
       hideLoadingSpinner();
       enableFormFields();
     }
@@ -254,7 +242,7 @@ const populateFormFromQueryParams = async (blogId) => {
     const data = await response.json();
     if (response.ok) {
       const blogData = data.data;
-      // Populate form with blog data
+
       document.getElementById("title").value = blogData.title;
       document.getElementById("description").value = blogData.description;
       quill.root.innerHTML = blogData.contents;

@@ -40,10 +40,7 @@ function removeTask(button) {
   row.parentNode.removeChild(row);
 }
 
-//authentication
-
 function logout() {
-  // Remove the token from localStorage
   localStorage.removeItem("token");
   window.location.href = "index.html";
 }
