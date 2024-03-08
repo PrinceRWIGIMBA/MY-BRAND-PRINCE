@@ -782,10 +782,30 @@ nav a.clicked {
   }
   .commment-contents{
     padding: 10px;
-
+    flex-direction: column;
+    display: flex;
     background-color: #FFF3E8;
     border-radius: 10px;
   }
+
+  .comment-title{
+    display: grid;
+    flex-direction:row;
+    justify-content: space-between;
+  }
+
+
+  .error-message {
+    background-color: #f44336;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+#errorMessage {
+  display: none;
+}
  
   .profile-p{
     width: 50px;
@@ -803,7 +823,7 @@ nav a.clicked {
     font-size: 20px;
   } 
   .commment-contents span{
-    color: #777676;
+    color: #767776;
     font-size: 14px;
   }
   .footer{

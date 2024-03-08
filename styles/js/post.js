@@ -1,6 +1,6 @@
 var quill = new Quill("#editor", {
   theme: "snow",
-  placeholder: "Type Reminder here...",
+  placeholder: "Type Comment here...",
   modules: {
     toolbar: [
       ["bold", "italic", "underline", "strike"],
@@ -59,7 +59,7 @@ function validateForm(event) {
   let authToken = localStorage.getItem("token");
   if (!authToken) {
     console.error("Authentication token not found.");
-    contentError.innerHTML = "Authentication token not found.";
+    contentError.innerHTML = "Please login before to add comment.";
     // tokenError.style.backgroundColor = "red";
     return;
   }
@@ -139,8 +139,8 @@ fetch(`https://mybrand-prince-be.onrender.com/api/blogs/${blogId}`)
       viewedBlog.createdAt
     )}`;
     document.getElementById("blogContent").innerHTML = viewedBlog.contents;
-    document.getElementById("likes").innerHTML = `${likesCount} likes`;
-    document.getElementById("dislike").innerHTML = `${dislikesCount} dislikes`;
+    document.getElementById("likes").innerHTML = `${likesCount} Likes`;
+    document.getElementById("dislike").innerHTML = `${dislikesCount} Dislikes`;
     // Display the comments
     const commentsContainer = document.getElementById("commentsContainer");
     if (viewedBlog.comments && viewedBlog.comments.length > 0) {
