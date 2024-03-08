@@ -73,6 +73,8 @@ const deleteBlog = async (blogId, deleteBtn) => {
       if (response.ok) {
         alert("Blog deleted successfully");
         fetchInfo();
+
+        fetchInfo(); // Refresh the blog list
       } else {
         alert(data.error || "Error deleting blog");
       }
