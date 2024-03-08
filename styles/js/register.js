@@ -1,82 +1,178 @@
-const toggleFormButton = document.getElementById("toggleForm");
-const registerForm = document.querySelector(".register-form");
-const loginForm = document.querySelector(".login-form");
+const fnameEl = document.getElementById("firstname");
+const lnameEl = document.getElementById("lastname");
+const emailEl = document.getElementById("email");
+const passwordEl = document.getElementById("password");
+const form = document.getElementById("register");
+const response = document.getElementById("response");
 
-toggleFormButton.addEventListener("click", function () {
-  registerForm.classList.toggle("hidden");
-  loginForm.classList.toggle("hidden");
+const checkFirstname = () => {
+  let valid = false;
 
-  if (registerForm.classList.contains("hidden")) {
-    toggleFormButton.textContent =
-      "Don't have an account? Click here to register";
+  const min = 3,
+    max = 25;
+
+  const firstname = fnameEl.value.trim();
+
+  if (!isRequired(firstname)) {
+    showError(fnameEl, "firstname cannot be blank.");
+  } else if (!isBetween(firstname.length, min, max)) {
+    showError(
+      fnameEl,
+      `firstname must be between ${min} and ${max} characters.`
+    );
   } else {
-    toggleFormButton.textContent =
-      "Already have an account? Click here to login";
+    showSuccess(fnameEl);
+    valid = true;
   }
-});
+  return valid;
+};
+const checkLastname = () => {
+  let valid = false;
 
-const checkFirstName = () => {
-  // Implement your validation for first name
+  const min = 3,
+    max = 25;
+
+  const lastname = lnameEl.value.trim();
+
+  if (!isRequired(lastname)) {
+    showError(lnameEl, "lastname cannot be blank.");
+  } else if (!isBetween(lastname.length, min, max)) {
+    showError(
+      lnameEl,
+      `lastname must be between ${min} and ${max} characters.`
+    );
+  } else {
+    showSuccess(lnameEl);
+    valid = true;
+  }
+  return valid;
+};
+const checkemail = () => {
+  let valid = false;
+
+  const min = 3,
+    max = 25;
+
+  const email = emailEl.value.trim();
+
+  if (!isRequired(email)) {
+    showError(emailEl, "Email cannot be blank.");
+  } else if (!isBetween(email.length, min, max)) {
+    showError(emailEl, `Email must be between ${min} and ${max} characters.`);
+  } else {
+    showSuccess(emailEl);
+    valid = true;
+  }
+  return valid;
 };
 
-const checkLastName = () => {
-  // Implement your validation for last name
+const checkPassword = () => {
+  let valid = false;
+
+  const password = passwordEl.value.trim();
+
+  if (!isRequired(password)) {
+    showError(passwordEl, "Password cannot be blank.");
+  } else if (!isPasswordSecure(password)) {
+    showError(
+      passwordEl,
+      "Password must have at least 8 characters and contain at least one uppercase letter, one lowercase letter, one number, and one special character."
+    );
+  } else {
+    showSuccess(passwordEl);
+    valid = true;
+  }
+
+  return valid;
 };
 
-const checkEmail = () => {
-  // Implement your validation for email
+const isPasswordSecure = (password) => {
+  const re = new RegExp(
+    "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
+  );
+  return re.test(password);
 };
 
-const checkRegisterPassword = () => {
-  // Implement your validation for registration password
+const isRequired = (value) => (value === "" ? false : true);
+const isBetween = (length, min, max) =>
+  length < min || length > max ? false : true;
+
+const showError = (input, message) => {
+  const formField = input.parentElement;
+  formField.classList.remove("success");
+  formField.classList.add("error");
+  const error = formField.querySelector("small");
+  error.textContent = message;
 };
 
-const registerFormEl = document.querySelector("#register");
+const showSuccess = (input) => {
+  const formField = input.parentElement;
+  formField.classList.remove("error");
+  formField.classList.add("success");
+  const error = formField.querySelector("small");
+  error.textContent = "";
+};
 
-registerFormEl.addEventListener("submit", function (e) {
+form.addEventListener("submit", function (e) {
   e.preventDefault();
 
-  let isFirstNameValid = checkFirstName();
-  let isLastNameValid = checkLastName();
-  let isEmailValid = checkEmail();
-  let isRegisterPasswordValid = checkRegisterPassword();
+  let firstnameValid = checkFirstname(),
+    lastnameValid = checkLastname(),
+    emailValid = checkemail(),
+    isPasswordValid = checkPassword();
 
   let isFormValid =
-    isFirstNameValid &&
-    isLastNameValid &&
-    isEmailValid &&
-    isRegisterPasswordValid;
+    firstnameValid && lastnameValid && emailValid && isPasswordValid;
 
   if (isFormValid) {
-    var registerFormData = {
-      FirstName: document.querySelector("#firstname").value,
-      LastName: document.querySelector("#lastname").value,
-      Email: document.querySelector("#email").value,
-      Password: document.querySelector("#registerpassword").value,
+    var formData = {
+      firstname: fnameEl.value,
+      lastname: lnameEl.value,
+      email: emailEl.value,
+      password: passwordEl.value,
     };
-
-    // Send data to Swagger API
-    fetch("https://your-swagger-api-endpoint.com/register", {
+    document.querySelector(".loader").style.display = "none";
+    document.querySelector("#register-btn").style.display = "block";
+    fetch("https://mybrand-prince-be.onrender.com/api/auth/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // Add any other headers if needed
       },
-      body: JSON.stringify(registerFormData),
+      body: JSON.stringify(formData),
     })
       .then((response) => {
+        document.querySelector(".loader").style.display = "none";
+        document.querySelector("#register-btn").style.display = "block";
         if (!response.ok) {
-          throw new Error("Network response was not ok");
+          throw new Error("Sign Up failed");
         }
         return response.json();
       })
       .then((data) => {
-        console.log("Registration successful:", data);
-        // You can add any success handling here, like redirecting to another page
+        localStorage.setItem("token", data.token);
+        console.log("Authentication successful:", data.data.role);
+        let userType = data.data.role;
+        if (userType === "admin") {
+          window.location.href = "dashboard.html";
+        } else {
+          window.location.href = "index.html";
+        }
       })
       .catch((error) => {
-        console.error("Error registering:", error);
-        // You can add error handling here, such as displaying an error message to the user
+        console.error(error);
+        showError(response, "Data already exist ,Please try again.");
       });
   }
 });
+
+const debounce = (fn, delay = 500) => {
+  let timeoutId;
+  return (...args) => {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+    timeoutId = setTimeout(() => {
+      fn.apply(null, args);
+    }, delay);
+  };
+};
