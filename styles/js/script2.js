@@ -75,6 +75,8 @@ const deleteBlog = async (blogId, deleteBtn) => {
         document.querySelector(".loader").style.display = "block";
         document.querySelector("#delete-btn").style.display = "none";
         fetchInfo();
+
+        fetchInfo(); // Refresh the blog list
       } else {
         alert(data.error || "Error deleting blog");
       }
