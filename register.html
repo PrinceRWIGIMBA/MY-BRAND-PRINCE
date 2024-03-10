@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles/css/style.css" />
-    <link rel="stylesheet" href="styles/css/general.css" />
+    <link rel="stylesheet" href="styles/css/spinner.css" />
     <link rel="stylesheet" href="styles/css/registerCss.css" />
     <link
       rel="stylesheet"
@@ -55,62 +55,68 @@
     <section>
       <div class="register">
         <div class="message">
-          <h1><span>WELCOME</span><br />Back</h1>
+          <h1><span>SIGN</span>UP</h1>
         </div>
-        <div class="login-form">
+        <div class="register-form">
           <h1>Register</h1>
-          <div class="response" id="response"><small></small></div>
+          <div class="response" id="response">
+            <small style="color: #dc3545"></small>
+          </div>
           <form id="register" action="">
-            <div class="form-field">
-              <label for="firstname">FirstName:</label>
-              <input
-                type="text"
-                name="firstname"
-                id="firstname"
-                placeholder="...firstname.."
-                autocomplete="off"
-              />
+            <div class="fields1">
+              <div class="form-field">
+                <label for="firstname">FirstName:</label>
+                <input
+                  type="text"
+                  name="firstname"
+                  id="firstname"
+                  placeholder="...firstname.."
+                  autocomplete="off"
+                />
 
-              <small></small>
+                <small></small>
+              </div>
+              <div class="form-field">
+                <label for="username">LastName:</label>
+                <input
+                  type="text"
+                  name="lastname"
+                  id="lastname"
+                  placeholder="...lastname.."
+                  autocomplete="off"
+                />
+
+                <small></small>
+              </div>
             </div>
-            <div class="form-field">
-              <label for="username">LastName:</label>
-              <input
-                type="text"
-                name="lastname"
-                id="lastname"
-                placeholder="...lastname.."
-                autocomplete="off"
-              />
+            <div class="fields2">
+              <div class="form-field">
+                <label for="email">Email:</label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="...email.."
+                  autocomplete="off"
+                />
 
-              <small></small>
-            </div>
-            <div class="form-field">
-              <label for="email">Email:</label>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                placeholder="...email.."
-                autocomplete="off"
-              />
+                <small></small>
+              </div>
 
-              <small></small>
-            </div>
-
-            <div class="form-field">
-              <label for="password">password:</label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="...password..."
-                autocomplete="off"
-              />
-              <small></small>
+              <div class="form-field">
+                <label for="password">password:</label>
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  placeholder="...password..."
+                  autocomplete="off"
+                />
+                <small></small>
+              </div>
             </div>
 
-            <button type="submit">Register</button>
+            <button type="submit" id="register-btn">Register</button>
             <span class="loader"></span>
           </form>
         </div>

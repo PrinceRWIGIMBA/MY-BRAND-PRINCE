@@ -124,7 +124,7 @@ const showResponseMessage = (message, isSuccess) => {
   }, 3000);
 };
 
-const submitUpdate = () => {
+const submitForm = () => {
   if (
     !checkTitle() ||
     !checkImage() ||
@@ -133,17 +133,14 @@ const submitUpdate = () => {
   ) {
     return;
   }
-  const queryParams = new URLSearchParams(window.location.search);
-  const blogId = queryParams.get("blogId");
 
   const title = titleEl.value.trim();
   const imageInput = imageEl.files[0];
   const description = descriptionEl.value.trim();
   const contents = quill.root.innerHTML.trim();
+  const blogId = document.getElementById("blogIndex").value;
 
-  const responseDiv = document.getElementById("response");
-
-  if (title && imageInput && description && contents) {
+  if (title && imageInput && description && contents && blogId) {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("image", imageInput);
@@ -154,6 +151,8 @@ const submitUpdate = () => {
     disableFormFields();
 
     const authToken = localStorage.getItem("token");
+    document.querySelector(".loader").style.display = "block";
+    document.querySelector("#submitButton").style.display = "none";
     fetch(`https://mybrand-prince-be.onrender.com/api/blogs/${blogId}`, {
       method: "PUT",
       headers: {
@@ -163,17 +162,22 @@ const submitUpdate = () => {
     })
       .then((response) => response.json())
       .then((data) => {
+        document.querySelector(".loader").style.display = "block";
+        document.querySelector("#submitButton").style.display = "none";
         if (data.error) {
           showResponseMessage(data.error, false);
         } else {
           showResponseMessage("Blog updated successfully!", true);
-
-          setTimeout(() => {
-            window.location.href = "blogs.html";
-          }, 3000);
+          titleEl.value = "";
+          imageEl.value = "";
+          descriptionEl.value = "";
+          quill.root.innerHTML = "";
+          window.location.href = "blogs.html";
         }
       })
       .catch((error) => {
+        document.querySelector(".loader").style.display = "block";
+        document.querySelector("#submitButton").style.display = "none";
         console.error("Error:", error);
         showResponseMessage("Error updating blog.", false);
       })
@@ -182,9 +186,15 @@ const submitUpdate = () => {
         enableFormFields();
       });
   } else {
-    responseDiv.textContent = "Please fill out all required fields.";
+    showResponseMessage = ("Please fill out all required fields.", true);
   }
 };
+
+// Call submitForm function when form is submitted
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  submitForm();
+});
 
 const populateForm = async () => {
   const queryParams = new URLSearchParams(window.location.search);
@@ -216,7 +226,15 @@ const populateForm = async () => {
 
   document.getElementById("title").value = blog.title;
   document.getElementById("description").value = blog.description;
+  document.getElementById("old-image").innerHTML = ` <img
+  src="${blog.image}"
+  style="width: 100px; height: 100px"
+  alt="Blog Image"
+  class="table-image"
+/>`;
   quill.root.innerHTML = blog.contents;
-  document.getElementById("blogId").value = blogId;
+  document.getElementById("blogIndex").value = blogId;
+
+  //document.getElementById("blogId").value = blogId;
 };
 window.onload = populateForm;

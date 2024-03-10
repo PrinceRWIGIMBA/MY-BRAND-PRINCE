@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles/css/style.css" />
+    <link rel="stylesheet" href="styles/css/spinner.css" />
     <link rel="stylesheet" href="styles/css/general.css" />
     <link rel="stylesheet" href="styles/css/LoginCss.css" />
     <link
@@ -31,10 +31,13 @@
     <section>
       <div class="login">
         <div class="message">
-          <h1><span>WELCOME</span><br />Back</h1>
+          <h1><span>WELCOME</span> Back</h1>
         </div>
         <div class="login-form">
           <h1>Login</h1>
+          <div class="response" id="response">
+            <small style="color: #dc3545"></small>
+          </div>
           <form id="signin" action="">
             <div class="form-field">
               <label for="email">Email:</label>
@@ -73,6 +76,7 @@
         </div>
       </div>
     </section>
+
     <div class="footer">&copy; Prince RWIGIMBA</div>
     <script defer="defer" src="styles/js/script.js"></script>
   </body>

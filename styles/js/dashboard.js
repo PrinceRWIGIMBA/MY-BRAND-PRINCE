@@ -39,8 +39,3 @@ function removeTask(button) {
   var row = button.parentNode.parentNode;
   row.parentNode.removeChild(row);
 }
-
-function logout() {
-  localStorage.removeItem("token");
-  window.location.href = "index.html";
-}

@@ -1,3 +1,37 @@
+let navigation_bar = document.querySelector(".navbar");
+let menus_btn = document.querySelector(".menu-btn");
+let close_btn = document.querySelector(".close-btn");
+
+menus_btn.addEventListener("click", function () {
+  navigation_bar.classList.add("active2");
+});
+
+menus_btn.addEventListener("click", function () {
+  navigation_bar.classList.add("active2");
+});
+
+close_btn.addEventListener("click", function () {
+  navigation_bar.classList.remove("active2");
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const navLinks = document.querySelectorAll("nav a");
+  navLinks.forEach(function (link) {
+    link.addEventListener("click", function () {
+      navLinks.forEach(function (navLink) {
+        navLink.classList.remove("clicked");
+      });
+      if (!link.classList.contains("active")) {
+        navLinks.forEach(function (navLink) {
+          navLink.classList.remove("active");
+        });
+      }
+
+      link.classList.add("clicked");
+    });
+  });
+});
+
 const formatDate = (dateString) => {
   const options = { year: "numeric", month: "long", day: "numeric" };
   const date = new Date(dateString);

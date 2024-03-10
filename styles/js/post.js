@@ -126,7 +126,7 @@ fetch(`https://mybrand-prince-be.onrender.com/api/blogs/${blogId}`)
       viewedBlog.createdAt
     )}`;
     document.getElementById("blogContent").innerHTML = viewedBlog.contents;
-    document.getElementById("likes").innerHTML = `${likesCount} Likes`;
+    document.getElementById("like").innerHTML = `${likesCount} Likes`;
     document.getElementById("dislike").innerHTML = `${dislikesCount} Dislikes`;
 
     const commentsContainer = document.getElementById("commentsContainer");

@@ -50,9 +50,24 @@
           margin-bottom: 10px;
         }
   
+        .actions{
+          display: flex;
+          flex-direction: row;
+          gap:20px;
+        }
         /* Style for the reply button */
         .reply-button {
           background-color: #BF7506;
+          color: white;
+          padding: 8px 16px;
+          width: 20%;
+          border: none;
+          border-radius: 10px;
+          cursor: pointer;
+        }
+
+        .delete-button {
+          background-color: #ff2b06d0;
           color: white;
           padding: 8px 16px;
           width: 20%;
