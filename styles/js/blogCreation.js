@@ -153,6 +153,9 @@ const submitForm = () => {
       disableFormFields();
 
       const authToken = localStorage.getItem("token");
+
+      document.querySelector(".loader").style.display = "block";
+      document.querySelector("#submitButton").style.display = "none";
       fetch("https://mybrand-prince-be.onrender.com/api/blogs", {
         method: "POST",
         headers: {
@@ -162,7 +165,8 @@ const submitForm = () => {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
+          document.querySelector(".loader").style.display = "block";
+          document.querySelector("#submitButton").style.display = "none";
           if (data.error) {
             showResponseMessage(data.error, false);
           } else {
@@ -176,6 +180,8 @@ const submitForm = () => {
           }
         })
         .catch((error) => {
+          document.querySelector(".loader").style.display = "block";
+          document.querySelector("#submitButton").style.display = "none";
           console.error("Error:", error);
           showResponseMessage("Error creating blog.", false);
         })

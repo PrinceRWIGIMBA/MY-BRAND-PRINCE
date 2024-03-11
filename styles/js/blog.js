@@ -1,6 +1,6 @@
-var quill = new Quill("#editor", {
+let quill = new Quill("#editor", {
   theme: "snow",
-  placeholder: "Add Comment...",
+  placeholder: "Type Comment here...",
   modules: {
     toolbar: [
       ["bold", "italic", "underline", "strike"],
@@ -8,6 +8,43 @@ var quill = new Quill("#editor", {
       ["clean"],
     ],
   },
+});
+
+// const formatDate = (dateString) => {
+//   const options = { year: "numeric", month: "long", day: "numeric" };
+//   const date = new Date(dateString);
+//   return date.toLocaleDateString("en-US", options);
+// };
+
+function toggleForm() {
+  var editorContainer = document.getElementById("editor-container");
+  editorContainer.style.display =
+    editorContainer.style.display === "none" ? "block" : "none";
+}
+document.addEventListener("DOMContentLoaded", function () {
+  // Add click event listener to "See all" link
+  var seeAllLink = document.getElementById("seeAllLink");
+  seeAllLink.addEventListener("click", function (event) {
+    event.preventDefault();
+    toggleComments();
+  });
+
+  // Toggle Comments Function
+  function toggleComments() {
+    var commentsContainer = document.getElementById("commentsContainer");
+    var seeAllLink = document.getElementById("seeAllLink");
+
+    if (
+      commentsContainer.style.maxHeight === "150px" ||
+      commentsContainer.style.maxHeight === ""
+    ) {
+      commentsContainer.style.maxHeight = "none";
+      seeAllLink.textContent = "Collapse";
+    } else {
+      commentsContainer.style.maxHeight = "150px";
+      seeAllLink.textContent = "See all";
+    }
+  }
 });
 
 function getParameterByName(name, url) {
@@ -19,30 +56,9 @@ function getParameterByName(name, url) {
   return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
-function toggleForm() {
-  var editorContainer = document.getElementById("editor-container");
-  editorContainer.style.display =
-    editorContainer.style.display === "none" ? "block" : "none";
-}
-function toggleComments() {
-  var commentsContainer = document.querySelector(".comments");
-  var seeAllLink = document.querySelector(".see-all a");
-
-  if (
-    commentsContainer.style.maxHeight === "150px" ||
-    commentsContainer.style.maxHeight === ""
-  ) {
-    commentsContainer.style.maxHeight = "none";
-    seeAllLink.textContent = "Collapse";
-  } else {
-    commentsContainer.style.maxHeight = "150px";
-    seeAllLink.textContent = "See all";
-  }
-}
-
 function validateForm(event) {
   event.preventDefault();
-  let blogForm = document.getElementById("blogForm");
+
   let contentError = document.getElementById("contentError");
   contentError.innerHTML = "";
 
@@ -52,7 +68,7 @@ function validateForm(event) {
   let authToken = localStorage.getItem("token");
   if (!authToken) {
     console.error("Authentication token not found.");
-    contentError.innerHTML = "Authentication token not found.";
+    contentError.innerHTML = "Please login before to add comment.";
 
     return;
   }
@@ -64,7 +80,8 @@ function validateForm(event) {
     return;
   }
 
-  console.log(blogId);
+  document.querySelector(".loader").style.display = "block";
+  document.querySelector("#commentButton").style.display = "none";
 
   fetch(`https://mybrand-prince-be.onrender.com/api/comments/${blogId}`, {
     method: "POST",
@@ -83,13 +100,20 @@ function validateForm(event) {
       return response.json();
     })
     .then((result) => {
+      document.querySelector(".loader").style.display = "block";
+      document.querySelector("#commentButton").style.display = "none";
       console.log("Comment submitted successfully:", result);
 
       contentSuccess.innerHTML = "Comment submitted successfully!";
       contentSuccess.style.color = "var(--success-color)";
-      blogForm.reset();
+      quill.root.innerHTML = "";
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
     })
     .catch((error) => {
+      document.querySelector(".loader").style.display = "block";
+      document.querySelector("#commentButton").style.display = "none";
       if (error.response) {
         error.response.json().then((errorData) => {
           console.error("Error from backend:", errorData);
@@ -110,15 +134,19 @@ fetch(`https://mybrand-prince-be.onrender.com/api/blogs/${blogId}`)
   .then((response) => response.json())
   .then((viewedBlog) => {
     document.getElementById("blogTitle").textContent = viewedBlog.title;
-
+    console.log(viewedBlog);
     const blogImage = document.getElementById("blogImage");
+    const likesCount = viewedBlog.likes.length;
+    const dislikesCount = viewedBlog.disLikes.length;
     blogImage.src = viewedBlog.image;
     blogImage.alt = viewedBlog.title;
 
-    document.getElementById(
-      "blogDate"
-    ).textContent = `Date: ${viewedBlog.createdAt}`;
+    document.getElementById("blogDate").textContent = `Date: ${formatDate(
+      viewedBlog.createdAt
+    )}`;
     document.getElementById("blogContent").innerHTML = viewedBlog.contents;
+    document.getElementById("likes").innerHTML = `${likesCount} Likes`;
+    document.getElementById("dislike").innerHTML = `${dislikesCount} Dislikes`;
 
     const commentsContainer = document.getElementById("commentsContainer");
     if (viewedBlog.comments && viewedBlog.comments.length > 0) {
@@ -141,9 +169,15 @@ fetch(`https://mybrand-prince-be.onrender.com/api/blogs/${blogId}`)
                               <img src="images/icons/PersonCircle.png" alt=""/>
                             </div>
                             <div class="comment-contents">
-                              <h1 id="username">${names.firstname} ${names.lastname}</h1>
-                              <span id="createdAt">${comment.data.createdAt}</span>
-                              <p id="description">${comment.data.description}</p>
+                              <h1 id="username">${names.firstname} ${
+                    names.lastname
+                  }</h1>
+                              <span id="createdAt">${formatDate(
+                                comment.data.createdAt
+                              )}</span>
+                              <p id="description">${
+                                comment.data.description
+                              }</p>
                             </div>
                           </div>
                         `;

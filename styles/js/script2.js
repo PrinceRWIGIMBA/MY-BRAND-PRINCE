@@ -3,7 +3,7 @@ window.onload = function () {
   const index = queryParams.get("index");
 
   if (index !== null) {
-    populateFormFromQueryParams(index);
+   
   } else {
     fetchInfo();
   }
@@ -29,22 +29,23 @@ const fetchInfo = async () => {
     blogs.forEach((blog, index) => {
       const newRow = tableBody.insertRow();
       newRow.innerHTML = `
-        <td>${formatDate(blog.createdAt)}</td>
-        <td class="image-cell"><img src="${
-          blog.image
-        }" alt="Blog Image" class="table-image"></td>
-        <td>${blog.title}</td>
-        <td>${blog.description}</td>
-        <td class="action-buttons">
-          <a href="blog.html?index=${blog._id}"><h4>View</h4></a>
-          <button class="edit-btn" onclick="editBlog('${
-            blog._id
-          }')">Edit</button>
-          <button class="delete-btn" onclick="deleteBlog('${
-            blog._id
-          }', this)">Delete</button>
-        </td>
-      `;
+      <td>${formatDate(blog.createdAt)}</td>
+      <td class="image-cell"><img src="${
+        blog.image
+      }" alt="Blog Image" class="table-image" rel="noopener noreferrer"></td>
+      <td>${blog.title}</td>
+      <td>${blog.description}</td>
+      <td class="action-buttons">
+      <button class="view-btn">
+      <a href="blog.html?index=${blog._id}">View</a>
+      </button>
+        <button class="edit-btn" onclick="editBlog('${blog._id}')">Edit</button>
+        <button class="delete-btn" id="delete-btn" onclick="deleteBlog('${
+          blog._id
+        }', this)">Delete</button> <span class="loader"></span>
+       
+      </td>
+  `;
     });
   };
   displayBlogs();
@@ -54,12 +55,11 @@ const deleteBlog = async (blogId, deleteBtn) => {
   const confirmDelete = confirm("Are you sure you want to delete this blog?");
   if (confirmDelete) {
     deleteBtn.disabled = true;
-    const spinner = document.createElement("div");
-    spinner.className = "loading-spinner";
-    deleteBtn.appendChild(spinner);
 
     try {
       const authToken = localStorage.getItem("token");
+      document.querySelector(".loader").style.display = "block";
+      document.querySelector("#delete-btn").style.display = "none";
       const response = await fetch(
         `https://mybrand-prince-be.onrender.com/api/blogs/${blogId}`,
         {
@@ -71,7 +71,9 @@ const deleteBlog = async (blogId, deleteBtn) => {
       );
       const data = await response.json();
       if (response.ok) {
-        alert("Blog deleted successfully");
+       
+        document.querySelector(".loader").style.display = "block";
+        document.querySelector("#delete-btn").style.display = "none";
         fetchInfo();
 
         fetchInfo(); // Refresh the blog list
@@ -80,10 +82,12 @@ const deleteBlog = async (blogId, deleteBtn) => {
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("Error deleting blog");
+      document.querySelector(".loader").style.display = "block";
+      document.querySelector("#delete-btn").style.display = "none";
+      
     } finally {
       deleteBtn.disabled = false;
-      spinner.remove();
+  
     }
   }
 };
@@ -228,35 +232,3 @@ const checkContent = () => {
 };
 
 const isNotEmpty = (value) => (value.trim() === "" ? false : true);
-
-const quill = new Quill("#quill-editor", {
-  theme: "snow",
-  showCharCount: true,
-  maxLength: 100,
-  placeholder: "Type content here...",
-});
-
-const populateFormFromQueryParams = async (blogId) => {
-  try {
-    const response = await fetch(
-      `https://mybrand-prince-be.onrender.com/api/blogs/${blogId}`
-    );
-    const data = await response.json();
-    if (response.ok) {
-      const blogData = data.data;
-
-      document.getElementById("title").value = blogData.title;
-      document.getElementById("description").value = blogData.description;
-      quill.root.innerHTML = blogData.contents;
-
-      const updateButton = document.getElementById("submitButton");
-      updateButton.textContent = "Update";
-      updateButton.onclick = () => submitUpdate(blogId);
-    } else {
-      alert(data.error || "Error fetching blog data");
-    }
-  } catch (error) {
-    console.error("Error:", error);
-    alert("Error fetching blog data");
-  }
-};

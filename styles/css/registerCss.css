@@ -28,112 +28,94 @@
       }
 
 
-.register{
-  width: 100%;
-  display: grid;
-grid-template-columns: 1fr 1fr;
-
-
- padding: 100px ;
-
-gap: 10px;
-height: auto;
-}
-.message{
-  display: flex;
-  justify-content: center;
-}
-.message h1{
-  font-size: 64px;
-  margin-top:20%;
-}
-.message h1 span{
-  color:#BF7506 ;
-}
-  .login-form{
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    align-items: center;
-    background-color: #FFF3E8;
-    padding: 40px;
-    border-radius: 41px
-  }
-
-  .login-form form{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .login-form form button{
-    width: 20%;
-    align-self: center;
-  }
-
-  .login-form form label{
-    font-size: 16px;
-    font-weight: bold;
-  }
-  .login-form h1{
-
-    font-size: 30px;
-  }
-
-  @media (max-width:800px){
-  
+      .register{
+        width: 100%;
+        display: grid;
+      grid-template-columns: 1fr 1fr;
+       padding: 100px ;
+       overflow: auto;
+      gap: 10px;
+      height: auto;
+      }
+      .message{
+        display: flex;
     
-    .message{
-      margin-top:20px;
-      justify-content: space-between;
-      justify-items: center;
-      font-size: 16px;
-    }
-    .login{
-      display: flex;
-      justify-content: center;
-     justify-items: center;
-     flex-wrap: wrap;
-     overflow: scroll;
-     padding: 100px ;
-    }
-    .login-form form button{
-      width: 40%;
-      margin-left: 10px;
-      color: #000;
-      align-self: center;
-    }
-  }
+        justify-content: center;
+      }
+      .message img{
+        width: 60%;
+        height: 60%;
+      }
+      .message h1{
+        font-size: 64px;
+        margin-top:20%;
+      }
+    h1 span{
+        color:#BF7506 ;
+      }
+        .register-form{
+          display: flex;
+          flex-direction: column;
+          gap: 40px;
+          align-items: center;
+          background-color: #FFF3E8;
+          padding: 40px;
+          border-radius: 41px
+        }
+      
+        .register-form form{
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+        .register-form form button{
+          width: 20%;
+          align-self: center;
+        }
+      
+        .register-form, form label{
+          font-size: 16px;
+          font-weight: bold;
+        }
+        .register-form h1{
+      
+          font-size: 30px;
+        }
+        input {
+     
+          padding:  10px 10px;
+          box-sizing: border-box;
+          border: 1px solid #ccc;
+          color: black;
+          border-radius: 5px;
+        }
+        .fields1, .fields2{
+            display: flex;
+           flex-direction: row;
+            gap: 10px;
+        }
+        
+        input,
+        button {
+          padding: 10px;
+          margin-bottom: 16px;
+        }
+        h2 {
+          font-size: 24px;
+          margin-top: 10px;
+        }
+      
+        button {
+          margin-top: 20px;
+          background-color: #bf7506;
+          color: white;
+      
+          border-radius: 10px;
+          border: none;
+          cursor: pointer;
+        }
 
-
-
-  .register-form {
-    display: none;
-    margin-top: 20px;
-  }
-  
-  .hidden {
-    display: none;
-  }
-  
-
-  .register-link{
-
-    font-size: 140%;
-    font-weight:bold;
-  }
-
-  .register-form input,
-  textarea {
-    width: 400px;
-    padding:  10px 10px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    color: black;
-    border-radius: 5px;
-  }
-
-  .response{
-    font-size: 20px;
+       
+      
     
-  }
- 
+      

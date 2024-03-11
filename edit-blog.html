@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="styles/css/admin-sidebar.css" />
     <link rel="stylesheet" href="styles/css/admin-title.css" />
     <link rel="stylesheet" href="styles/css/admin-main.css" />
+    <link rel="stylesheet" href="styles/css/createSpinner.css" />
+    <link rel="stylesheet" href="styles/js/logout.js" />
     <style>
       .card-container {
         width: 100%;
@@ -154,7 +156,7 @@
         <a href="profile.html"><i class="fa fa-address-card"></i> Profile</a>
       </div>
       <div class="logout-icon">
-        <a href=""><i class="fas fa-sign-out-alt"></i>Logout</a>
+        <a onclick="logout()"><i class="fas fa-sign-out-alt"></i>Logout</a>
         <p>&copy; Prince RWIGIMBA</p>
       </div>
     </div>
@@ -166,7 +168,7 @@
       <div id="response"></div>
       <div class="card-container">
         <div class="card">
-          <form id="blogForm" onsubmit="submitForm(); return false">
+          <form id="blogForm" onsubmit="submitForm()" return false>
             <label for="title">Title:</label>
             <input
               type="text"
@@ -185,6 +187,8 @@
               accept="image/*"
               required
             />
+            <div id="old-image"></div>
+
             <div class="error-container" id="image-error"></div>
 
             <label for="description">Description:</label>
@@ -205,6 +209,7 @@
             <input type="hidden" id="blogIndex" name="blogIndex" value="" />
 
             <button type="submit" id="submitButton">Submit</button>
+            <span class="loader"></span>
 
             <div id="response" class="response-container">
               <div id="loading-spinner" class="loading-spinner"></div>

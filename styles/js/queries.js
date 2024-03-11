@@ -18,7 +18,7 @@ const fetchMessageInfo = async () => {
     );
 
     if (!response.ok) {
-      throw new Error("Failed to fetch message");
+      throw new Error("Failed to fetch messages");
     }
 
     const data = await response.json();
@@ -33,28 +33,75 @@ const fetchMessageInfo = async () => {
         messageCard.classList.add("message-card");
 
         messageCard.innerHTML = `
-              <div class="address">
-                <!-- Profile picture -->
-                <img
-                  src="images/icons/PersonCircle.png"
-                  alt="Profile Picture"
-                  class="profile-pic"
-                />
-                <!-- Sender's email -->
-                <div class="sender-email">${message.username} (${
+          <div class="address">
+            <!-- Profile picture -->
+            <img
+              src="images/icons/PersonCircle.png"
+              alt="Profile Picture"
+              class="profile-pic"
+            />
+            <!-- Sender's email -->
+            <div class="sender-email">${message.username} (${
           message.email
         })</div>
-                <span style="color:#D9D9D9;">.${formatDate(
-                  message.createdAt
-                )}</span>
-              </div>
-              <!-- Email content -->
-              <div class="email-content">${message.querie}</div>
-              <!-- Reply button -->
-              <button class="reply-button">Reply</button>
-            `;
+            <span style="color:#D9D9D9;">.${formatDate(
+              message.createdAt
+            )}</span>
+          </div>
+          <!-- Email content -->
+          <div class="email-content">${message.querie}</div>
+      
+         <div class="actions">
+         <button class="reply-button" onclick="window.location.href='mailto:${
+           message.email
+         }?subject=Subject%20Here&body=Body%20Here'">Reply</button>
+       
+        ${
+          authToken
+            ? `<button class="delete-button" id="delete-button" data-id="${message.id}">Delete</button>`
+            : ""
+        } <span class="loader"></span>
+      </div>`;
 
         cardContainer.appendChild(messageCard);
+      });
+
+      // Add event listener for delete buttons
+      const deleteButtons = document.querySelectorAll(".delete-button");
+      deleteButtons.forEach((button) => {
+        button.addEventListener("click", async (event) => {
+          const messageId = event.target.getAttribute("data-id");
+          const confirmed = confirm(
+            "Are you sure you want to delete this message?"
+          );
+          if (confirmed) {
+            try {
+              document.querySelector(".loader").style.display = "block";
+              document.querySelector("#delete-button").style.display = "none";
+              const deleteResponse = await fetch(
+                `https://mybrand-prince-be.onrender.com/api/messages/${messageId}`,
+                {
+                  method: "DELETE",
+                  headers: {
+                    Authorization: `Bearer ${authToken}`,
+                  },
+                }
+              );
+              if (!deleteResponse.ok) {
+                throw new Error("Failed to delete message");
+              }
+              // If successful, remove the message card from UI
+              event.target.parentNode.remove();
+              document.querySelector(".loader").style.display = "block";
+              document.querySelector("#delete-button").style.display = "none";
+              setTimeout(() => {
+                window.location.reload();
+              }, 500);
+            } catch (error) {
+              console.error("Error deleting message:", error.message);
+            }
+          }
+        });
       });
     };
 

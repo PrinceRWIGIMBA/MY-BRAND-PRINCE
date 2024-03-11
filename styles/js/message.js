@@ -84,6 +84,8 @@ form.addEventListener("submit", function (e) {
     };
 
     console.log(formData);
+    document.querySelector(".loader").style.display = "block";
+    document.querySelector("#contact-button").style.display = "none";
 
     fetch("https://mybrand-prince-be.onrender.com/api/messages", {
       method: "POST",
@@ -95,9 +97,19 @@ form.addEventListener("submit", function (e) {
       .then((response) => response.json())
       .then((data) => {
         console.log("Message sent successfully:", data);
+        document.querySelector(".loader").style.display = "block";
+        document.querySelector("#contact-button").style.display = "none";
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
         form.reset();
       })
       .catch((error) => {
+        document.querySelector(".loader").style.display = "block";
+        document.querySelector("#contact-button").style.display = "none";
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
         console.error("Error sending message:", error);
       });
   }

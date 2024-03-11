@@ -15,7 +15,9 @@
     <link rel="stylesheet" href="styles/css/admin-sidebar.css" />
     <link rel="stylesheet" href="styles/css/admin-title.css" />
     <link rel="stylesheet" href="styles/css/admin-main.css" />
+    <link rel="stylesheet" href="styles/css/deleteSpinner.css" />
     <script defer="defer" src="styles/js/main.js"></script>
+    <script defer="defer" src="styles/js/logout.js"></script>
     <style>
         .blogs-table{
             width: 100%;
@@ -106,6 +108,15 @@
             height: auto;
             
         }
+        .view-btn a {
+        color: white;
+            text-decoration: none;
+          }
+          
+          .view-btn:hover {
+            background-color: darkgreen;
+          }
+          
        
 
 
@@ -148,7 +159,7 @@
                 <a href="profile.html"><i class="fa fa-address-card"></i> Profile</a>
             </div>
             <div class="logout-icon">
-                <a href=""><i class="fas fa-sign-out-alt"></i>Logout</a>
+                <a  onclick="logout()"><i class="fas fa-sign-out-alt"></i>Logout</a>
                 <p>&copy; Prince RWIGIMBA</p>
             </div>
         </div>

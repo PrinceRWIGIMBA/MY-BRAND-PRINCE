@@ -1,6 +1,6 @@
 const emailEl = document.querySelector("#email");
 const passwordEl = document.querySelector("#password");
-
+const responseError = document.getElementById("response");
 const form = document.querySelector("#signin");
 
 const checkemail = () => {
@@ -82,7 +82,6 @@ form.addEventListener("submit", function (e) {
     };
     document.querySelector(".loader").style.display = "block";
     document.querySelector("#login-btn").style.display = "none";
-    // Make a POST request to the authentication API using fetch
     fetch("https://mybrand-prince-be.onrender.com/api/auth/login", {
       method: "POST",
       headers: {
@@ -110,7 +109,12 @@ form.addEventListener("submit", function (e) {
       })
       .catch((error) => {
         console.error("Authentication failed:", error);
-        showError(form, "Invalid email or password. Please try again.");
+        document.querySelector(".loader").style.display = "none";
+        document.querySelector("#login-btn").style.display = "block";
+        showError(
+          responseError,
+          "Invalid email or password. Please try again."
+        );
       });
   }
 });

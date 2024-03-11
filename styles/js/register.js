@@ -131,8 +131,8 @@ form.addEventListener("submit", function (e) {
       email: emailEl.value,
       password: passwordEl.value,
     };
-    document.querySelector(".loader").style.display = "none";
-    document.querySelector("#register-btn").style.display = "block";
+    document.querySelector(".loader").style.display = "block";
+    document.querySelector("#register-btn").style.display = "none";
     fetch("https://mybrand-prince-be.onrender.com/api/auth/signup", {
       method: "POST",
       headers: {
@@ -141,14 +141,14 @@ form.addEventListener("submit", function (e) {
       body: JSON.stringify(formData),
     })
       .then((response) => {
-        document.querySelector(".loader").style.display = "none";
-        document.querySelector("#register-btn").style.display = "block";
         if (!response.ok) {
           throw new Error("Sign Up failed");
         }
         return response.json();
       })
       .then((data) => {
+        document.querySelector(".loader").style.display = "none";
+        document.querySelector("#register-btn").style.display = "block";
         localStorage.setItem("token", data.token);
         console.log("Authentication successful:", data.data.role);
         let userType = data.data.role;
@@ -160,6 +160,8 @@ form.addEventListener("submit", function (e) {
       })
       .catch((error) => {
         console.error(error);
+        document.querySelector(".loader").style.display = "none";
+        document.querySelector("#register-btn").style.display = "block";
         showError(response, "Data already exist ,Please try again.");
       });
   }
