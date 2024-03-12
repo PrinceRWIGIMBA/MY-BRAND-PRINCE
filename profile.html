@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="styles/css/admin-main.css" />
     <script defer="defer" src="styles/js/main.js"></script>
     <script defer="defer" src="styles/js/logout.js"></script>
+    <script defer="defer" src="styles/js/profile.js"></script>
     <style>
          .profile-container{
             width: 100%;
@@ -188,7 +189,7 @@
                     <img src="images/icons/Envelope.png" alt="" />
                     <img src="images/icons/nitifications.png" alt="" />
                 </div>
-                <div class="username">Prince Rwigimba</div>
+                <div class="username" id="name2">Prince Rwigimba</div>
                 <div class="user-pic">
                     <img src="images/icons/PersonCircle.png" alt="" />
                 </div>
@@ -216,7 +217,7 @@
         <div class="profile-container">
           <div class="profile-card">
               <img src="images/icons/PersonCircle.png" alt="">
-              <span class="name">Prince RWIGIMBA</span>
+              <span class="name" id="name"></span>
           </div>
           <div class="profile-content-card">
               <div class="nav-links">
@@ -228,14 +229,14 @@
                   
                   <!-- Display user details like username, email, and address -->
                   <div id="user-info">
-                      <h3>About</h3>
-                  <p class="small fst-italic">User details go here...</p>
-          
-                    <p><strong>Username:</strong> <i id="name"></i></p>
-                    <p><strong>Email:</strong><i  id="email1"></i> </p>
-                    <p><strong >Address:</strong > <i id="address1"></i></p>
-                  </div>
-              </div>
+                    <h2>User details</h2>
+                
+              
+                    <p><strong>Username:</strong> <i id="name1"></i></p>
+                    <p><strong>Email:</strong><i id="email1"></i></p>
+                    <p><strong>Role:</strong><i id="role"></i></p>
+
+                </div>
               <div class="edit-form" id="edit-form">
                   <h2>Edit User Info</h2>
                   <form method="post" id="editProfileForm">
