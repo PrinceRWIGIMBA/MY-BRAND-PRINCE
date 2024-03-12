@@ -71,6 +71,8 @@ function validateForm(event) {
   }
 
   console.log(blogId);
+  document.querySelector(".loader").style.display = "block";
+  document.querySelector("#comment-btn").style.display = "none";
 
   fetch(`https://mybrand-prince-be.onrender.com/api/comments/${blogId}`, {
     method: "POST",
@@ -89,12 +91,19 @@ function validateForm(event) {
       return response.json();
     })
     .then((result) => {
+      document.querySelector(".loader").style.display = "block";
+      document.querySelector("#comment-btn").style.display = "none";
       console.log("Comment submitted successfully:", result);
 
       contentSuccess.innerHTML = "Comment submitted successfully!";
       contentSuccess.style.color = "var(--success-color)";
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
     })
     .catch((error) => {
+      document.querySelector(".loader").style.display = "block";
+      document.querySelector("#comment-btn").style.display = "none";
       if (error.response) {
         error.response.json().then((errorData) => {
           console.error("Error from backend:", errorData);
