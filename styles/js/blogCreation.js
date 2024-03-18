@@ -124,7 +124,7 @@ const showResponseMessage = (message, isSuccess) => {
   }, 3000);
 };
 
-const submitForm = () => {
+const submitForm = (isUpdate) => {
   if (
     !checkTitle() ||
     !checkImage() ||
@@ -138,59 +138,119 @@ const submitForm = () => {
   const imageInput = imageEl.files[0];
   const description = descriptionEl.value.trim();
   const contents = quill.root.innerHTML.trim();
-  const blogIndex = document.getElementById("blogIndex").value;
-  const responseDiv = document.getElementById("response");
+  let url = "https://mybrand-prince-be.onrender.com/api/blogs";
+  let method = "POST";
+  let messageSuccess = "Blog created successfully!";
+  let messageError = "Error creating blog.";
 
-  if (title && imageInput && description && contents) {
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("image", imageInput);
-    formData.append("description", description);
-    formData.append("contents", contents);
+  if (isUpdate) {
+    const blogId = document.getElementById("blogIndex").value;
+    url = `https://mybrand-prince-be.onrender.com/api/blogs/${blogId}`;
+    method = "PUT";
+    messageSuccess = "Blog updated successfully!";
+    messageError = "Error updating blog.";
+  }
 
-    if (blogIndex === "") {
-      showLoadingSpinner();
-      disableFormFields();
+  const formData = new FormData();
+  formData.append("title", title);
+  formData.append("image", imageInput);
+  formData.append("description", description);
+  formData.append("contents", contents);
 
-      const authToken = localStorage.getItem("token");
+  showLoadingSpinner();
+  disableFormFields();
 
+  const authToken = localStorage.getItem("token");
+  document.querySelector(".loader").style.display = "block";
+  document.querySelector("#submitButton").style.display = "none";
+  fetch(url, {
+    method: method,
+    headers: {
+      Authorization: `Bearer ${authToken}`,
+    },
+    body: formData,
+  })
+    .then((response) => response.json())
+    .then((data) => {
       document.querySelector(".loader").style.display = "block";
       document.querySelector("#submitButton").style.display = "none";
-      fetch("https://mybrand-prince-be.onrender.com/api/blogs", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-        },
-        body: formData,
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          document.querySelector(".loader").style.display = "block";
-          document.querySelector("#submitButton").style.display = "none";
-          if (data.error) {
-            showResponseMessage(data.error, false);
-          } else {
-            showResponseMessage("Blog created successfully!", true);
-            titleEl.value = "";
-            imageEl.value = "";
-            descriptionEl.value = "";
-            quill.root.innerHTML = "";
+      if (data.error) {
+        showResponseMessage(data.error, false);
+      } else {
+        showResponseMessage(messageSuccess, true);
+        titleEl.value = "";
+        imageEl.value = "";
+        descriptionEl.value = "";
+        quill.root.innerHTML = "";
 
-            window.location.href = "blogs.html";
-          }
-        })
-        .catch((error) => {
-          document.querySelector(".loader").style.display = "block";
-          document.querySelector("#submitButton").style.display = "none";
-          console.error("Error:", error);
-          showResponseMessage("Error creating blog.", false);
-        })
-        .finally(() => {
-          hideLoadingSpinner();
-          enableFormFields();
-        });
-    }
-  } else {
-    responseDiv.textContent = "Please fill out all required fields.";
-  }
+        if (!isUpdate) {
+          window.location.href = "blogs.html";
+        }
+        window.location.href = "blogs.html";
+      }
+    })
+    .catch((error) => {
+      document.querySelector(".loader").style.display = "block";
+      document.querySelector("#submitButton").style.display = "none";
+      console.error("Error:", error);
+      showResponseMessage(messageError, false);
+    })
+    .finally(() => {
+      hideLoadingSpinner();
+      enableFormFields();
+    });
 };
+
+// Call submitForm function when form is submitted
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const blogIndex = document.getElementById("blogIndex").value;
+  if (blogIndex) {
+    submitForm(true); // Update existing blog
+  } else {
+    submitForm(false); // Create new blog
+  }
+});
+const populateForm = async () => {
+  const queryParams = new URLSearchParams(window.location.search);
+  const blogId = queryParams.get("blogId");
+
+  if (!blogId) {
+    console.error("No blog ID provided in URL");
+    return;
+  }
+
+  const authToken = localStorage.getItem("token");
+  const response = await fetch(
+    `https://mybrand-prince-be.onrender.com/api/blogs/${blogId}`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+    }
+  );
+
+  if (!response.ok) {
+    console.error("Error fetching blog data:", response.statusText);
+    return;
+  }
+
+  const data = await response.json();
+  const blog = data;
+
+  document.getElementById("title").value = blog.title;
+  document.getElementById("description").value = blog.description;
+  document.getElementById("old-image").innerHTML = ` <img
+  src="${blog.image}"
+  style="width: 100px; height: 100px"
+  alt="Blog Image"
+  class="table-image"
+/>`;
+  quill.root.innerHTML = blog.contents;
+  document.getElementById("blogIndex").value = blogId;
+
+  //document.getElementById("blogId").value = blogId;
+};
+window.onload = populateForm;

@@ -16,29 +16,8 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-    <style>
-      :root {
-        --error-color: #dc3545;
-        --success-color: #28a745;
-        --warning-color: #ffc107;
-      }
-
-      .form-group.error input {
-        border-color: var(--error-color);
-      }
-
-      .form-group.success input {
-        border-color: var(--success-color);
-      }
-
-      .form-group small {
-        color: var(--error-color);
-        font-size: 12px;
-        margin-top: 0px;
-        display: block;
-      }
-    </style>
     <title>header sample</title>
   </head>
   <body>
@@ -101,7 +80,7 @@
               </li>
 
               <li>
-                <a id="cv-link" href="path/to/your/cv.pdf"
+                <a id="cv-link" href="files/prince_rwigimba_CV.pdf"
                   ><i class="fas fa-paperclip"></i> Download CV</a
                 >
               </li>
@@ -171,34 +150,8 @@
           </div>
         </div>
       </div>
-      <div class="blogs" id="blogs">
-        <div class="slideshow-container">
-          <div class="mySlides fade">
-            <h1 class="titles">Blogs</h1>
-            <div class="blog-container" id="slide1"></div>
-          </div>
-
-          <div class="mySlides fade">
-            <h1 class="titles">Blogs</h1>
-            <div class="blog-container" id="slide2"></div>
-          </div>
-
-          <div class="mySlides fade">
-            <h1 class="titles">Blogs</h1>
-            <div class="blog-container" id="slide3"></div>
-          </div>
-
-          <a class="prev" id="leftButton_id">❮</a>
-          <a class="next" id="rightButton_id">❯</a>
-        </div>
-        <br />
-
-        <div class="pagination" style="text-align: center">
-          <span class="dot" onclick="currentSlide(1)"></span>
-          <span class="dot" onclick="currentSlide(2)"></span>
-          <span class="dot" onclick="currentSlide(3)"></span>
-        </div>
-      </div>
+      <div id="blogs" type="text/babel"></div>
+      <script src="/components/post.js" type="text/babel"></script>
       <div class="about" id="about">
         <div class="row">
           <div class="about-col-1">
@@ -289,7 +242,16 @@
       </div>
     </section>
     <div class="footer">&copy; Prince RWIGIMBA</div>
-    <script defer="defer" src="styles/js/landingpage.js"></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.production.min.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"
+    ></script>
+
+    <!-- <script defer="defer" src="styles/js/landingpage.js"></script> -->
     <script src="styles/js/message.js"></script>
   </body>
 </html>
