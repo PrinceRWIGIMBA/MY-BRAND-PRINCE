@@ -130,6 +130,7 @@ function validateForm(event) {
 const urlParams = new URLSearchParams(window.location.search);
 const blogId = urlParams.get("index");
 
+console.log(blogId);
 fetch(`https://mybrand-prince-be.onrender.com/api/blogs/${blogId}`)
   .then((response) => response.json())
   .then((viewedBlog) => {

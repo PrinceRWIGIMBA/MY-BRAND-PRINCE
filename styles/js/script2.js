@@ -3,7 +3,6 @@ window.onload = function () {
   const index = queryParams.get("index");
 
   if (index !== null) {
-   
   } else {
     fetchInfo();
   }
@@ -71,7 +70,6 @@ const deleteBlog = async (blogId, deleteBtn) => {
       );
       const data = await response.json();
       if (response.ok) {
-       
         document.querySelector(".loader").style.display = "block";
         document.querySelector("#delete-btn").style.display = "none";
         fetchInfo();
@@ -84,16 +82,14 @@ const deleteBlog = async (blogId, deleteBtn) => {
       console.error("Error:", error);
       document.querySelector(".loader").style.display = "block";
       document.querySelector("#delete-btn").style.display = "none";
-      
     } finally {
       deleteBtn.disabled = false;
-  
     }
   }
 };
 
 const editBlog = (blogId) => {
-  window.location.href = `edit-blog.html?blogId=${blogId}`;
+  window.location.href = `form.html?blogId=${blogId}`;
 };
 
 const updateBlog = async () => {
